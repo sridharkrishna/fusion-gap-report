@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Fusion Gap Report</title>
+<meta name="description" content="A monthly tracker scoring the ten gaps between nuclear fusion and the grid. Sridhar Krishna, The Takshashila Institution.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+:root {
+  --bg: #f8fafa; --surface: #ffffff; --fg: #1f2526; --muted: #5d6869; --rule: #dbe4e4;
+  --accent: #620D3C; --accent-soft: #eaf2f1;
+  --f-head: "Palatino Linotype", Palatino, "Book Antiqua", "URW Palladio L", Georgia, serif;
+  --f-ui: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) { :root {
+  --bg: #121718; --surface: #1a2122; --fg: #eef2f2; --muted: #a3b0b1; --rule: #2f3a3b;
+  --accent: #e08bb0; --accent-soft: #1d2b2b; color-scheme: dark } }
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--f-ui); font-size: 15px; line-height: 1.55; }
+.wrap { max-width: 760px; margin: 0 auto; padding-block: 32px 56px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+header { border-top: 6px solid var(--accent); padding-top: 16px; display: grid; gap: 8px; }
+.eyebrow { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+h1, h2 { font-family: var(--f-head); margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(1.8rem, 5vw, 2.4rem); line-height: 1.15; }
+h2 { font-size: 1.2rem; }
+p { margin: 0; }
+.lede { color: var(--muted); max-width: 62ch; }
+ol { list-style: none; padding: 0; margin: 28px 0 0; display: grid; gap: 10px; }
+a.issue { display: grid; gap: 4px; padding: 14px 16px; background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; color: inherit; text-decoration: none; }
+a.issue:hover, a.issue:focus-visible { border-color: var(--accent); outline: none; }
+a.issue .when { color: var(--accent); font-weight: 600; font-size: .85rem; }
+a.issue.latest { border-left: 4px solid var(--accent); }
+.about { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--rule); display: grid; gap: 8px; font-size: .88rem; color: var(--muted); }
+.about b { color: var(--fg); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">The Takshashila Institution · Monthly tracker</div>
+    <h1>The Fusion Gap Report</h1>
+    <p class="lede">Ten gaps stand between nuclear fusion and the electricity grid: net energy gain, plasma stability, materials, tritium breeding, magnets, heat-to-power conversion, private investment, regulation, supply chain and workforce. Each month I score every gap from 0 to 10, compare countries, and update an estimate of when the first fusion plant connects to the grid.</p>
+    <p class="lede">Sridhar Krishna</p>
+  </header>
+
+  <ol>
+    <li><a class="issue latest" href="sep2026.html"><span class="when">September 2026 · Issue 3 · Latest</span><h2>Helion softens its 2028 commitment</h2><p class="lede">No score change. A second US state fusion-plant licence, Japan's ¥60B demonstration programme, and the first private tokamak plasma in India.</p></a></li>
+    <li><a class="issue" href="aug2026.html"><span class="when">August 2026 · Issue 2</span><h2>A capital-and-programmes month</h2><p class="lede">No score change. CFS raises $1B, Helion holds the first fusion-plant licences, and breeding-blanket test facilities get hardware plans.</p></a></li>
+    <li><a class="issue" href="jul2026.html"><span class="when">July 2026 · Inaugural issue</span><h2>The baseline</h2><p class="lede">Where the ten gaps stand against 2020, which countries lead on each, and why the estimate for the first grid-connected plant is the late 2030s to mid 2040s.</p></a></li>
+  </ol>
+
+  <div class="about">
+    <p><b>How the scores move.</b> A score changes only on a new physical demonstration or an institutional decision with legal effect. Announcements, simulations, design papers and single funding rounds don't move scores. Each issue explains every score, lists its sources, and records corrections.</p>
+    <p>Scores are analyst judgement grounded in cited milestones, not an official index. Each issue works best on a laptop; on a phone, use the table view.</p>
+  </div>
+</div>
+</body>
+</html>
