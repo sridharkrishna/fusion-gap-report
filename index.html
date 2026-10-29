@@ -6,63 +6,82 @@
 <title>Geopolitics and Commercialisation of Nuclear Fusion</title>
 <meta name="description" content="A monthly tracker scoring the ten gaps between nuclear fusion and the grid. Sridhar Krishna, The Takshashila Institution.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Roboto+Mono:wght@400&display=swap">
 <style>
+/* Takshashila design language; palette C colours by Sridhar's decision (29 Oct 2026). Single light theme. */
 :root {
-  --bg: #f8fafa; --surface: #ffffff; --fg: #1f2526; --muted: #5d6869; --rule: #dbe4e4;
-  --accent: #620D3C; --accent-soft: #eaf2f1;
-  --f-head: "Palatino Linotype", Palatino, "Book Antiqua", "URW Palladio L", Georgia, serif;
-  --f-ui: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --bg: #f8fafa; --surface: #ffffff; --sunk: #eef3f3; --fg: #1f2526; --muted: #5d6869; --rule: #dbe4e4;
+  --accent: #620D3C;
+  --sans: Inter, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --mono: "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   color-scheme: light;
 }
-@media (prefers-color-scheme: dark) { :root {
-  --bg: #121718; --surface: #1a2122; --fg: #eef2f2; --muted: #a3b0b1; --rule: #2f3a3b;
-  --accent: #e08bb0; --accent-soft: #1d2b2b; color-scheme: dark } }
-body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--f-ui); font-size: 15px; line-height: 1.55; }
-.wrap { max-width: 760px; margin: 0 auto; padding-block: 32px 56px;
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 15px; line-height: 1.5; }
+.topbar { background: var(--accent); }
+.inner { max-width: 860px; margin: 0 auto;
   padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
-header { border-top: 6px solid var(--accent); padding-top: 16px; display: grid; gap: 8px; }
-.eyebrow { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
-h1, h2 { font-family: var(--f-head); margin: 0; text-wrap: balance; }
-h1 { font-size: clamp(1.8rem, 5vw, 2.4rem); line-height: 1.15; }
-h2 { font-size: 1.2rem; }
-.h1sub { display: block; font-size: .62em; font-weight: 400; color: var(--muted); margin-top: 4px; }
-
-p { margin: 0; }
-.lede { color: var(--muted); max-width: 62ch; }
-ol { list-style: none; padding: 0; margin: 28px 0 0; display: grid; gap: 10px; }
-a.issue { display: grid; gap: 4px; padding: 14px 16px; background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; color: inherit; text-decoration: none; }
-a.issue:hover, a.issue:focus-visible { border-color: var(--accent); outline: none; }
-a.issue .when { color: var(--accent); font-weight: 600; font-size: .85rem; }
-a.issue.latest { border-left: 4px solid var(--accent); }
-.about { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--rule); display: grid; gap: 8px; font-size: .88rem; color: var(--muted); }
-.about b { color: var(--fg); }
+.topbar .inner { min-height: 52px; display: flex; align-items: center; }
+.topbar span { font-size: 15px; letter-spacing: 0.3px; color: rgba(255,255,255,0.9); }
+header { padding-block: 44px 40px; border-bottom: 1px solid var(--rule); display: grid; gap: 16px; }
+.eyebrow, .meta { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 400; }
+.meta { letter-spacing: 0.08em; }
+h1, h2 { font-family: var(--sans); font-weight: 400; margin: 0; text-wrap: balance; }
+h1 { font-size: 40px; line-height: 1.12; letter-spacing: -0.02em; }
+.h1sub { display: block; font-size: 22px; font-weight: 300; color: var(--muted); letter-spacing: 0; margin-top: 8px; }
+h2 { font-size: 22px; font-weight: 500; line-height: 1.2; letter-spacing: -0.005em; }
+@media (max-width: 560px) { h1 { font-size: 30px; } .h1sub { font-size: 18px; } }
+p { margin: 0; text-wrap: pretty; }
+.lede { font-size: 18px; font-weight: 300; line-height: 1.5; color: var(--muted); max-width: 64ch; }
+.byline { font-size: 15px; color: var(--fg); }
+section { padding-block: 44px; border-bottom: 1px solid var(--rule); display: grid; gap: 20px; }
+.sechead { font-size: 32px; line-height: 1.1; letter-spacing: -0.02em; font-weight: 400; }
+ol.issues { list-style: none; padding: 0; margin: 0; display: grid; gap: 20px; }
+a.issue { display: grid; gap: 10px; padding: 26px 28px; background: var(--surface); border: 1px solid var(--rule); color: inherit; text-decoration: none; transition: background .15s ease; }
+@media (max-width: 560px) { a.issue { padding: 20px; } }
+a.issue:hover { background: var(--sunk); }
+a.issue:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.top { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+.tag { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; background: var(--accent); color: #fff; }
+a.issue p { font-size: 15px; color: var(--muted); }
+.go { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); border-top: 1px solid var(--rule); padding-top: 10px; }
+.about { padding-block: 32px 56px; display: grid; gap: 12px; font-size: 14px; color: var(--muted); }
+.about b { color: var(--fg); font-weight: 500; }
 .about a { color: var(--accent); text-underline-offset: 2px; }
+.about a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="topbar"><div class="inner"><span>The Takshashila Institution</span></div></div>
+<div class="inner">
   <header>
-    <div class="eyebrow">The Takshashila Institution</div>
+    <div class="eyebrow">Monthly dashboards · since July 2026</div>
     <h1>Geopolitics and Commercialisation of Nuclear Fusion: <span class="h1sub">A Monthly Tracker</span></h1>
     <p class="lede">Nuclear fusion is how the sun and the stars produce energy. It could be a near-limitless, clean source of power and holds great promise for the future. Unlike nuclear fission, which releases energy by splitting the nuclei of heavy atoms such as uranium into smaller ones, fusion combines the nuclei of two isotopes of hydrogen to form helium, releasing huge amounts of energy.</p>
     <p class="lede">Scientists have understood for about a century that fusion powers the stars, and have tried to harness it for electricity since the 1950s. Only now do many of the hurdles to commercialising it look surmountable. Recent experiments have produced more fusion energy than was delivered to the fuel, and have held hot plasma for longer periods, giving new hope for commercialisation.</p>
     <p class="lede">Until recently, fusion research was largely confined to government laboratories and international institutions set up by groups of countries. Private companies have since raised billions, and the enormous energy needs of artificial intelligence have drawn in large technology firms: Microsoft has agreed to buy power from Helion, and Google has invested in Commonwealth Fusion Systems and TAE Technologies.</p>
     <p class="lede">I am tracking the progress in nuclear fusion and identifying the gaps to commercial production of electricity from fusion reactors. These monthly dashboards reflect the progress and the gaps.</p>
-    <p class="lede">Sridhar Krishna</p>
+    <p class="byline">Sridhar Krishna</p>
   </header>
 
-  <ol>
-    <li><a class="issue latest" href="sep2026.html"><span class="when">September 2026 · Issue 3 · Latest</span><h2>Helion softens its 2028 commitment</h2><p class="lede">No score change. A second US state fusion-plant licence, Japan's ¥60B demonstration programme, and the first private tokamak plasma in India.</p></a></li>
-    <li><a class="issue" href="aug2026.html"><span class="when">August 2026 · Issue 2</span><h2>A capital-and-programmes month</h2><p class="lede">No score change. CFS raises $1B, Helion holds the first fusion-plant licences, and breeding-blanket test facilities get hardware plans.</p></a></li>
-    <li><a class="issue" href="jul2026.html"><span class="when">July 2026 · Inaugural issue</span><h2>The baseline</h2><p class="lede">Where the ten gaps stand against 2020, which countries lead on each, and why the estimate for the first grid-connected plant is the late 2030s to mid 2040s.</p></a></li>
-  </ol>
+  <section>
+    <div class="eyebrow">Issues</div>
+    <ol class="issues">
+      <li><a class="issue" href="sep2026.html"><div class="top"><span class="meta">September 2026 · Issue 03</span><span class="tag">Latest</span></div><h2>Helion softens its 2028 commitment</h2><p>No score change. A second US state fusion-plant licence, Japan's ¥60B demonstration programme, and the first private tokamak plasma in India.</p><span class="go">Read the issue →</span></a></li>
+      <li><a class="issue" href="aug2026.html"><div class="top"><span class="meta">August 2026 · Issue 02</span></div><h2>A capital-and-programmes month</h2><p>No score change. CFS raises $1B, Helion holds the first fusion-plant licences, and breeding-blanket test facilities get hardware plans.</p><span class="go">Read the issue →</span></a></li>
+      <li><a class="issue" href="jul2026.html"><div class="top"><span class="meta">July 2026 · Issue 01 · Inaugural</span></div><h2>The baseline</h2><p>Where the ten gaps stand against 2020, which countries lead on each, and why the estimate for the first grid-connected plant is the late 2030s to mid 2040s.</p><span class="go">Read the issue →</span></a></li>
+    </ol>
+  </section>
 
   <div class="about">
     <p><b>How the scores move.</b> A score changes only on a new physical demonstration or an institutional decision with legal effect. Announcements, simulations, design papers and single funding rounds don't move scores. Each issue explains every score, lists its sources, and records corrections.</p>
     <p>Scores are analyst judgement grounded in cited milestones, not an official index. Each issue works best on a laptop; on a phone, use the table view.</p>
-    <p><b>Background reading.</b> Sridhar Krishna, <a href="https://takshashila.org.in/content/publications/20250819-A-Primer-On-Nuclear-Fusion.html#executive-summary">“Towards Limitless Power: A Primer On Nuclear Fusion”</a>, Takshashila SlideDoc No. 2025-01, August 2025, The Takshashila Institution.</p>
-    <p><b>Sources for this introduction.</b> <a href="https://euro-fusion.org/fusion/history-of-fusion/">EUROfusion, “History of fusion”</a>; <a href="https://www.nbcnews.com/business/business-news/google-makes-first-foray-fusion-venture-mit-commonwealth-fusion-rcna216017">NBC News, “Google makes first foray into fusion”</a> (2025); <a href="https://www.helionenergy.com/orion">Helion, “Orion”</a> (Microsoft power purchase agreement).</p>
+    <div class="eyebrow" style="margin-top:8px">Background reading</div>
+    <p>Sridhar Krishna, “<a href="https://takshashila.org.in/content/publications/20250819-A-Primer-On-Nuclear-Fusion.html#executive-summary">Towards Limitless Power: A Primer On Nuclear Fusion</a>,” Takshashila SlideDoc No. 2025-01, August 2025, The Takshashila Institution.</p>
+    <div class="eyebrow" style="margin-top:8px">Sources for this introduction</div>
+    <p>EUROfusion, “<a href="https://euro-fusion.org/fusion/history-of-fusion/">History of fusion</a>,” EUROfusion, n.d.</p>
+    <p>NBC News, “<a href="https://www.nbcnews.com/business/business-news/google-makes-first-foray-fusion-venture-mit-commonwealth-fusion-rcna216017">Google makes first foray into fusion in venture with MIT spinoff Commonwealth Fusion Systems</a>,” NBC News, 2025.</p>
+    <p>Helion Energy, “<a href="https://www.helionenergy.com/orion">The world’s first fusion power plant</a>,” Helion Energy, n.d.</p>
   </div>
 </div>
 </body>

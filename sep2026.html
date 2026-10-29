@@ -4,225 +4,271 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Geopolitics and Commercialisation of Nuclear Fusion · September 2026</title>
-<style>:root{color-scheme:light} body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
+<style>body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Roboto+Mono:wght@400&display=swap">
 <style>
-/* Layout: a single reading column like a Takshashila research document — maroon masthead rule,
-   Palatino headings, Inter for interface and data. Sections stack; charts sit inside the column. */
+/* Takshashila design language (Oct 2026 spec), applied to an 860px reading column.
+   Inter for words, Roboto Mono for metadata. Hairlines, no radius, no shadow.
+   Colours: palette C (maroon and teal), kept by Sridhar's decision on 29 Oct 2026 even though
+   the design language allows only wine and marigold in the interface. Single light theme. */
 :root {
   --bg: #f8fafa;
   --surface: #ffffff;
-  --sunk: #eef3f3;
+  --sunk: #eef3f3;            /* hover fill and alternate band */
   --fg: #1f2526;
-  --muted: #5d6869;
-  --rule: #dbe4e4;
-  --accent: #620D3C;          /* Takshashila maroon (style guide) */
+  --muted: #5d6869;           /* secondary prose and meta; ~5.6:1 on white */
+  --rule: #dbe4e4;            /* every hairline */
+  --grid: rgba(23,20,19,0.08);
+  --accent: #620D3C;          /* wine, the Takshashila primary */
+  --accent-dark: #4a0a2e;
   --accent-soft: #eaf2f1;
-  --pos: #2e7d4f; --mix: #a86b00; --neg: #b3261e;
-  /* Chart series: palette C, maroon and teal (approved 28 Oct 2026). Only the maroon is from the
-     style guide. Country colours tuned to stay distinct for red-green colour blindness. */
+  --gold: #f1a222; --gold-soft: #fcf0d9;
+  --pos: #2f6b4a; --neg: #a3282d;
+  /* Chart series, palette C. Country colours tuned for red-green colour blindness. */
   --s-current: #620D3C; --s-prior: #2a7f7a; --s-base: #a3aeae;
   --c-global: #2f3336; --c-us: #1f6f6b; --c-europe: #24497a; --c-china: #b5473a;
   --c-japan: #a8c060; --c-korea: #c47ab3; --c-india: #d9a21b;
-  --f-head: "Palatino Linotype", Palatino, "Book Antiqua", "URW Palladio L", Georgia, serif;
-  --f-ui: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --sans: Inter, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --mono: "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  color-scheme: light;
 }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-  --bg: #121718; --surface: #1a2122; --sunk: #222b2c; --fg: #eef2f2; --muted: #a3b0b1; --rule: #2f3a3b;
-  --accent: #e08bb0; --accent-soft: #1d2b2b; --pos: #6fcf97; --mix: #e3b04b; --neg: #f08a80;
-  --s-current: #e08bb0; --s-prior: #2e7f79; --s-base: #6a7676;
-  --c-global: #d3d9da; --c-us: #2e958d; --c-europe: #4f7fcf; --c-china: #e0604f;
-  --c-japan: #b2cf72; --c-korea: #e08fc6; --c-india: #f0c44f; color-scheme: dark } }
-:root[data-theme="dark"] {
-  --bg: #121718; --surface: #1a2122; --sunk: #222b2c; --fg: #eef2f2; --muted: #a3b0b1; --rule: #2f3a3b;
-  --accent: #e08bb0; --accent-soft: #1d2b2b; --pos: #6fcf97; --mix: #e3b04b; --neg: #f08a80;
-  --s-current: #e08bb0; --s-prior: #2e7f79; --s-base: #6a7676;
-  --c-global: #d3d9da; --c-us: #2e958d; --c-europe: #4f7fcf; --c-china: #e0604f;
-  --c-japan: #b2cf72; --c-korea: #e08fc6; --c-india: #f0c44f; color-scheme: dark }
 
-body { background: var(--bg); color: var(--fg); font-family: var(--f-ui); font-size: 15px; line-height: 1.55; }
-.wrap { max-width: 860px; margin: 0 auto; padding-block: 28px 56px;
+body { background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 15px; line-height: 1.5; }
+.wrap { max-width: 860px; margin: 0 auto; padding-block: 0 56px;
   padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
-h1, h2, h3 { font-family: var(--f-head); font-weight: 700; text-wrap: balance; margin: 0; }
-h1 { font-size: clamp(1.7rem, 4.5vw, 2.3rem); line-height: 1.15; }
-h2 { font-size: 1.35rem; color: var(--accent); }
-h3 { font-size: 1.05rem; }
-.h1sub { display: block; font-size: .62em; font-weight: 400; color: var(--muted); margin-top: 4px; }
-
-p { margin: 0; }
+h1, h2, h3 { font-family: var(--sans); font-weight: 400; text-wrap: balance; margin: 0; }
+h1 { font-size: 40px; line-height: 1.12; letter-spacing: -0.02em; }
+.h1sub { display: block; font-size: 22px; font-weight: 300; color: var(--muted); letter-spacing: 0; margin-top: 8px; }
+h2 { font-size: 32px; line-height: 1.1; letter-spacing: -0.02em; }
+h3 { font-size: 18px; font-weight: 500; line-height: 1.3; }
+@media (max-width: 560px) { h1 { font-size: 30px; } .h1sub { font-size: 18px; } h2 { font-size: 26px; } }
+p { margin: 0; text-wrap: pretty; }
 a { color: var(--accent); text-underline-offset: 2px; }
-a:focus-visible, button:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.eyebrow { font-size: .72rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+a:focus-visible, button:focus-visible, select:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.eyebrow, .meta { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 400; }
+.meta { letter-spacing: 0.08em; }
 .muted { color: var(--muted); }
-.small { font-size: .85rem; }
+.small { font-size: 14px; }
+.num, .fig { font-variant-numeric: tabular-nums; }
 
-header.mast { border-top: 6px solid var(--accent); padding-top: 16px; display: grid; gap: 8px; }
-.mast-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; justify-content: space-between; }
-select { font: inherit; font-size: .9rem; padding: 6px 10px; border: 1px solid var(--rule); border-radius: 6px; background: var(--surface); color: var(--fg); }
+/* Wine bar: navigation, Inter Title Case */
+.topbar { background: var(--accent); }
+.topbar-in { max-width: 860px; margin: 0 auto; min-height: 52px; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.topbar span, .topbar a { font-family: var(--sans); font-size: 15px; font-weight: 400; letter-spacing: 0.3px; color: rgba(255,255,255,0.9); text-decoration: none; }
+.topbar a:hover { color: #fff; text-decoration: underline; }
+.topbar a:focus-visible { outline-color: #fff; }
 
-section { margin-top: 36px; display: grid; gap: 14px; }
-section > header { display: grid; gap: 4px; border-bottom: 1px solid var(--rule); padding-bottom: 8px; }
+header.mast { padding-block: 40px 32px; border-bottom: 1px solid var(--rule); display: grid; gap: 14px; }
+.mast-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; }
+.lede { font-size: 18px; font-weight: 300; line-height: 1.45; color: var(--muted); max-width: 64ch; }
+select { font: inherit; font-size: 14px; padding: 7px 10px; border: 1px solid var(--rule); border-radius: 0; background: var(--surface); color: var(--fg); }
 
-.verdict { background: var(--accent-soft); border-left: 4px solid var(--accent); padding: 14px 16px; border-radius: 0 6px 6px 0; display: grid; gap: 4px; }
+section { padding-block: 48px; border-bottom: 1px solid var(--rule); display: grid; gap: 18px; }
+section > header { display: grid; gap: 8px; }
+@media (max-width: 560px) { section { padding-block: 36px; } }
 
-.seg { display: inline-flex; border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
-.seg button { font: inherit; font-size: .82rem; padding: 5px 12px; border: 0; background: var(--surface); color: var(--muted); cursor: pointer; }
-.seg button[aria-pressed="true"] { background: var(--accent); color: var(--bg); font-weight: 600; }
-.bar { display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between; align-items: center; }
+/* Aside: verdict and best estimate */
+.aside { border-left: 2px solid var(--accent); padding: 4px 0 4px 28px; display: grid; gap: 8px; }
+.verdict { margin-block: 32px 0; }
+.verdict p { font-size: 17px; line-height: 1.5; }
+.aside .fig { font-size: 32px; font-weight: 400; letter-spacing: -0.02em; line-height: 1.1; }
 
-.chartbox { position: relative; width: 100%; height: 430px; }
-@media (max-width: 560px) { .chartbox { height: 340px; } }
-
-.tablewrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 6px; background: var(--surface); }
-table { border-collapse: collapse; width: 100%; font-size: .88rem; font-variant-numeric: tabular-nums; }
-th, td { padding: 7px 10px; border-bottom: 1px solid var(--rule); text-align: left; white-space: nowrap; }
-th { font-weight: 600; color: var(--muted); font-size: .76rem; text-transform: uppercase; letter-spacing: .06em; }
-td.num, th.num { text-align: center; }
-tr:last-child td { border-bottom: 0; }
-td.up { color: var(--pos); font-weight: 600; }
+/* Tabs and selectors: Inter, Title Case, hard-edged */
+.seg { display: inline-flex; border: 1px solid var(--rule); }
+.seg button { font: inherit; font-size: 14px; padding: 7px 14px; border: 0; border-left: 1px solid var(--rule); background: var(--surface); color: var(--fg); cursor: pointer; transition: background .15s ease; }
+.seg button:first-child { border-left: 0; }
+.seg button:hover { background: var(--sunk); }
+.seg button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+.bar { display: flex; flex-wrap: wrap; gap: 8px 16px; justify-content: space-between; align-items: center; }
 
 .chips { display: flex; flex-wrap: wrap; gap: 6px; }
-.chip { font: inherit; font-size: .8rem; padding: 4px 10px; border: 1px solid var(--rule); border-radius: 999px; background: var(--surface); color: var(--fg); cursor: pointer; }
-.chip:hover { border-color: var(--accent); }
-.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--bg); font-weight: 600; }
-.chip .sw { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; vertical-align: 0; }
-.chip.country[aria-pressed="true"] { background: var(--surface); color: var(--fg); border-width: 2px; padding: 3px 9px; }
-.pickmsg { font-size: .82rem; color: var(--muted); min-height: 1.2em; }
-.pickmsg.full { color: var(--accent); font-weight: 500; }
+.chip { font: inherit; font-size: 13px; padding: 5px 11px; border: 1px solid var(--rule); border-radius: 0; background: var(--surface); color: var(--fg); cursor: pointer; transition: background .15s ease; }
+.chip:hover { background: var(--sunk); }
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+.chip .sw { display: inline-block; width: 9px; height: 9px; margin-right: 7px; vertical-align: 0; }
+.chip.country[aria-pressed="true"] { background: var(--surface); color: var(--fg); border-width: 2px; padding: 4px 10px; }
+.chip.country[aria-pressed="true"]:hover { background: var(--sunk); }
+.chip.ghost { background: transparent; }
+.pickmsg { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; color: var(--muted); min-height: 1.3em; }
+.pickmsg.full { color: var(--accent); }
 
-.detail { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: start; background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 14px; }
-.detail > div { min-width: 0; display: grid; gap: 6px; }
-.score { width: 44px; height: 44px; border-radius: 8px; display: grid; place-items: center; font-weight: 700; font-size: 1.15rem; color: var(--bg); background: var(--accent); font-variant-numeric: tabular-nums; }
-.next { font-size: .85rem; border-top: 1px dashed var(--rule); padding-top: 6px; }
-.next b { color: var(--accent); font-weight: 600; }
-.cstack { display: grid; gap: 8px; }
+/* Figures */
+figure { margin: 0; display: grid; gap: 10px; }
+figure .ftitle { font-size: 20px; font-weight: 500; line-height: 1.2; letter-spacing: -0.005em; }
+.key { display: flex; flex-wrap: wrap; gap: 6px 18px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.key span { display: inline-flex; align-items: center; gap: 7px; }
+.key svg { flex: none; }
+figcaption { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.04em; color: var(--muted); line-height: 1.5; border-top: 1px solid var(--rule); padding-top: 8px; }
+.chartbox { position: relative; width: 100%; height: 440px; }
+@media (max-width: 560px) { .chartbox { height: 340px; } }
 
-.devs { display: grid; gap: 10px; counter-reset: dev; }
-.dev { background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 14px; display: grid; gap: 6px; }
-.dev .top { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }
-.sig { font-size: .74rem; font-weight: 600; white-space: nowrap; }
-.sig.positive { color: var(--pos); } .sig.mixed { color: var(--mix); } .sig.negative { color: var(--neg); }
-.links { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: .84rem; }
-.links a::after { content: " ↗"; font-size: .8em; }
+/* Data tables */
+.tablewrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; font-variant-numeric: tabular-nums; }
+th, td { padding: 9px 12px 9px 0; border-bottom: 1px solid var(--rule); text-align: left; white-space: nowrap; }
+th { font-family: var(--mono); font-weight: 400; font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+td.num, th.num { text-align: right; padding-right: 0; padding-left: 16px; }
+td.up { color: var(--pos); font-weight: 500; }
+table.prose td { white-space: normal; vertical-align: top; }
+table.ladder td { min-width: 150px; }
+table.ladder td:first-child, table.prose td.score-col { min-width: 56px; color: var(--accent); }
 
-.ladder td { white-space: normal; vertical-align: top; min-width: 150px; }
-.ladder td:first-child { min-width: 54px; font-weight: 700; color: var(--accent); }
-.draft { display: inline-block; font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--mix); border: 1px solid var(--mix); border-radius: 4px; padding: 1px 6px; margin-left: 8px; vertical-align: middle; font-family: var(--f-ui); }
+/* Cards */
+.card { background: var(--surface); border: 1px solid var(--rule); padding: 24px 26px; display: grid; gap: 10px; transition: background .15s ease; }
+@media (max-width: 560px) { .card { padding: 18px; } }
+.scorecard { grid-template-columns: auto 1fr; gap: 6px 22px; align-items: start; }
+.scorecard > div { min-width: 0; display: grid; gap: 8px; }
+.bigfig { display: grid; gap: 4px; justify-items: start; }
+.bigfig .fig { font-size: 44px; font-weight: 400; line-height: 1; letter-spacing: -0.02em; color: var(--accent); }
+.bigfig .meta { font-size: 10.5px; }
+.cstack .bigfig .fig { color: var(--fg); }
+.ctitle { display: flex; align-items: center; gap: 8px; }
+.ctitle i { width: 12px; height: 12px; display: inline-block; flex: none; }
+.next { font-size: 14px; border-top: 1px solid var(--rule); padding-top: 10px; }
+.next .meta { display: block; margin-bottom: 3px; color: var(--accent); }
+.cstack, .devs { display: grid; gap: 12px; }
 
-.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
-.stat { background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 12px 14px; display: grid; gap: 2px; align-content: start; }
-.stat .v { font-family: var(--f-head); font-size: 1.7rem; font-weight: 700; font-variant-numeric: tabular-nums; }
-.stat .d { font-size: .76rem; font-weight: 600; color: var(--muted); }
-.stat .d.moved { color: var(--mix); }
-.band { background: var(--accent-soft); border-radius: 8px; padding: 16px; display: grid; gap: 6px; }
-.band .v { font-family: var(--f-head); font-size: 1.5rem; font-weight: 700; }
+.dev .top { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+.dev h3 { font-size: 20px; letter-spacing: -0.005em; }
+.code { font-family: var(--mono); font-size: 12px; color: var(--accent); letter-spacing: 0.06em; }
+.badge { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; border: 1px solid var(--rule); white-space: nowrap; }
+.badge.positive { color: var(--pos); border-color: var(--pos); }
+.badge.negative { color: var(--neg); border-color: var(--neg); }
+.badge.mixed { background: var(--gold); border-color: var(--gold); color: #171413; font-weight: 600; }
+.links { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 14px; border-top: 1px solid var(--rule); padding-top: 10px; }
+.links a::after { content: " ↗"; }
 
-ul.plain { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
-ul.plain li { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 8px 12px; font-size: .9rem; }
-ul.corr li { border-left: 3px solid var(--mix); }
+/* KPI strip: gapless ruled grid */
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--rule); background: var(--surface); }
+.stat { padding: 20px 22px; display: grid; gap: 6px; align-content: start; border-right: 1px solid var(--rule); }
+.stat:last-child { border-right: 0; }
+.stat .fig { font-size: 44px; font-weight: 400; line-height: 1; letter-spacing: -0.02em; }
+.stat .meta.moved { color: var(--accent); }
+@media (max-width: 640px) { .stats { grid-template-columns: 1fr; } .stat { border-right: 0; border-bottom: 1px solid var(--rule); } .stat:last-child { border-bottom: 0; } }
 
-details { background: var(--surface); border: 1px solid var(--rule); border-radius: 8px; padding: 10px 14px; }
-summary { cursor: pointer; font-weight: 600; }
-dl.gloss { display: grid; grid-template-columns: max-content 1fr; gap: 6px 14px; margin: 12px 0 0; font-size: .88rem; }
-dl.gloss dt { font-weight: 700; } dl.gloss dd { margin: 0; color: var(--muted); }
-@media (max-width: 560px) { dl.gloss { grid-template-columns: 1fr; } dl.gloss dd { margin-bottom: 6px; } }
+/* Row lists */
+ol.rows { list-style: none; padding: 0; margin: 0; border-top: 2px solid var(--fg); }
+ol.rows li { display: grid; grid-template-columns: 52px 1fr; gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--rule); font-size: 15px; }
+ol.rows li > span:last-child { min-width: 0; }
 
-/* glossary terms in running text */
+/* Glossary */
+details { padding-block: 0; }
+summary { cursor: pointer; font-size: 18px; font-weight: 500; }
+dl.gloss { display: grid; grid-template-columns: max-content 1fr; gap: 0; margin: 14px 0 0; font-size: 14px; }
+dl.gloss dt, dl.gloss dd { padding: 7px 0; border-bottom: 1px solid var(--rule); margin: 0; }
+dl.gloss dt { font-weight: 500; padding-right: 18px; }
+dl.gloss dd { color: var(--muted); }
+@media (max-width: 560px) { dl.gloss { grid-template-columns: 1fr; } dl.gloss dt { border-bottom: 0; padding-bottom: 0; } }
+
 .g { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: help; border-bottom: 1px dotted var(--accent); }
 .g:hover, .g[aria-expanded="true"] { color: var(--accent); }
-#tip { position: fixed; z-index: 50; max-width: min(320px, calc(100vw - 32px)); background: var(--fg); color: var(--bg); font-size: .82rem; line-height: 1.45; padding: 9px 11px; border-radius: 6px; box-shadow: 0 6px 20px rgba(0,0,0,.25); pointer-events: none; }
-#tip b { display: block; margin-bottom: 2px; }
+#tip { position: fixed; z-index: 50; max-width: min(320px, calc(100vw - 32px)); background: #171413; color: rgba(255,255,255,0.85); font-size: 13px; line-height: 1.45; padding: 10px 12px; pointer-events: none; }
+#tip b { display: block; margin-bottom: 2px; color: #fff; font-weight: 500; }
 
-footer { margin-top: 40px; border-top: 1px solid var(--rule); padding-top: 16px; display: grid; gap: 10px; font-size: .84rem; color: var(--muted); }
-ol.src { margin: 0; padding-left: 20px; display: grid; gap: 3px; }
-.mobile-hint { display: none; font-size: .8rem; color: var(--muted); }
+footer { padding-top: 32px; display: grid; gap: 16px; font-size: 14px; color: var(--muted); }
+ol.src { margin: 0; padding-left: 22px; display: grid; gap: 6px; }
+.mobile-hint { display: none; }
 @media (max-width: 560px) { .mobile-hint { display: block; } }
-@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
 </head>
 <body>
 
+<div class="topbar"><div class="topbar-in"><span>The Takshashila Institution</span><a href="./">All Issues →</a></div></div>
 <div class="wrap">
   <header class="mast">
-    <div class="eyebrow">The Takshashila Institution</div>
+    <div class="eyebrow">Sridhar Krishna · <span id="issueName"></span></div>
     <h1>Geopolitics and Commercialisation of Nuclear Fusion: <span class="h1sub">A Monthly Tracker</span></h1>
+    <p class="lede">Ten gaps stand between fusion and the grid. Each is scored 0–10, where 10 means solved for commercial deployment. Hover or tap any <span class="g" tabindex="-1" style="cursor:default">underlined term</span> for an explanation. <a href="#scale">How to read the scores</a>.</p>
     <div class="mast-row">
-      <span class="muted small"><a href="./">All issues</a> · Sridhar Krishna · <span id="issueName"></span></span>
-      <label class="small muted">Issue <select id="issueSel" aria-label="Choose issue"></select></label>
+      <label class="meta" for="issueSel">Issue</label>
+      <select id="issueSel"></select>
     </div>
-    <p class="small muted">Ten gaps stand between fusion and the grid. Each is scored 0–10, where 10 means solved for commercial deployment. Hover or tap any <span class="g" tabindex="-1" style="cursor:default">underlined term</span> for an explanation. <a href="#scale">How to read the scores</a>.</p>
   </header>
 
-  <div class="verdict" style="margin-top:20px">
-    <div class="eyebrow" id="verdictLabel">This month's verdict</div>
+  <div class="aside verdict">
+    <div class="eyebrow">This month's verdict</div>
     <p id="verdict"></p>
   </div>
 
-  <section id="world">
-    <header><div class="eyebrow">Section 1</div><h2>World-system readiness</h2></header>
-    <div class="bar">
-      <span class="small muted">2020 baseline, prior month and this month</span>
-      <div class="seg" role="group" aria-label="View"><button data-v="chart" aria-pressed="true">Chart</button><button data-v="table" aria-pressed="false">Table</button></div>
-    </div>
-    <div class="chartbox" id="worldChartBox"><canvas id="worldChart" aria-label="Radar chart of the ten gap scores"></canvas></div>
-    <div class="tablewrap" id="worldTable" hidden></div>
-    <p class="mobile-hint">On a phone, the table view is easier to read than the chart.</p>
+  <section id="world" style="margin-top:16px">
+    <header><div class="eyebrow">Section 01</div><h2>World-system readiness</h2></header>
+    <figure>
+      <div class="eyebrow">Figure 1</div>
+      <div class="bar">
+        <div class="ftitle">The ten gaps, scored 0–10</div>
+        <div class="seg" role="group" aria-label="View"><button type="button" data-v="chart" aria-pressed="true">Chart</button><button type="button" data-v="table" aria-pressed="false">Table</button></div>
+      </div>
+      <div class="key" id="worldKey"></div>
+      <div class="chartbox" id="worldChartBox"><canvas id="worldChart" aria-label="Radar chart of the ten gap scores"></canvas></div>
+      <div class="tablewrap" id="worldTable" hidden></div>
+      <figcaption id="worldCap"></figcaption>
+    </figure>
+    <p class="meta mobile-hint">On a phone, the table view is easier to read than the chart.</p>
 
-    <h3 style="margin-top:6px">Why these scores — pick a gap</h3>
+    <h3>Why these scores: pick a gap</h3>
     <div class="chips" id="gapChips"></div>
-    <div class="detail" id="gapDetail"></div>
+    <div class="card scorecard" id="gapDetail"></div>
 
-    <h3 style="margin-top:6px">Score changes</h3>
+    <h3>Score changes</h3>
     <p class="small muted" id="changes"></p>
   </section>
 
   <section>
-    <header><div class="eyebrow">This month</div><h2>Top 3 developments</h2></header>
+    <header><div class="eyebrow">This month</div><h2>Top three developments</h2></header>
     <div class="devs" id="devs"></div>
   </section>
 
   <section id="countries">
-    <header><div class="eyebrow">Section 2</div><h2>Country standings</h2></header>
-    <p class="small muted">Pick up to three. “Global” (dashed) is the best score any country holds on each gap, the frontier, so no country can exceed it. Country scores use the same 0–10 ladder, applied to national capability.</p>
+    <header><div class="eyebrow">Section 02</div><h2>Country standings</h2></header>
+    <p class="small muted">Pick any of the seven. “Global” (dashed) is the best score any country holds on each gap, the frontier, so no country can exceed it. Country scores use the same 0–10 ladder, applied to national capability.</p>
     <div class="chips" id="countryChips"></div>
+    <div class="chips"><button type="button" class="chip ghost" id="selAll">Select All</button><button type="button" class="chip ghost" id="selReset">Reset</button></div>
     <div class="pickmsg" id="pickMsg" aria-live="polite"></div>
-    <div class="bar">
-      <span></span>
-      <div class="seg" role="group" aria-label="View"><button data-v="chart" aria-pressed="true">Chart</button><button data-v="table" aria-pressed="false">All countries table</button></div>
-    </div>
-    <div class="chartbox" id="countryChartBox"><canvas id="countryChart" aria-label="Radar chart comparing selected countries"></canvas></div>
-    <div class="tablewrap" id="countryTable" hidden></div>
-    <h3 style="margin-top:6px">Why these country scores — pick a gap</h3>
+    <figure>
+      <div class="eyebrow">Figure 2</div>
+      <div class="bar">
+        <div class="ftitle">Country scores on the ten gaps</div>
+        <div class="seg" role="group" aria-label="View"><button type="button" data-v="chart" aria-pressed="true">Chart</button><button type="button" data-v="table" aria-pressed="false">All Countries</button></div>
+      </div>
+      <div class="key" id="countryKey"></div>
+      <div class="chartbox" id="countryChartBox"><canvas id="countryChart" aria-label="Radar chart comparing selected countries"></canvas></div>
+      <div class="tablewrap" id="countryTable" hidden></div>
+      <figcaption id="countryCap"></figcaption>
+    </figure>
+    <h3>Why these country scores: pick a gap</h3>
     <div class="chips" id="cGapChips"></div>
     <div class="cstack" id="cDetail"></div>
   </section>
 
   <section>
-    <header><div class="eyebrow">Section 3</div><h2>Grid-connection prediction</h2></header>
+    <header><div class="eyebrow">Section 03</div><h2>Grid-connection prediction</h2></header>
     <div class="stats" id="stats"></div>
-    <div class="band">
+    <div class="aside">
       <div class="eyebrow">Current best estimate · first grid-connected plant</div>
-      <div class="v" id="bandV"></div>
+      <div class="fig" id="bandV"></div>
       <p class="small" id="bandD"></p>
     </div>
-    <h3 style="margin-top:6px">Watchlist · next checkpoints</h3>
-    <ul class="plain" id="watch"></ul>
+    <h3>Watchlist: next checkpoints</h3>
+    <ol class="rows" id="watch"></ol>
   </section>
 
   <section id="scale">
     <header><div class="eyebrow">Method</div><h2>How to read the scores</h2></header>
     <p class="small">The same ladder applies every month, so a score means the same thing in July as in December. Technical gaps (net gain to heat conversion) use the left column; institutional gaps (investment, regulation, supply chain, workforce) use the right. The last column shows which gaps sit on each rung in the selected issue.</p>
-    <div class="tablewrap"><table class="ladder" id="ladder"></table></div>
+    <div class="tablewrap"><table class="prose ladder" id="ladder"></table></div>
     <p class="small">A score moves only on a new <b>physical demonstration</b> or an <b>institutional decision with legal effect</b>. Announcements, simulations, design papers and single funding rounds don't move scores. Each gap's “what would move it up a point” line appears when you pick it above.</p>
     <h3>What moves Private Investment</h3>
     <p class="small">Funding rounds alone don't count, so two things can move this axis: (1) the FIA's annual cumulative total, published each July, crossing into a new band; (2) capital with legal effect, such as a plant's financial close, a binding power purchase agreement, or an enacted public appropriation.</p>
-    <div class="tablewrap"><table id="piBands"></table></div>
+    <div class="tablewrap"><table class="prose" id="piBands"></table></div>
   </section>
 
   <section>
     <header><div class="eyebrow">Record</div><h2>Corrections and decisions</h2></header>
-    <ul class="plain corr" id="corr"></ul>
+    <ol class="rows" id="corr"></ol>
   </section>
 
   <section>
@@ -230,8 +276,8 @@ ol.src { margin: 0; padding-left: 20px; display: grid; gap: 3px; }
   </section>
 
   <footer>
-    <p>Method: headline scores rate world-system readiness (0 = gap wide open, 10 = solved for commercial deployment), continuing the 2020 baseline analysis. Country scores rate national standing. Standing rule (Sept 2026): state-level fusion licences do not move Regulatory Clarity; revisit on an NRC final rule or a federal-level licence. “Europe” = EU + UK. The prediction band combines five methods: industry self-report (FIA survey), crowd forecasting (Metaculus), independent technical review, historical base rates (ITER slippage), and the weakest-link logic of this report's own gap scores. Scores are analyst judgment grounded in cited milestones, not an official index. Chart colours beyond the Takshashila maroon are our own choice.</p>
-    <div><b style="color:var(--fg)">Sources for this issue</b><ol class="src" id="src"></ol><p id="srcNote" style="margin-top:6px"></p></div>
+    <p>Method: headline scores rate world-system readiness (0 = gap wide open, 10 = solved for commercial deployment), continuing the 2020 baseline analysis. Country scores rate national standing. Standing rule (Sept 2026): state-level fusion licences do not move Regulatory Clarity; revisit on an NRC final rule or a federal-level licence. “Europe” = EU + UK. The prediction band combines five methods: industry self-report (FIA survey), crowd forecasting (Metaculus), independent technical review, historical base rates (ITER slippage), and the weakest-link logic of this report's own gap scores. Scores are analyst judgement grounded in cited milestones, not an official index.</p>
+    <div style="display:grid;gap:8px"><div class="eyebrow">Sources for this issue</div><ol class="src" id="src"></ol><p id="srcNote"></p></div>
   </footer>
 </div>
 <div id="tip" hidden></div>
@@ -564,12 +610,12 @@ const ISSUES = [
       "Oct 2026: India regulatory note revised for the SHANTI Act and draft rules; score held at 2.",
     ],
     sources: [
-      ["Business Standard: SHANTI draft rules include fusion reactors (Sept 1)", "https://www.business-standard.com/india-news/india-shifts-nuclear-fusion-debate-from-research-towards-power-deployment-126090101606_1.html"],
-      ["Tennessee TDEC: first licence for commercial fusion (Aug 31)", "https://www.tn.gov/environment/news/2026/8/31/first-license-commercial-fusion.html"],
-      ["ANS Nuclear Newswire: Type One licence (Sept 2)", "https://www.ans.org/news/2026-09-02/article-8360/tennessee-issues-commercial-fusion-license-to-type-one-energy-for-bull-run-site"],
-      ["Axios: Helion moves goalpost (Sept 28)", "https://www.axios.com/local/seattle/2026/09/28/helion-energy-orion-fusion-microsoft-commercial-power-altman"],
-      ["World Nuclear News: METI demonstration programme", "https://www.world-nuclear-news.org/articles/helical-selected-for-japanese-fusion-demonstration-project"],
-      ["ThePrint: Pranos builds India's first private tokamak (Sept 3)", "https://theprint.in/ground-reports/pranos-pragya-tokamak-nuclear-fusion-reactor/3032248/"],
+      {"author": "Business Standard", "title": "India shifts nuclear fusion debate from research towards power deployment", "pub": "Business Standard", "date": "September 1, 2026", "url": "https://www.business-standard.com/india-news/india-shifts-nuclear-fusion-debate-from-research-towards-power-deployment-126090101606_1.html"},
+      {"author": "Tennessee Department of Environment and Conservation", "title": "Governor Bill Lee, TDEC Announce First License for Commercial Fusion", "pub": "TN.gov", "date": "August 31, 2026", "url": "https://www.tn.gov/environment/news/2026/8/31/first-license-commercial-fusion.html"},
+      {"author": "American Nuclear Society", "title": "Tennessee issues commercial fusion license to Type One Energy for Bull Run site", "pub": "Nuclear Newswire", "date": "September 2, 2026", "url": "https://www.ans.org/news/2026-09-02/article-8360/tennessee-issues-commercial-fusion-license-to-type-one-energy-for-bull-run-site"},
+      {"author": "Axios", "title": "Seattle-area Helion quietly moves goalpost on fusion", "pub": "Axios Seattle", "date": "September 28, 2026", "url": "https://www.axios.com/local/seattle/2026/09/28/helion-energy-orion-fusion-microsoft-commercial-power-altman"},
+      {"author": "World Nuclear News", "title": "Helical selected for Japanese fusion demonstration project", "pub": "World Nuclear News", "date": "September 2026", "url": "https://www.world-nuclear-news.org/articles/helical-selected-for-japanese-fusion-demonstration-project"},
+      {"author": "Soumya Pillai", "title": "Bengaluru startup builds India’s 1st private nuclear fusion tokamak. Next step is a reactor", "pub": "ThePrint", "date": "September 3, 2026", "url": "https://theprint.in/ground-reports/pranos-pragya-tokamak-nuclear-fusion-reactor/3032248/"},
     ],
     sourceNote: "Also used, unlinked: ANS Nuclear Newswire (FIA Agreement States white paper, Sept 9; Proxima HTS MOU, Sept 14; STEP and US-UK partnerships, Sept 16-17; House fusion bill, Sept 30; California bills, Oct 2); NEI Magazine (China at IAEA General Conference); 36Kr (Nova Fusion round); The Fusion Report weekly digests (headlines only for ENN Helong-2, not independently verified). The RMB-to-USD conversion for Nova Fusion is ours. NRC final-rule status and SPARC magnet completion rest on absence of evidence in English-language search.",
     countries: COUNTRIES_SEP,
@@ -633,11 +679,11 @@ const ISSUES = [
       "Oct 2026: India regulatory note revised for the SHANTI Act and the August draft rules (which include D-T fusion reactors in reactor licensing); score held at 2.",
     ],
     sources: [
-      ["Business Standard: SHANTI draft rules include fusion reactors (Sept 1)", "https://www.business-standard.com/india-news/india-shifts-nuclear-fusion-debate-from-research-towards-power-deployment-126090101606_1.html"],
-      ["CFS: $1B raise, $4B total (July 30)", "https://cfs.energy/news-and-media/commonwealth-fusion-systems-raises-another-1-billion-bringing-total-capital-raised-to-4-billion/"],
-      ["ANS Nuclear Newswire: Helion's Washington licences", "https://www.ans.org/news/2026-06-23/article-8140/helion-secures-new-licenses-from-washington/"],
-      ["NEI Magazine: Kyoto Fusioneering and ORNL advance UNITY-3", "https://www.neimagazine.com/news/kyoto-ornl-advance-unity-3-fusion/"],
-      ["World Nuclear News: FIA 2026 report ($14.24B cumulative)", "https://world-nuclear-news.org/articles/fusion-industry-raised-usd45-billion-over-past-year-report-says"],
+      {"author": "Business Standard", "title": "India shifts nuclear fusion debate from research towards power deployment", "pub": "Business Standard", "date": "September 1, 2026", "url": "https://www.business-standard.com/india-news/india-shifts-nuclear-fusion-debate-from-research-towards-power-deployment-126090101606_1.html"},
+      {"author": "Commonwealth Fusion Systems", "title": "Commonwealth Fusion Systems Raises Another $1 Billion, Bringing Total Capital Raised to $4 Billion", "pub": "CFS", "date": "July 30, 2026", "url": "https://cfs.energy/news-and-media/commonwealth-fusion-systems-raises-another-1-billion-bringing-total-capital-raised-to-4-billion/"},
+      {"author": "American Nuclear Society", "title": "Helion secures new licenses from Washington", "pub": "Nuclear Newswire", "date": "June 23, 2026", "url": "https://www.ans.org/news/2026-06-23/article-8140/helion-secures-new-licenses-from-washington/"},
+      {"author": "Nuclear Engineering International", "title": "Kyoto, ORNL advance Unity-3 fusion", "pub": "NEI Magazine", "date": "August 2026", "url": "https://www.neimagazine.com/news/kyoto-ornl-advance-unity-3-fusion/"},
+      {"author": "World Nuclear News", "title": "Fusion industry raised USD4.5 billion in past year, report says", "pub": "World Nuclear News", "date": "July 2026", "url": "https://world-nuclear-news.org/articles/fusion-industry-raised-usd45-billion-over-past-year-report-says"},
     ],
     sourceNote: "Also used, unlinked: Fusion Energy Base 'Confinement Time: August 2026'; The Fusion Report weekly digests (Aug 7, 21, 28); ORNL, ASIPP/Global Times, UKAEA/gov.uk and TAE releases; Reuters (TAE helium-3); Federal Register (NRC proposed rule). Metaculus date confirmed only via a June 2026 secondary source (AEI), not the site itself.",
     countries: COUNTRIES_AUG,
@@ -699,12 +745,12 @@ const ISSUES = [
       "Oct 2026: Private Investment note corrected to FIA's 2026 cumulative figure ($14.24B); the FIA confidence comparison now carries a wording caveat, and the claim that the drop was the first in the survey's history is withdrawn (the figure was 89% in 2024).",
     ],
     sources: [
-      ["MP-IDSA: SHANTI Act and India's nuclear governance (for the India regulatory correction)", "https://idsa.in/publisher/issuebrief/shanti-act-and-indias-nuclear-energy-governance-framework"],
-      ["World Nuclear News: FIA 2026 report", "https://world-nuclear-news.org/articles/fusion-industry-raised-usd45-billion-over-past-year-report-says"],
-      ["World Nuclear News: FIA 2025 report", "https://wnn.world-nuclear.org/articles/access-to-funding-remains-a-major-issue-for-fusion-says-fia"],
-      ["ANS Nuclear Newswire: Tennessee fusion regulations take effect", "https://www.ans.org/news/2026-06-11/article-8115/tennessee-fusion-regulations-take-effect/"],
-      ["CFS: SPARC nearly 75% complete", "https://blog.cfs.energy/cfs-begins-preparing-a-home-for-our-100-million-degree-fusion-plasma/"],
-      ["ThePrint: Pranos Fusion and PRAGYA (for the India correction)", "https://theprint.in/ground-reports/pranos-pragya-tokamak-nuclear-fusion-reactor/3032248/"],
+      {"author": "Niranjan Chandrashekhar Oak and Bhawna Budhwar", "title": "SHANTI Act and India’s Nuclear Energy Governance Framework", "pub": "Issue Brief, MP-IDSA", "date": "February 17, 2026", "url": "https://idsa.in/publisher/issuebrief/shanti-act-and-indias-nuclear-energy-governance-framework"},
+      {"author": "World Nuclear News", "title": "Fusion industry raised USD4.5 billion in past year, report says", "pub": "World Nuclear News", "date": "July 2026", "url": "https://world-nuclear-news.org/articles/fusion-industry-raised-usd45-billion-over-past-year-report-says"},
+      {"author": "World Nuclear News", "title": "Access to funding remains a major issue for fusion, says industry report", "pub": "World Nuclear News", "date": "July 2025", "url": "https://wnn.world-nuclear.org/articles/access-to-funding-remains-a-major-issue-for-fusion-says-fia"},
+      {"author": "American Nuclear Society", "title": "Tennessee fusion regulations take effect", "pub": "Nuclear Newswire", "date": "June 11, 2026", "url": "https://www.ans.org/news/2026-06-11/article-8115/tennessee-fusion-regulations-take-effect/"},
+      {"author": "Commonwealth Fusion Systems", "title": "CFS begins preparing a home for our 100 million degree fusion plasma", "pub": "CFS blog", "date": "2026", "url": "https://blog.cfs.energy/cfs-begins-preparing-a-home-for-our-100-million-degree-fusion-plasma/"},
+      {"author": "Soumya Pillai", "title": "Bengaluru startup builds India’s 1st private nuclear fusion tokamak. Next step is a reactor", "pub": "ThePrint", "date": "September 3, 2026", "url": "https://theprint.in/ground-reports/pranos-pragya-tokamak-nuclear-fusion-reactor/3032248/"},
     ],
     sourceNote: "Also used, unlinked: F4E Fusion Observatory, Metaculus, primary lab and regulator announcements.",
     countries: COUNTRIES_JULY,
@@ -717,12 +763,15 @@ const LATEST_ID = "2026-09";
 (function () {
   const issues = ISSUES.slice(ISSUES.findIndex(i => i.id === LATEST_ID));
   const COUNTRY_VAR = { Global: "--c-global", US: "--c-us", Europe: "--c-europe", China: "--c-china", Japan: "--c-japan", "South Korea": "--c-korea", India: "--c-india" };
-  const MAX = 3;
-  const st = { i: 0, gap: 0, cgap: 0, sel: ["Global", "US", "China"], wv: "chart", cv: "chart" };
+  const DEFAULT_SEL = ["Global", "US", "China"];
+  // A distinct marker per country, so lines can be told apart without colour.
+  const SHAPE = { Global: "circle", US: "rect", Europe: "triangle", China: "rectRot", Japan: "crossRot", "South Korea": "star", India: "cross" };
+  const st = { i: 0, gap: 0, cgap: 0, sel: DEFAULT_SEL.slice(), wv: "chart", cv: "chart" };
   const $ = id => document.getElementById(id);
   const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
   const narrow = () => window.innerWidth < 560;
-  const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const pad = n => String(n).padStart(2, "0");
 
   // ---------- glossary wrapping ----------
   const KEYS = Object.keys(GLOSSARY).sort((a, b) => b.length - a.length);
@@ -730,7 +779,7 @@ const LATEST_ID = "2026-09";
   function gloss(root) {
     const seen = new Set();
     const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
-      acceptNode: n => n.parentElement.closest("a,button,select,.g,h1,h2,th,summary,dt") ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT });
+      acceptNode: n => n.parentElement.closest("a,button,select,.g,h1,h2,th,summary,dt,.meta,.eyebrow,.code,.badge") ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT });
     const nodes = []; while (walker.nextNode()) nodes.push(walker.currentNode);
     nodes.forEach(n => {
       const t = n.nodeValue; RX.lastIndex = 0; let m, last = 0, frag = null;
@@ -765,33 +814,61 @@ const LATEST_ID = "2026-09";
 
   // ---------- charts ----------
   let wChart, cChart;
+  const MONO = "'Roboto Mono', ui-monospace, Menlo, monospace";
   function radarOpts() {
-    const grid = css("--rule"), fg = css("--fg"), mu = css("--muted");
     return {
       responsive: true, maintainAspectRatio: false, animation: false,
       layout: { padding: narrow() ? 2 : 8 },
-      scales: { r: { min: 0, max: 10, ticks: { stepSize: 2, color: mu, backdropColor: "transparent", font: { size: 10 } },
-        grid: { color: grid }, angleLines: { color: grid },
-        pointLabels: { color: fg, font: { size: narrow() ? 10 : 12, family: "Inter, system-ui, sans-serif" } } } },
-      plugins: { legend: { position: "bottom", labels: { color: fg, boxWidth: 12, font: { size: 12 } } },
-        tooltip: { callbacks: { title: it => GAPS[it[0].dataIndex] } } },
+      scales: { r: { min: 0, max: 10,
+        ticks: { stepSize: 2, color: css("--muted"), backdropColor: "transparent", font: { size: 10, family: MONO } },
+        grid: { color: css("--grid") }, angleLines: { color: css("--grid") },
+        pointLabels: { color: css("--muted"), font: { size: narrow() ? 10 : 11, family: MONO } } } },
+      plugins: { legend: { display: false },
+        tooltip: { backgroundColor: "#171413", cornerRadius: 0, caretSize: 5, padding: 10,
+          titleFont: { family: "Inter, sans-serif", weight: "500" }, bodyFont: { family: MONO, size: 11 },
+          callbacks: { title: it => GAPS[it[0].dataIndex] } } },
     };
   }
   const labels = () => narrow() ? GAPS_SHORT : GAPS.map(g => g.replace("Tritium Supply/Breeding", "Tritium breeding").replace("Heat/Power Conversion", "Heat→power"));
   function ds(label, data, color, o = {}) {
     return Object.assign({ label, data, borderColor: color, backgroundColor: color + "26", pointBackgroundColor: color, pointRadius: 2.5, borderWidth: 2 }, o);
   }
+  // Series key in mono, with the line style drawn: radar series can't be labelled at a line end.
+  function marker(shape, c) {
+    const x = 13, y = 6;
+    switch (shape) {
+      case "rect": return `<rect x="${x-3.5}" y="${y-3.5}" width="7" height="7" fill="${c}"/>`;
+      case "triangle": return `<path d="M${x} ${y-4.5}L${x+4.5} ${y+3.5}H${x-4.5}Z" fill="${c}"/>`;
+      case "rectRot": return `<path d="M${x} ${y-5}L${x+5} ${y}L${x} ${y+5}L${x-5} ${y}Z" fill="${c}"/>`;
+      case "crossRot": return `<path d="M${x-4} ${y-4}L${x+4} ${y+4}M${x+4} ${y-4}L${x-4} ${y+4}" stroke="${c}" stroke-width="2"/>`;
+      case "cross": return `<path d="M${x} ${y-5}V${y+5}M${x-5} ${y}H${x+5}" stroke="${c}" stroke-width="2"/>`;
+      case "star": return `<path d="M${x} ${y-5}L${x+1.5} ${y-1.5}L${x+5} ${y-1.5}L${x+2.2} ${y+1}L${x+3.2} ${y+5}L${x} ${y+2.6}L${x-3.2} ${y+5}L${x-2.2} ${y+1}L${x-5} ${y-1.5}L${x-1.5} ${y-1.5}Z" fill="${c}"/>`;
+      default: return `<circle cx="${x}" cy="${y}" r="3.5" fill="${c}"/>`;
+    }
+  }
+  function key(el, items) {
+    el.innerHTML = items.map(([label, color, dash, w, shape]) =>
+      `<span><svg width="26" height="12" aria-hidden="true"><line x1="1" y1="6" x2="25" y2="6" stroke="${color}" stroke-width="${w || 2}" ${dash ? `stroke-dasharray="${dash}"` : ""}/>${shape ? marker(shape, color) : ""}</svg>${esc(label)}</span>`).join("");
+  }
   function drawWorld() {
     const is = issues[st.i], pr = issues[st.i + 1];
     const sets = [ds("2020 baseline", BASELINE_2020, css("--s-base"), { borderDash: [4, 4], backgroundColor: "transparent", borderWidth: 1.5, order: 3 })];
-    if (pr) sets.push(ds("Prior month", pr.scores, css("--s-prior"), { backgroundColor: "transparent", borderDash: [2, 3], order: 2 }));
+    const k = [["This month", css("--s-current"), "", 2.5]];
+    if (pr) { sets.push(ds("Prior month", pr.scores, css("--s-prior"), { backgroundColor: "transparent", borderDash: [2, 3], order: 2 })); k.push(["Prior month", css("--s-prior"), "2 3"]); }
     sets.push(ds("This month", is.scores, css("--s-current"), { borderWidth: 2.5, order: 1 }));
+    k.push(["2020 baseline", css("--s-base"), "4 4", 1.5]);
+    key($("worldKey"), k);
     wChart && wChart.destroy();
     wChart = new Chart($("worldChart"), { type: "radar", data: { labels: labels(), datasets: sets }, options: radarOpts() });
   }
   function drawCountry() {
     const C = issues[st.i].countries;
-    const sets = st.sel.map(c => ds(c, C[c].scores, css(COUNTRY_VAR[c]), c === "Global" ? { borderDash: [6, 4], backgroundColor: "transparent" } : {}));
+    const many = st.sel.length > 3;
+    const sets = st.sel.map(c => ds(c, C[c].scores, css(COUNTRY_VAR[c]), Object.assign(
+      { pointStyle: SHAPE[c], pointRadius: many ? 4.5 : 3.5, pointBorderColor: css(COUNTRY_VAR[c]), pointBorderWidth: 1.5 },
+      (c === "Global" || many) ? { backgroundColor: "transparent" } : {},
+      c === "Global" ? { borderDash: [6, 4] } : {})));
+    key($("countryKey"), st.sel.map(c => [c, css(COUNTRY_VAR[c]), c === "Global" ? "6 4" : "", 2, SHAPE[c]]));
     cChart && cChart.destroy();
     cChart = new Chart($("countryChart"), { type: "radar", data: { labels: labels(), datasets: sets }, options: radarOpts() });
   }
@@ -805,15 +882,16 @@ const LATEST_ID = "2026-09";
   function renderWorldDetail() {
     const is = issues[st.i], g = st.gap;
     chips($("gapChips"), g, i => { st.gap = i; renderWorldDetail(); });
-    $("gapDetail").innerHTML = `<div class="score">${is.scores[g]}</div><div><h3>${esc(GAPS[g])}</h3><p class="small">${esc(is.scoreNotes[g])}</p>
-      <p class="next"><b>What would move it up a point:</b> ${esc(NEXT_POINT[g])}</p></div>`;
+    $("gapDetail").innerHTML = `<div class="bigfig"><span class="fig">${is.scores[g]}</span><span class="meta">of 10</span></div>
+      <div><h3>${esc(GAPS[g])}</h3><p class="small">${esc(is.scoreNotes[g])}</p>
+      <p class="next"><span class="meta">What would move it up a point</span>${esc(NEXT_POINT[g])}</p></div>`;
     gloss($("gapDetail"));
   }
   function renderWorldTable() {
     const is = issues[st.i], pr = issues[st.i + 1];
     let h = `<table><thead><tr><th>Gap</th><th class="num">2020</th>${pr ? '<th class="num">Prior month</th>' : ""}<th class="num">This month</th></tr></thead><tbody>`;
     GAPS.forEach((g, i) => { const up = pr && is.scores[i] > pr.scores[i];
-      h += `<tr><td>${esc(g)}</td><td class="num">${BASELINE_2020[i]}</td>${pr ? `<td class="num">${pr.scores[i]}</td>` : ""}<td class="num ${up ? "up" : ""}"><b>${is.scores[i]}</b></td></tr>`; });
+      h += `<tr><td>${esc(g)}</td><td class="num">${BASELINE_2020[i]}</td>${pr ? `<td class="num">${pr.scores[i]}</td>` : ""}<td class="num ${up ? "up" : ""}">${is.scores[i]}</td></tr>`; });
     $("worldTable").innerHTML = h + "</tbody></table>";
   }
   function renderCountryPick() {
@@ -824,18 +902,19 @@ const LATEST_ID = "2026-09";
       b.innerHTML = `<span class="sw" style="background:${css(COUNTRY_VAR[name])}"></span>${esc(name)}`;
       b.onclick = () => {
         if (on) { if (st.sel.length > 1) st.sel = st.sel.filter(c => c !== name); else return msg("Keep at least one selected."); }
-        else if (st.sel.length >= MAX) return msg(`${MAX} of ${MAX} selected. Tap a selected one to remove it, then add ${name}.`, true);
-        else st.sel = [...st.sel, name];
+        else st.sel = Object.keys(C).filter(n => n === name || st.sel.includes(n));
         renderCountries();
       };
       el.append(b); });
-    msg(st.sel.length >= MAX ? `${MAX} of ${MAX} selected. To add another, remove one first.` : `${st.sel.length} of ${MAX} selected.`, st.sel.length >= MAX);
+    const n = st.sel.length, total = Object.keys(C).length;
+    msg(n > 3 ? `${n} of ${total} selected. With more than three, fills are switched off and each country has its own marker; the All Countries table is easier to compare.` : `${n} of ${total} selected.`, n > 3);
   }
   function msg(t, full) { const m = $("pickMsg"); m.textContent = t; m.classList.toggle("full", !!full); }
   function renderCountryDetail() {
     const C = issues[st.i].countries;
     chips($("cGapChips"), st.cgap, i => { st.cgap = i; renderCountryDetail(); });
-    $("cDetail").innerHTML = st.sel.map(c => `<div class="detail"><div class="score" style="background:var(--surface);color:var(--fg);border:3px solid ${css(COUNTRY_VAR[c])}">${C[c].scores[st.cgap]}</div><div><h3>${esc(c)}</h3><p class="small">${esc(C[c].notes[st.cgap])}</p></div></div>`).join("");
+    $("cDetail").innerHTML = st.sel.map(c => `<div class="card scorecard"><div class="bigfig"><span class="fig">${C[c].scores[st.cgap]}</span><span class="meta">of 10</span></div>
+      <div><h3 class="ctitle"><i style="background:${css(COUNTRY_VAR[c])}"></i>${esc(c)}</h3><p class="small">${esc(C[c].notes[st.cgap])}</p></div></div>`).join("");
     gloss($("cDetail"));
   }
   function renderCountryTable() {
@@ -850,27 +929,31 @@ const LATEST_ID = "2026-09";
     const is = issues[st.i];
     let h = `<thead><tr><th>Score</th><th>Technical gaps</th><th>Institutional gaps</th><th>Gaps here now</th></tr></thead><tbody>`;
     LADDER.forEach(r => { const here = GAPS.filter((g, i) => is.scores[i] >= r.range[0] && is.scores[i] <= r.range[1]);
-      h += `<tr><td>${r.range[0] === r.range[1] ? r.range[0] : r.range[0] + "–" + r.range[1]}</td><td>${esc(r.tech)}</td><td>${esc(r.inst)}</td><td class="muted">${here.map(esc).join(", ") || "—"}</td></tr>`; });
+      h += `<tr><td class="num" style="text-align:left;padding-left:0">${r.range[0] === r.range[1] ? r.range[0] : r.range[0] + "–" + r.range[1]}</td><td>${esc(r.tech)}</td><td>${esc(r.inst)}</td><td class="muted">${here.map(esc).join(", ") || "—"}</td></tr>`; });
     $("ladder").innerHTML = h + "</tbody>";
     $("piBands").innerHTML = `<thead><tr><th>Score</th><th>FIA cumulative</th><th>Condition</th></tr></thead><tbody>` +
-      PI_BANDS.map(b => `<tr><td><b>${b.s}</b></td><td>${b.cap}</td><td style="white-space:normal;min-width:220px">${esc(b.cond)}</td></tr>`).join("") + "</tbody>";
-    $("piBands").querySelectorAll("tr").forEach(tr => {});
+      PI_BANDS.map(b => `<tr><td class="score-col">${b.s}</td><td style="white-space:nowrap">${b.cap}</td><td style="min-width:220px">${esc(b.cond)}</td></tr>`).join("") + "</tbody>";
     gloss($("scale"));
   }
+  // Chicago style, commas as separators (Takshashila convention)
+  const cite = s => `${esc(s.author)}, “<a href="${s.url}" target="_blank" rel="noopener">${esc(s.title)}</a>,” ${esc(s.pub)}, ${esc(s.date)}.`;
 
   function render() {
     const is = issues[st.i];
     $("issueName").textContent = is.label;
     $("verdict").textContent = is.verdict;
     $("changes").innerHTML = "No gap moved a point this month. A score changes only on a new <em>physical</em> demonstration or an institutional decision taking legal effect.";
-    $("devs").innerHTML = is.achievements.map((a, n) => `<article class="dev"><div class="top"><h3>${n + 1}. ${esc(a.title)}</h3><span class="sig ${a.signal}">${{ positive: "▲ Positive", mixed: "◆ Mixed", negative: "▼ Negative" }[a.signal]}</span></div>
-      <p class="small">${esc(a.detail)}</p><div class="links"><span class="muted">Read more:</span>${a.links.map(l => `<a href="${l[1]}" target="_blank" rel="noopener">${esc(l[0])}</a>`).join("")}</div></article>`).join("");
-    $("stats").innerHTML = Object.values(is.tracker).map(t => `<div class="stat"><div class="v">${t.value}</div><div class="d ${t.value !== t.prior ? "moved" : ""}">${t.value !== t.prior ? "changed from " + t.prior : "unchanged"}</div><p class="small muted">${esc(t.note)}</p></div>`).join("");
+    $("devs").innerHTML = is.achievements.map((a, n) => `<article class="card dev"><div class="top"><span class="code">${pad(n + 1)}</span><span class="badge ${a.signal}">${{ positive: "▲ Positive", mixed: "◆ Mixed", negative: "▼ Negative" }[a.signal]}</span></div>
+      <h3>${esc(a.title)}</h3><p class="small">${esc(a.detail)}</p><div class="links"><span class="meta">Read more</span>${a.links.map(l => `<a href="${l[1]}" target="_blank" rel="noopener">${esc(l[0])}</a>`).join("")}</div></article>`).join("");
+    $("stats").innerHTML = Object.values(is.tracker).map(t => `<div class="stat"><span class="fig">${t.value}</span><span class="meta ${t.value !== t.prior ? "moved" : ""}">${t.value !== t.prior ? "Changed from " + t.prior : "Unchanged"}</span><p class="small muted">${esc(t.note)}</p></div>`).join("");
     $("bandV").textContent = is.prediction.band; $("bandD").textContent = is.prediction.detail;
-    $("watch").innerHTML = is.watchlist.map(w => `<li>○ ${esc(w)}</li>`).join("");
-    $("corr").innerHTML = is.corrections.map(c => `<li>${esc(c)}</li>`).join("");
-    $("src").innerHTML = is.sources.map(s => `<li><a href="${s[1]}" target="_blank" rel="noopener">${esc(s[0])}</a></li>`).join("");
+    $("watch").innerHTML = is.watchlist.map((w, n) => `<li><span class="code">W.${pad(n + 1)}</span><span>${esc(w)}</span></li>`).join("");
+    $("corr").innerHTML = is.corrections.map((c, n) => `<li><span class="code">C.${pad(n + 1)}</span><span>${esc(c)}</span></li>`).join("");
+    $("src").innerHTML = is.sources.map(s => `<li>${cite(s)}</li>`).join("");
     $("srcNote").textContent = is.sourceNote;
+    const cap = `Source: author's scoring, ${is.month}. Evidence for each score is given under “Why these scores” and in the sources for this issue.`;
+    $("worldCap").textContent = cap;
+    $("countryCap").textContent = `Source: author's scoring, ${is.month}. “Global” is the highest score any of the six countries holds on each gap.`;
     ["verdict", "devs", "stats", "bandD", "watch", "corr", "srcNote"].forEach(id => gloss($(id)));
     if (st.wv === "chart") drawWorld(); renderWorldTable(); renderWorldDetail(); renderCountries(); renderLadder();
   }
@@ -883,15 +966,16 @@ const LATEST_ID = "2026-09";
     seg.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
     const isWorld = seg.closest("#world");
     const v = b.dataset.v;
-    if (isWorld) { st.wv = v; $("worldChartBox").hidden = v !== "chart"; $("worldTable").hidden = v !== "table"; if (v === "chart") drawWorld(); }
-    else { st.cv = v; $("countryChartBox").hidden = v !== "chart"; $("countryTable").hidden = v !== "table"; if (v === "chart") drawCountry(); }
+    if (isWorld) { st.wv = v; $("worldChartBox").hidden = $("worldKey").hidden = v !== "chart"; $("worldTable").hidden = v !== "table"; if (v === "chart") drawWorld(); }
+    else { st.cv = v; $("countryChartBox").hidden = $("countryKey").hidden = v !== "chart"; $("countryTable").hidden = v !== "table"; if (v === "chart") drawCountry(); }
   }));
+  $("selAll").onclick = () => { st.sel = Object.keys(issues[st.i].countries); renderCountries(); };
+  $("selReset").onclick = () => { st.sel = DEFAULT_SEL.slice(); renderCountries(); };
   $("gloss").innerHTML = Object.keys(GLOSSARY).sort((a, b) => a.localeCompare(b)).map(k => `<dt>${esc(k)}</dt><dd>${esc(GLOSSARY[k])}</dd>`).join("");
   let wasNarrow = narrow();
   window.addEventListener("resize", () => { if (narrow() !== wasNarrow) { wasNarrow = narrow(); if (st.wv === "chart") drawWorld(); if (st.cv === "chart") drawCountry(); } });
-  const redraw = () => { if (st.wv === "chart") drawWorld(); renderCountries(); };
-  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", redraw);
-  new MutationObserver(redraw).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+  // Redraw once the web fonts arrive so chart labels use Roboto Mono.
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { if (st.wv === "chart") drawWorld(); if (st.cv === "chart") drawCountry(); });
   render();
 })();
 </script>
