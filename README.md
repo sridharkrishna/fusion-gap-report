@@ -1,4 +1,4 @@
-# The Fusion Gap Report
+# Geopolitics and Commercialisation of Nuclear Fusion: A Monthly Tracker
 
 A monthly tracker of how far nuclear fusion is from the electricity grid.
 
