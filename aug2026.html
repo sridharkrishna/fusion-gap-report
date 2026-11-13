@@ -182,7 +182,7 @@ ol.src { margin: 0; padding-left: 22px; display: grid; gap: 6px; }
   <header class="mast">
     <div class="eyebrow">Sridhar Krishna · <span id="issueName"></span></div>
     <h1>Geopolitics and Commercialisation of Nuclear Fusion: <span class="h1sub">A Monthly Tracker</span></h1>
-    <p class="lede">Ten gaps stand between fusion and the grid. Each is scored 0–10, where 10 means solved for commercial deployment. Hover or tap any <span class="g" tabindex="-1" style="cursor:default">underlined term</span> for an explanation. <a href="#scale">How to read the scores</a>.</p>
+    <p class="lede">We have identified ten major gaps that prevent commercialisation of nuclear fusion today. Each is scored 0–10, where 10 means solved for commercial deployment. Hover or tap any <span class="g" tabindex="-1" style="cursor:default">underlined term</span> for an explanation. <a href="#scale">How to read the scores</a>.</p>
     <div class="mast-row">
       <label class="meta" for="issueSel">Issue</label>
       <select id="issueSel"></select>
@@ -319,6 +319,7 @@ const NEXT_POINT = [
 ];
 
 // India regulatory note revised and held at 2; palette C adopted (Sridhar, 28 Oct 2026).
+// October 2026 issue added; decisions taken by Sridhar 13 Nov 2026 (Supply Chain and Europe investment held).
 // Generic score ladder (approved by Sridhar, 28 Oct 2026).
 const LADDER = [
   { range: [0, 0], tech: "Not attempted; no credible path.", inst: "Nothing exists." },
@@ -539,14 +540,110 @@ COUNTRIES_SEP.Japan.notes[6] = "Held at 3 (3→4 considered and held, Oct 2026):
 COUNTRIES_SEP.Japan.notes[7] = "National strategy (2030s power demo goal); METI demonstration programme ties subsidies to milestones; NRA dialogue begun, but no fusion licensing framework yet";
 COUNTRIES_SEP.Europe.notes[4] = "ITER magnet manufacturing base; Proxima signed an MOU with Lower Saxony (Sept 14) to lay foundations for industrial-scale HTS tape production — a plan, not a factory";
 COUNTRIES_SEP.Europe.notes[8] = "ITER's supplier network is the deepest in existence; UK STEP announced manufacturing and project partnerships during UK Fusion Week (Sept 15-17), incl. Kyoto Fusioneering";
-COUNTRIES_SEP.China.notes[0] = "BEST burning-plasma device in final assembly (completion targeted 2027); no net gain yet. ENN reported starting its Helong-2 device (Sept; detail not independently verified). CNNC restated at the IAEA General Conference: commercial fusion by ~2050, demonstration ~2045";
+COUNTRIES_SEP.China.notes[0] = "BEST burning-plasma device in final assembly (completion targeted 2027); no net gain yet. ENN's next device, Helong-2, is targeted for completion around end-2027. [Corrected Nov 2026: this note previously said ENN had started Helong-2, taken from a newsletter headline.] CNNC restated at the IAEA General Conference: commercial fusion by ~2050, demonstration ~2045";
 COUNTRIES_SEP.China.notes[6] = "~$5B+ across CFEC ($2.1B), NeoFusion ($2B+), Startorus, Energy Singularity, ENN; Sept 1: Nova Fusion closed a RMB 1.2B (~$165-170M, our conversion) pre-Series A to pursue Q>1 verification";
 COUNTRIES_SEP["South Korea"].notes[1] = "KSTAR holds the temperature-qualified record: 48s at ≥100M°C (2024); 300s target by end-2026 — no result reported as of early Oct. Recurring 2026 '102s at 100M°C' headlines conflate two separate 2024 metrics and are excluded";
 COUNTRIES_SEP.India.notes[1] = "ADITYA-U and SST-1 are small experimental devices, far from records. Sept: Pranos Fusion's PRAGYA, India's first privately built tokamak, showed plasma to investors (ThePrint ground report, Sept 3). It is a testbed; the company says it cannot produce fusion. No score change";
 COUNTRIES_SEP.India.notes[6] = "2 (corrected Oct 2026; published as 1). Pranos Fusion: ~$7M raised in total, including a $6.8M round in March 2026. Its next machine, 'Praniq', is described by the company as a $100–200M project targeted for 2030 — a company aim, not funded capital";
 
 // ---------------- Issues ----------------
+// October: deep-copy September countries, then apply the month's edits. All scores held.
+const COUNTRIES_OCT = JSON.parse(JSON.stringify(COUNTRIES_SEP));
+COUNTRIES_OCT.Global.notes[7] = "Frontier = US (7), held: two state fusion-plant licences (Helion, WA; Type One, TN); NRC final rule still not found as of early November. UK holds the only fusion-specific primary law; Italy passed a framework law (Sept 23) whose rules come by decree";
+COUNTRIES_OCT.Global.notes[8] = "Frontier = Europe/China/Japan (6): ITER now has all nine vacuum vessel sectors on site (Oct); Japan's Fujikura signed the largest HTS tape order yet (CFS, >10,000 km). Still no fusion-specific component in serial production for several customers";
+COUNTRIES_OCT.US.notes[6] = "CFS ~$4B, Helion $1.5B, TAE >$1B — world's deepest capital pool. Oct: Commerce CHIPS letters of intent for up to $175M (Helion) and up to $85M (CFS), preliminary until definitive agreements are signed; DOE picked CFS to lead a SPARC digital-twin project (Genesis Mission Phase II, amount undisclosed)";
+COUNTRIES_OCT.US.notes[7] = "Held at 7: two state fusion-plant licences (Helion, WA, June; Type One, TN, Aug 31). NRC final rule still not found as of early November; the NRC's status page was last updated Sept 14. California SB 925 (signed Sept 30) requires a state fusion strategic plan — planning, not licensing";
+COUNTRIES_OCT.US.notes[8] = "Held at 5: CFS signed a long-term agreement to buy >10,000 km of HTS tape from Fujikura for its ARC plants (announced Sept 30) — a volume order, but from a Japanese supplier and for one customer. Helion's CHIPS letter of intent targets domestic power semiconductors. Still no US serial production of fusion-specific components";
+COUNTRIES_OCT.Europe.notes[6] = "Held at 4: ~$1-2B private across Tokamak Energy (UK), Proxima, Marvel, Renaissance. Oct 14: Germany's SPRIND launched a milestone-based fusion programme with €500M to 2029 (projected €2.5B later). Held because it is public money released against milestones — the same reasoning as Japan's METI programme";
+COUNTRIES_OCT.Europe.notes[7] = "UK Energy Act 2023 remains the only fusion-specific primary law. Italy's parliament gave final approval (Sept 23) to a framework law for fission and fusion; rules and a national programme follow by government decree within 12 months. EU-level framework less settled";
+COUNTRIES_OCT.Europe.notes[8] = "ITER's ninth and final vacuum vessel sector reached Cadarache in early October (WNN, Oct 5), completing delivery of the major core components after a 16-year manufacturing effort. Proxima and Fujikura signed an MoU to assess an HTS tape factory in Germany (reported Oct 30)";
+COUNTRIES_OCT.China.notes[0] = "BEST more than half assembled; construction to finish in 2027, with a stated aim to demonstrate D-T fusion power generation around 2030 (CGTN, Oct 1). No net gain yet. CNNC's stated path: demonstration ~2045, commercial ~2050";
+COUNTRIES_OCT.China.notes[1] = "EAST's 1,066s record; HL-3 >100M°C; strongest duration portfolio. ENN reported hydrogen-boron fusion reactions above 10^8 per second on EXL-50U (late Sept; company-reported). Aneutronic fuel and no energy-gain claim, so no score change";
+COUNTRIES_OCT.China.notes[4] = "Energy Singularity's 21.7T HTS magnet (Mar 2025); ASIPP's 582-ton TF coil tests (Jul/Aug 2026). Oct: Startorus reported a central-solenoid model coil ramping at 63 T/s with a 10 T peak at 20 K, which it calls a record for fusion superconducting magnets (company-reported, via NEI)";
+COUNTRIES_OCT.Japan.notes[0] = "JT-60SA (world's largest operating tokamak): systems restart began in May; new experimental campaign expected from end-2026. No D-T capability. Helical Fusion plans power-on tests of its Helix HARUKA device in 2027 (Reuters, Sept 29)";
+COUNTRIES_OCT.Japan.notes[8] = "Deep industrial base; supplied ITER + JT-60SA. Fujikura signed the largest HTS tape order yet (>10,000 km for CFS, Sept 30) and is expanding capacity; also an MoU with Proxima on a German tape factory. Japan's supplier role is growing, but for foreign projects";
+COUNTRIES_OCT["South Korea"].notes[1] = "KSTAR holds the temperature-qualified record: 48s at ≥100M°C (2024); 300s target by end-2026 — no result reported as of early November. Recurring '102s at 100M°C' headlines conflate two separate 2024 metrics and are excluded";
+
 const ISSUES = [
+  {
+    id: "2026-10", month: "October 2026", label: "October 2026 · Issue 4",
+    verdict: "No score change. Two candidates were considered and held: the Fujikura order does not yet amount to serial production, and Germany's programme is public money. October moved money and hardware, not physics: CFS committed to the largest superconducting-tape order yet, ITER's last vacuum vessel sector arrived, and Germany and the US put public money behind fusion on milestone or letter-of-intent terms. SPARC's magnet milestone, now about two months overdue, is still unconfirmed.",
+    scores: [6, 6, 4, 3, 8, 3, 6, 6, 4, 4],
+    scoreNotes: [
+      "Unchanged (6). No new gain result anywhere. SPARC: we found no public confirmation that all 18 magnets are installed (CFS's target was end of summer 2026), so the milestone is about two months overdue unless confirmed; first plasma is still targeted for 2027. China's BEST is more than half assembled, to finish in 2027 (CGTN, Oct 1). General Fusion reported electron temperatures above 1 keV on LM26 (Oct 9, company-reported, measured with UKAEA) — a first for its approach, but a threshold tokamaks passed in 1968, and far from gain.",
+      "Unchanged (6). No new duration or temperature record. KSTAR's 300s-at-100M°C target (end-2026): no result as of early November. ENN reported hydrogen-boron fusion reactions above 10^8 per second on EXL-50U (late Sept, company-reported) — aneutronic fuel, no energy gain claimed. DIII-D's negative-triangularity team won the APS Dawson Award for weeks of plasmas without edge-localised modes, and Kyoto Fusioneering will supply a new divertor for that work (ANS, Oct 15) — recognition of earlier results and a hardware plan.",
+      "Unchanged (4). No fusion-relevant neutron test facility operates anywhere, and October produced no materials result under neutron flux. Kyoto Fusioneering and Focused Energy signed an MoU covering, among other things, materials for extreme conditions — an MoU, not a test.",
+      "Unchanged (3). No physical TBR>1 demonstration. Proxima and Kyoto Fusioneering signed an MoU on gyrotrons and fuel-cycle technology — a plan, not a result.",
+      "Unchanged (8). Startorus (China) reported a central-solenoid model coil ramping at 63 T/s with a 10 T peak at 20 K, which it calls a record for fusion superconducting magnets (company-reported, via NEI). CFS's order for more than 10,000 km of Fujikura HTS tape, and Fujikura's capacity expansion, address the cost and manufacturing leg of this gap. A full SPARC magnet set operating together remains the outstanding test.",
+      "Unchanged (3). No physical progress. Helion's CHIPS letter of intent funds high-voltage semiconductors for its pulsed-power systems — enabling electronics, not a demonstration of converting fusion energy to electricity.",
+      "Unchanged (6). Neither trigger of the Private Investment rule occurred: no new FIA total and no capital with legal effect. Private: Blue Laser Fusion closed $34M; Cambridge Heavy Industries raised a $6.2M seed. Public: Germany's SPRIND launched a milestone-based programme with €500M to 2029 (Oct 14); US Commerce signed CHIPS letters of intent for up to $175M (Helion) and up to $85M (CFS), preliminary until definitive agreements; DOE selected CFS to lead a SPARC digital-twin project (Genesis Mission Phase II). Israel published a draft national fusion strategy for comment.",
+      "Unchanged (6). NRC final rule: not found as of early November; the NRC's rulemaking page was last updated Sept 14. Italy's parliament gave final approval to a framework law for fission and fusion (Sept 23, late-logged); its rules and national programme follow by government decree within 12 months. California's SB 925 (signed Sept 30) requires a state fusion strategic plan. Held: none is a final federal-level rule or a national fusion-specific licence.",
+      "Held at 4 (4→5 considered and held, Nov 2026). CFS signed a long-term agreement to buy more than 10,000 km of HTS tape from Fujikura for its ARC plants (signed Sept 28, announced Sept 30; late-logged), the largest such order, and Fujikura is expanding capacity. ITER's ninth and final vacuum vessel sector reached the site in early October, completing delivery of its major core components. Proxima and Fujikura will assess a German HTS tape factory. The ladder's test for 5 is serial production of a fusion-specific component for several customers; this is a volume order from one customer, for capacity not yet built, so the score holds.",
+      "Unchanged (4). No new workforce or training-capacity data published in October. Helion says its CHIPS-funded work would create more than 100 jobs in Everett — a company estimate tied to a preliminary award.",
+    ],
+    achievements: [
+      { title: "CFS places the largest superconducting-tape order yet (late-logged)", signal: "positive",
+        detail: "Signed Sept 28 and announced Sept 30: CFS agreed to buy more than 10,000 km of high-temperature superconducting tape from Japan's Fujikura for its ARC power plants, starting with the Fall Line plant in Chesterfield County, Virginia. Fujikura says it is investing to expand capacity. It is tied to a power plant rather than a prototype; volume orders like this are how magnet costs are expected to fall. In October Proxima and Fujikura also agreed to study an HTS tape factory in Germany. Falls on the boundary of September; logged here.",
+        links: [
+          ["Fujikura press release", "https://www.fujikura.co.jp/en/news/pressrelease/20260930cfsarc1km.html"],
+          ["CFS announcement (PR Newswire)", "https://www.prnewswire.com/news-releases/commonwealth-fusion-systems-places-largest-single-purchase-order-of-hts-tape-with-fujikura-to-accelerate-development-of-arc-power-plants-302893652.html"],
+        ] },
+      { title: "ITER's last vacuum vessel sector arrives", signal: "positive",
+        detail: "Europe's fifth and last vacuum vessel sector reached ITER in early October, ending a 16-year manufacturing effort; all nine sectors and the major core components are now on site. Assembly continues under the 2025 baseline, which targets deuterium-deuterium operation in 2035. A logistics milestone for the world's largest fusion supply chain, not a change to ITER's schedule.",
+        links: [
+          ["World Nuclear News", "https://www.world-nuclear-news.org/articles/europe-delivers-final-iter-vacuum-vessel-sector"],
+          ["ANS Nuclear Newswire", "https://www.ans.org/news/2026-10-07/article-8469/iter-welcomes-last-major-component-needed-for-core-machine-assembly/"],
+        ] },
+      { title: "Governments fund fusion on milestone terms", signal: "mixed",
+        detail: "Germany's SPRIND launched a programme with €500M to 2029 that releases money only as independent experts verify milestones; companies that miss one are dropped (Oct 14). In the US, Commerce signed CHIPS letters of intent for up to $175M to Helion and up to $85M to CFS for fusion-related semiconductors, and DOE chose CFS to lead a SPARC digital-twin project. Real public money, but conditional or preliminary, and public rather than private, so it does not move Private Investment.",
+        links: [
+          ["NEI Magazine (Germany)", "https://www.neimagazine.com/news/germany-launches-fusion-milestone-programme/"],
+          ["Helion announcement", "https://www.helionenergy.com/newsroom/helion-signs-letter-of-intent-for-175-million-chips-award-to-advance-semiconductor-fusion-energy"],
+          ["ANS Nuclear Newswire (Genesis Mission)", "https://www.ans.org/news/2026-10-21/article-8506/second-round-of-genesis-mission-selections-includes-12-phase-ii-awards/"],
+        ] },
+    ],
+    tracker: {
+      fiaConfidence: { value: "71%", prior: "71%", note: "% of FIA-surveyed companies expecting grid electricity by the 2030s — no new survey since July" },
+      metaculusSparc: { value: "Jun 2029", prior: "Jun 2029", note: "Crowd-forecast date for SPARC net power — NOT re-verified this month; last confirmed via a June 2026 secondary source" },
+      minGapScore: { value: "3/10", prior: "3/10", note: "Weakest links: Tritium Breeding & Heat/Power Conversion — still no physical demonstration anywhere" },
+    },
+    prediction: {
+      band: "Late 2030s – mid 2040s",
+      detail: "Band unchanged. October's progress was logistical and financial: a plant-scale tape order, ITER's last core component on site, and conditional public money in Germany and the US. None of it touched the three never-demonstrated gaps (materials under neutron flux, tritium breeding, heat-to-electricity conversion). The nearest test of the optimistic case is still SPARC, whose magnet milestone is unconfirmed about two months after its target; first plasma remains set for 2027. China says BEST will finish in 2027 and aims to demonstrate D-T power generation around 2030 — a stated goal, not yet a schedule we can check.",
+    },
+    watchlist: [
+      "SPARC: all 18 magnets installed — about two months past CFS's end-of-summer target; no public confirmation found as of early November",
+      "KSTAR 300-second attempt at ≥100M°C (KFE target: end of 2026) — no result as of early November",
+      "NRC final fusion rule (proposed Feb 2026; not found as of early November)",
+      "JT-60SA new experimental campaign (expected from end-2026, about six months)",
+      "Helion: what 'initial operations' in 2028 means; CHIPS definitive agreement",
+      "Japan METI programme: formal grant decisions and per-project amounts (none found as of early November)",
+      "Germany SPRIND programme: first companies selected",
+      "Italy: implementing decrees under the new nuclear law (within 12 months)",
+      "TAE–TMTG merger: SEC registration effective Nov 5; TMTG shareholder meeting Dec 14; close targeted by end-2026",
+      "American Leadership in Fusion Act ($10B) — no committee action found",
+    ],
+    corrections: [
+      "Decisions (Nov 2026): world Supply Chain held at 4; Europe private investment held at 4.",
+      "September's Supply Chain note said ITER's final vacuum vessel sector was delivered on Oct 7; World Nuclear News reported it on site on Oct 5. Corrected in September.",
+      "September's China note said ENN had started its Helong-2 device; ENN targets completion around end-2027. The earlier claim came from a newsletter headline. Corrected in September.",
+      "Late-logged here: Italy's framework law (final approval Sept 23) and the CFS–Fujikura tape agreement (Sept 28–30), both missed in the September issue.",
+    ],
+    sources: [
+      {"author": "Fujikura Ltd.", "title": "Fujikura signs long-term supply contract for high-temperature superconducting wires with CFS", "pub": "Fujikura", "date": "September 30, 2026", "url": "https://www.fujikura.co.jp/en/news/pressrelease/20260930cfsarc1km.html"},
+      {"author": "World Nuclear News", "title": "Europe delivers final ITER vacuum vessel sector", "pub": "World Nuclear News", "date": "October 5, 2026", "url": "https://www.world-nuclear-news.org/articles/europe-delivers-final-iter-vacuum-vessel-sector"},
+      {"author": "American Nuclear Society", "title": "ITER welcomes last major component needed for core machine assembly", "pub": "Nuclear Newswire", "date": "October 7, 2026", "url": "https://www.ans.org/news/2026-10-07/article-8469/iter-welcomes-last-major-component-needed-for-core-machine-assembly/"},
+      {"author": "Nuclear Engineering International", "title": "Germany launches fusion milestone programme", "pub": "NEI Magazine", "date": "October 14, 2026", "url": "https://www.neimagazine.com/news/germany-launches-fusion-milestone-programme/"},
+      {"author": "Helion Energy", "title": "Helion Signs Letter of Intent For $175 Million CHIPS Award to Advance U.S. High Voltage Semiconductor R&D To Support Fusion Energy", "pub": "Helion", "date": "October 22, 2026", "url": "https://www.helionenergy.com/newsroom/helion-signs-letter-of-intent-for-175-million-chips-award-to-advance-semiconductor-fusion-energy"},
+      {"author": "American Nuclear Society", "title": "Second round of Genesis Mission selections includes 12 Phase II awards", "pub": "Nuclear Newswire", "date": "October 21, 2026", "url": "https://www.ans.org/news/2026-10-21/article-8506/second-round-of-genesis-mission-selections-includes-12-phase-ii-awards/"},
+      {"author": "World Nuclear News", "title": "Italy's Senate approves a return to nuclear power", "pub": "World Nuclear News", "date": "September 24, 2026", "url": "https://world-nuclear-news.org/articles/italys-senate-approves-a-return-to-nuclear-power"},
+      {"author": "CGTN", "title": "China's 'artificial sun' project enters key construction phase", "pub": "CGTN", "date": "October 1, 2026", "url": "https://news.cgtn.com/news/2026-10-01/China-s-artificial-sun-project-enters-key-construction-phase-1QSYBsXj0d2/p.html"},
+      {"author": "TAE Technologies", "title": "Trump Media & Technology Group and TAE Technologies Announce Effectiveness of Form S-4 Registration Statement for Proposed Merger", "pub": "TAE", "date": "November 5, 2026", "url": "https://tae.com/trump-media-technology-group-and-tae-technologies-announce-effectiveness-of-form-s-4-registration-statement-for-proposed-merger/"},
+      {"author": "U.S. Nuclear Regulatory Commission", "title": "Fusion Machine Rulemaking Status", "pub": "NRC", "date": "last updated September 14, 2026", "url": "https://www.nrc.gov/materials/fusion/rulemaking-status"},
+    ],
+    sourceNote: "Also used, unlinked: The Fusion Report weekly digests (Oct 2, 16, 23, 30) for Blue Laser Fusion, Cambridge Heavy Industries, the Proxima–Fujikura and Proxima–Kyoto Fusioneering MoUs, Kyoto Fusioneering–Focused Energy, and Israel's draft strategy; ANS Nuclear Newswire (General Fusion 1 keV, Oct 9; DIII-D divertor, Oct 15); NEI Magazine (Startorus magnet); Pandaily (ENN EXL-50U, company-reported); Reuters (Helical Fusion HARUKA, Sept 29); NucNet (JT-60SA restart, May 13). The Proxima–Fujikura MoU and the smaller funding rounds rest on the newsletter and company releases, not independent reporting. SPARC magnet status, the NRC final rule, KSTAR and METI grant decisions rest on absence of evidence in English-language search, as does the absence of new Indian developments.",
+    countries: COUNTRIES_OCT,
+  },
   {
     id: "2026-09", month: "September 2026", label: "September 2026 · Issue 3",
     verdict: "No score change. Three candidate changes were considered and held (Oct 2026): state licences still don't move Regulatory Clarity, and Japan's METI subsidy is public, conditional and undisbursed. The month's most consequential signal ran the other way: Helion, the optimistic tail of every timeline, softened its 2028 commitment.",
@@ -560,7 +657,7 @@ const ISSUES = [
       "Unchanged (3). No physical progress. Thea Energy published 16 peer-reviewed papers on its 400 MW Helios stellarator design (Sept 9) — design publication, which by rule does not move scores.",
       "Unchanged (6). Under the Private Investment rule (see 'How to read the scores'), only the annual FIA total or capital with legal effect can move this axis; neither occurred. Private: Nova Fusion (China) RMB 1.2B pre-Series A (Sept 1); smaller rounds (e.g. Fusionality €3.2M). Public: Japan's ~¥60B METI programme (four projects conditionally selected — not yet awarded); US House bill proposing $10B (introduced, not enacted); US-UK fusion and AI cooperation deal (Sept 14-15).",
       "Held at 6 (6→7 considered and held, Oct 2026). Tennessee's TDEC issued Type One Energy a fusion-specific byproduct material licence for Project Infinity at TVA's Bull Run site (announced Aug 31; Infinity Two full startup targeted 2034). It is the first licence issued under a state fusion-specific framework. Late-logged: it falls on the last day of August, after our August issue. Applying the August rule (state licences too narrow; revisit on an NRC final rule or a federal-level licence), the score holds. NRC final rule: not found as of early October. Also: FIA white paper guiding Agreement States (Sept 9); California signed fusion-related legislation (Sept 30).",
-      "Unchanged (4). Program and partnership formation only: STEP manufacturing partnerships (Sept 15-17), Proxima HTS tape MOU, Realta–Madison utility partnership (Sept 2). Nothing in serial production. October note: ITER's ninth and final vacuum vessel sector was delivered Oct 7 — to be logged next issue.",
+      "Unchanged (4). Program and partnership formation only: STEP manufacturing partnerships (Sept 15-17), Proxima HTS tape MOU, Realta–Madison utility partnership (Sept 2). Nothing in serial production. October note: ITER's ninth and final vacuum vessel sector reached the site in early October (World Nuclear News, Oct 5) — logged in the October issue. [Corrected Nov 2026: this note previously said Oct 7, which was the date of a later report.]",
       "Unchanged (4). No new workforce data published in September. Trade-press commentary on recruitment difficulty continues; no training-capacity numbers.",
     ],
     achievements: [
@@ -608,6 +705,8 @@ const ISSUES = [
       "Decisions (Oct 2026): Regulatory Clarity held at 6, US regulatory held at 7, Japan private investment held at 3. The issue was previously marked draft.",
       "India private investment: 2, corrected from 1 (see July).",
       "Oct 2026: India regulatory note revised for the SHANTI Act and draft rules; score held at 2.",
+      "Nov 2026: Supply Chain note corrected. ITER's final vacuum vessel sector was reported on site on Oct 5, not delivered on Oct 7.",
+      "Nov 2026: China note corrected. ENN has not started Helong-2; the company targets completion around end-2027. The earlier claim came from a newsletter headline.",
     ],
     sources: [
       {"author": "Business Standard", "title": "India shifts nuclear fusion debate from research towards power deployment", "pub": "Business Standard", "date": "September 1, 2026", "url": "https://www.business-standard.com/india-news/india-shifts-nuclear-fusion-debate-from-research-towards-power-deployment-126090101606_1.html"},

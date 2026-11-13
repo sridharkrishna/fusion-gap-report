@@ -1,0 +1,1083 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Geopolitics and Commercialisation of Nuclear Fusion · October 2026</title>
+<style>body{margin:0} img{max-width:100%} [hidden]{display:none!important}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Roboto+Mono:wght@400&display=swap">
+<style>
+/* Takshashila design language (Oct 2026 spec), applied to an 860px reading column.
+   Inter for words, Roboto Mono for metadata. Hairlines, no radius, no shadow.
+   Colours: palette C (maroon and teal), kept by Sridhar's decision on 29 Oct 2026 even though
+   the design language allows only wine and marigold in the interface. Single light theme. */
+:root {
+  --bg: #f8fafa;
+  --surface: #ffffff;
+  --sunk: #eef3f3;            /* hover fill and alternate band */
+  --fg: #1f2526;
+  --muted: #5d6869;           /* secondary prose and meta; ~5.6:1 on white */
+  --rule: #dbe4e4;            /* every hairline */
+  --grid: rgba(23,20,19,0.08);
+  --accent: #620D3C;          /* wine, the Takshashila primary */
+  --accent-dark: #4a0a2e;
+  --accent-soft: #eaf2f1;
+  --gold: #f1a222; --gold-soft: #fcf0d9;
+  --pos: #2f6b4a; --neg: #a3282d;
+  /* Chart series, palette C. Country colours tuned for red-green colour blindness. */
+  --s-current: #620D3C; --s-prior: #2a7f7a; --s-base: #a3aeae;
+  --c-global: #2f3336; --c-us: #1f6f6b; --c-europe: #24497a; --c-china: #b5473a;
+  --c-japan: #a8c060; --c-korea: #c47ab3; --c-india: #d9a21b;
+  --sans: Inter, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --mono: "Roboto Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  color-scheme: light;
+}
+
+body { background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 15px; line-height: 1.5; }
+.wrap { max-width: 860px; margin: 0 auto; padding-block: 0 56px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { font-family: var(--sans); font-weight: 400; text-wrap: balance; margin: 0; }
+h1 { font-size: 40px; line-height: 1.12; letter-spacing: -0.02em; }
+.h1sub { display: block; font-size: 22px; font-weight: 300; color: var(--muted); letter-spacing: 0; margin-top: 8px; }
+h2 { font-size: 32px; line-height: 1.1; letter-spacing: -0.02em; }
+h3 { font-size: 18px; font-weight: 500; line-height: 1.3; }
+@media (max-width: 560px) { h1 { font-size: 30px; } .h1sub { font-size: 18px; } h2 { font-size: 26px; } }
+p { margin: 0; text-wrap: pretty; }
+a { color: var(--accent); text-underline-offset: 2px; }
+a:focus-visible, button:focus-visible, select:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.eyebrow, .meta { font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 400; }
+.meta { letter-spacing: 0.08em; }
+.muted { color: var(--muted); }
+.small { font-size: 14px; }
+.num, .fig { font-variant-numeric: tabular-nums; }
+
+/* Wine bar: navigation, Inter Title Case */
+.topbar { background: var(--accent); }
+.topbar-in { max-width: 860px; margin: 0 auto; min-height: 52px; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.topbar span, .topbar a { font-family: var(--sans); font-size: 15px; font-weight: 400; letter-spacing: 0.3px; color: rgba(255,255,255,0.9); text-decoration: none; }
+.topbar a:hover { color: #fff; text-decoration: underline; }
+.topbar a:focus-visible { outline-color: #fff; }
+
+header.mast { padding-block: 40px 32px; border-bottom: 1px solid var(--rule); display: grid; gap: 14px; }
+.mast-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 12px; }
+.lede { font-size: 18px; font-weight: 300; line-height: 1.45; color: var(--muted); max-width: 64ch; }
+select { font: inherit; font-size: 14px; padding: 7px 10px; border: 1px solid var(--rule); border-radius: 0; background: var(--surface); color: var(--fg); }
+
+section { padding-block: 48px; border-bottom: 1px solid var(--rule); display: grid; gap: 18px; }
+section > header { display: grid; gap: 8px; }
+@media (max-width: 560px) { section { padding-block: 36px; } }
+
+/* Aside: verdict and best estimate */
+.aside { border-left: 2px solid var(--accent); padding: 4px 0 4px 28px; display: grid; gap: 8px; }
+.verdict { margin-block: 32px 0; }
+.verdict p { font-size: 17px; line-height: 1.5; }
+.aside .fig { font-size: 32px; font-weight: 400; letter-spacing: -0.02em; line-height: 1.1; }
+
+/* Tabs and selectors: Inter, Title Case, hard-edged */
+.seg { display: inline-flex; border: 1px solid var(--rule); }
+.seg button { font: inherit; font-size: 14px; padding: 7px 14px; border: 0; border-left: 1px solid var(--rule); background: var(--surface); color: var(--fg); cursor: pointer; transition: background .15s ease; }
+.seg button:first-child { border-left: 0; }
+.seg button:hover { background: var(--sunk); }
+.seg button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+.bar { display: flex; flex-wrap: wrap; gap: 8px 16px; justify-content: space-between; align-items: center; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font: inherit; font-size: 13px; padding: 5px 11px; border: 1px solid var(--rule); border-radius: 0; background: var(--surface); color: var(--fg); cursor: pointer; transition: background .15s ease; }
+.chip:hover { background: var(--sunk); }
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+.chip .sw { display: inline-block; width: 9px; height: 9px; margin-right: 7px; vertical-align: 0; }
+.chip.country[aria-pressed="true"] { background: var(--surface); color: var(--fg); border-width: 2px; padding: 4px 10px; }
+.chip.country[aria-pressed="true"]:hover { background: var(--sunk); }
+.chip.ghost { background: transparent; }
+.pickmsg { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; color: var(--muted); min-height: 1.3em; }
+.pickmsg.full { color: var(--accent); }
+
+/* Figures */
+figure { margin: 0; display: grid; gap: 10px; }
+figure .ftitle { font-size: 20px; font-weight: 500; line-height: 1.2; letter-spacing: -0.005em; }
+.key { display: flex; flex-wrap: wrap; gap: 6px 18px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.key span { display: inline-flex; align-items: center; gap: 7px; }
+.key svg { flex: none; }
+figcaption { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.04em; color: var(--muted); line-height: 1.5; border-top: 1px solid var(--rule); padding-top: 8px; }
+.chartbox { position: relative; width: 100%; height: 440px; }
+@media (max-width: 560px) { .chartbox { height: 340px; } }
+
+/* Data tables */
+.tablewrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; font-variant-numeric: tabular-nums; }
+th, td { padding: 9px 12px 9px 0; border-bottom: 1px solid var(--rule); text-align: left; white-space: nowrap; }
+th { font-family: var(--mono); font-weight: 400; font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+td.num, th.num { text-align: right; padding-right: 0; padding-left: 16px; }
+td.up { color: var(--pos); font-weight: 500; }
+table.prose td { white-space: normal; vertical-align: top; }
+table.ladder td { min-width: 150px; }
+table.ladder td:first-child, table.prose td.score-col { min-width: 56px; color: var(--accent); }
+
+/* Cards */
+.card { background: var(--surface); border: 1px solid var(--rule); padding: 24px 26px; display: grid; gap: 10px; transition: background .15s ease; }
+@media (max-width: 560px) { .card { padding: 18px; } }
+.scorecard { grid-template-columns: auto 1fr; gap: 6px 22px; align-items: start; }
+.scorecard > div { min-width: 0; display: grid; gap: 8px; }
+.bigfig { display: grid; gap: 4px; justify-items: start; }
+.bigfig .fig { font-size: 44px; font-weight: 400; line-height: 1; letter-spacing: -0.02em; color: var(--accent); }
+.bigfig .meta { font-size: 10.5px; }
+.cstack .bigfig .fig { color: var(--fg); }
+.ctitle { display: flex; align-items: center; gap: 8px; }
+.ctitle i { width: 12px; height: 12px; display: inline-block; flex: none; }
+.next { font-size: 14px; border-top: 1px solid var(--rule); padding-top: 10px; }
+.next .meta { display: block; margin-bottom: 3px; color: var(--accent); }
+.cstack, .devs { display: grid; gap: 12px; }
+
+.dev .top { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+.dev h3 { font-size: 20px; letter-spacing: -0.005em; }
+.code { font-family: var(--mono); font-size: 12px; color: var(--accent); letter-spacing: 0.06em; }
+.badge { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; padding: 4px 10px; border: 1px solid var(--rule); white-space: nowrap; }
+.badge.positive { color: var(--pos); border-color: var(--pos); }
+.badge.negative { color: var(--neg); border-color: var(--neg); }
+.badge.mixed { background: var(--gold); border-color: var(--gold); color: #171413; font-weight: 600; }
+.links { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 14px; border-top: 1px solid var(--rule); padding-top: 10px; }
+.links a::after { content: " ↗"; }
+
+/* KPI strip: gapless ruled grid */
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--rule); background: var(--surface); }
+.stat { padding: 20px 22px; display: grid; gap: 6px; align-content: start; border-right: 1px solid var(--rule); }
+.stat:last-child { border-right: 0; }
+.stat .fig { font-size: 44px; font-weight: 400; line-height: 1; letter-spacing: -0.02em; }
+.stat .meta.moved { color: var(--accent); }
+@media (max-width: 640px) { .stats { grid-template-columns: 1fr; } .stat { border-right: 0; border-bottom: 1px solid var(--rule); } .stat:last-child { border-bottom: 0; } }
+
+/* Row lists */
+ol.rows { list-style: none; padding: 0; margin: 0; border-top: 2px solid var(--fg); }
+ol.rows li { display: grid; grid-template-columns: 52px 1fr; gap: 12px; padding: 11px 0; border-bottom: 1px solid var(--rule); font-size: 15px; }
+ol.rows li > span:last-child { min-width: 0; }
+
+/* Glossary */
+details { padding-block: 0; }
+summary { cursor: pointer; font-size: 18px; font-weight: 500; }
+dl.gloss { display: grid; grid-template-columns: max-content 1fr; gap: 0; margin: 14px 0 0; font-size: 14px; }
+dl.gloss dt, dl.gloss dd { padding: 7px 0; border-bottom: 1px solid var(--rule); margin: 0; }
+dl.gloss dt { font-weight: 500; padding-right: 18px; }
+dl.gloss dd { color: var(--muted); }
+@media (max-width: 560px) { dl.gloss { grid-template-columns: 1fr; } dl.gloss dt { border-bottom: 0; padding-bottom: 0; } }
+
+.g { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: help; border-bottom: 1px dotted var(--accent); }
+.g:hover, .g[aria-expanded="true"] { color: var(--accent); }
+#tip { position: fixed; z-index: 50; max-width: min(320px, calc(100vw - 32px)); background: #171413; color: rgba(255,255,255,0.85); font-size: 13px; line-height: 1.45; padding: 10px 12px; pointer-events: none; }
+#tip b { display: block; margin-bottom: 2px; color: #fff; font-weight: 500; }
+
+footer { padding-top: 32px; display: grid; gap: 16px; font-size: 14px; color: var(--muted); }
+ol.src { margin: 0; padding-left: 22px; display: grid; gap: 6px; }
+.mobile-hint { display: none; }
+@media (max-width: 560px) { .mobile-hint { display: block; } }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<div class="topbar"><div class="topbar-in"><span>The Takshashila Institution</span><a href="./">All Issues →</a></div></div>
+<div class="wrap">
+  <header class="mast">
+    <div class="eyebrow">Sridhar Krishna · <span id="issueName"></span></div>
+    <h1>Geopolitics and Commercialisation of Nuclear Fusion: <span class="h1sub">A Monthly Tracker</span></h1>
+    <p class="lede">We have identified ten major gaps that prevent commercialisation of nuclear fusion today. Each is scored 0–10, where 10 means solved for commercial deployment. Hover or tap any <span class="g" tabindex="-1" style="cursor:default">underlined term</span> for an explanation. <a href="#scale">How to read the scores</a>.</p>
+    <div class="mast-row">
+      <label class="meta" for="issueSel">Issue</label>
+      <select id="issueSel"></select>
+    </div>
+  </header>
+
+  <div class="aside verdict">
+    <div class="eyebrow">This month's verdict</div>
+    <p id="verdict"></p>
+  </div>
+
+  <section id="world" style="margin-top:16px">
+    <header><div class="eyebrow">Section 01</div><h2>World-system readiness</h2></header>
+    <figure>
+      <div class="eyebrow">Figure 1</div>
+      <div class="bar">
+        <div class="ftitle">The ten gaps, scored 0–10</div>
+        <div class="seg" role="group" aria-label="View"><button type="button" data-v="chart" aria-pressed="true">Chart</button><button type="button" data-v="table" aria-pressed="false">Table</button></div>
+      </div>
+      <div class="key" id="worldKey"></div>
+      <div class="chartbox" id="worldChartBox"><canvas id="worldChart" aria-label="Radar chart of the ten gap scores"></canvas></div>
+      <div class="tablewrap" id="worldTable" hidden></div>
+      <figcaption id="worldCap"></figcaption>
+    </figure>
+    <p class="meta mobile-hint">On a phone, the table view is easier to read than the chart.</p>
+
+    <h3>Why these scores: pick a gap</h3>
+    <div class="chips" id="gapChips"></div>
+    <div class="card scorecard" id="gapDetail"></div>
+
+    <h3>Score changes</h3>
+    <p class="small muted" id="changes"></p>
+  </section>
+
+  <section>
+    <header><div class="eyebrow">This month</div><h2>Top three developments</h2></header>
+    <div class="devs" id="devs"></div>
+  </section>
+
+  <section id="countries">
+    <header><div class="eyebrow">Section 02</div><h2>Country standings</h2></header>
+    <p class="small muted">Pick any of the seven. “Global” (dashed) is the best score any country holds on each gap, the frontier, so no country can exceed it. Country scores use the same 0–10 ladder, applied to national capability.</p>
+    <div class="chips" id="countryChips"></div>
+    <div class="chips"><button type="button" class="chip ghost" id="selAll">Select All</button><button type="button" class="chip ghost" id="selReset">Reset</button></div>
+    <div class="pickmsg" id="pickMsg" aria-live="polite"></div>
+    <figure>
+      <div class="eyebrow">Figure 2</div>
+      <div class="bar">
+        <div class="ftitle">Country scores on the ten gaps</div>
+        <div class="seg" role="group" aria-label="View"><button type="button" data-v="chart" aria-pressed="true">Chart</button><button type="button" data-v="table" aria-pressed="false">All Countries</button></div>
+      </div>
+      <div class="key" id="countryKey"></div>
+      <div class="chartbox" id="countryChartBox"><canvas id="countryChart" aria-label="Radar chart comparing selected countries"></canvas></div>
+      <div class="tablewrap" id="countryTable" hidden></div>
+      <figcaption id="countryCap"></figcaption>
+    </figure>
+    <h3>Why these country scores: pick a gap</h3>
+    <div class="chips" id="cGapChips"></div>
+    <div class="cstack" id="cDetail"></div>
+  </section>
+
+  <section>
+    <header><div class="eyebrow">Section 03</div><h2>Grid-connection prediction</h2></header>
+    <div class="stats" id="stats"></div>
+    <div class="aside">
+      <div class="eyebrow">Current best estimate · first grid-connected plant</div>
+      <div class="fig" id="bandV"></div>
+      <p class="small" id="bandD"></p>
+    </div>
+    <h3>Watchlist: next checkpoints</h3>
+    <ol class="rows" id="watch"></ol>
+  </section>
+
+  <section id="scale">
+    <header><div class="eyebrow">Method</div><h2>How to read the scores</h2></header>
+    <p class="small">The same ladder applies every month, so a score means the same thing in July as in December. Technical gaps (net gain to heat conversion) use the left column; institutional gaps (investment, regulation, supply chain, workforce) use the right. The last column shows which gaps sit on each rung in the selected issue.</p>
+    <div class="tablewrap"><table class="prose ladder" id="ladder"></table></div>
+    <p class="small">A score moves only on a new <b>physical demonstration</b> or an <b>institutional decision with legal effect</b>. Announcements, simulations, design papers and single funding rounds don't move scores. Each gap's “what would move it up a point” line appears when you pick it above.</p>
+    <h3>What moves Private Investment</h3>
+    <p class="small">Funding rounds alone don't count, so two things can move this axis: (1) the FIA's annual cumulative total, published each July, crossing into a new band; (2) capital with legal effect, such as a plant's financial close, a binding power purchase agreement, or an enacted public appropriation.</p>
+    <div class="tablewrap"><table class="prose" id="piBands"></table></div>
+  </section>
+
+  <section>
+    <header><div class="eyebrow">Record</div><h2>Corrections and decisions</h2></header>
+    <ol class="rows" id="corr"></ol>
+  </section>
+
+  <section>
+    <details id="glossBox"><summary>Glossary of terms and acronyms</summary><dl class="gloss" id="gloss"></dl></details>
+  </section>
+
+  <footer>
+    <p>Method: headline scores rate world-system readiness (0 = gap wide open, 10 = solved for commercial deployment), continuing the 2020 baseline analysis. Country scores rate national standing. Standing rule (Sept 2026): state-level fusion licences do not move Regulatory Clarity; revisit on an NRC final rule or a federal-level licence. “Europe” = EU + UK. The prediction band combines five methods: industry self-report (FIA survey), crowd forecasting (Metaculus), independent technical review, historical base rates (ITER slippage), and the weakest-link logic of this report's own gap scores. Scores are analyst judgement grounded in cited milestones, not an official index.</p>
+    <div style="display:grid;gap:8px"><div class="eyebrow">Sources for this issue</div><ol class="src" id="src"></ol><p id="srcNote"></p></div>
+  </footer>
+</div>
+<div id="tip" hidden></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+// =========================================================================
+// THE FUSION GAP REPORT — data. One template renders July, August and
+// September; each page shows its own issue plus the earlier ones.
+// Edits applied Oct 2026 (reviewer feedback + decisions by Sridhar):
+//  - India Private Investment country score 1→2 back to July (logged correction)
+//  - Private Investment rule: legal-effect capital + annual FIA total
+//  - September decisions settled: all three candidates held
+//  - FIA cumulative figure corrected ($14.24B, FIA 2026 report)
+// =========================================================================
+
+const GAPS = [
+  "Net Energy Gain", "Plasma Stability", "Materials Science", "Tritium Supply/Breeding",
+  "Magnet Technology", "Heat/Power Conversion", "Private Investment", "Regulatory Clarity",
+  "Supply Chain", "Workforce Pipeline",
+];
+const GAPS_SHORT = ["Net gain", "Plasma", "Materials", "Tritium", "Magnets", "Heat→power",
+  "Investment", "Regulation", "Supply chain", "Workforce"];
+
+const BASELINE_2020 = [1, 3, 2, 1, 2, 1, 2, 1, 1, 2];
+
+// What would move each world-system score up one point (analyst judgment, Oct 2026).
+const NEXT_POINT = [
+  "A magnetic-confinement device reaching scientific breakeven (Q>1), e.g. SPARC; or an inertial result with materially better wall-plug accounting.",
+  "One machine holding fusion-relevant temperature (≥100M°C) for minutes, combining today's separate duration and temperature records.",
+  "A fusion-relevant neutron source operating and exposing candidate materials (e.g. IFMIF-DONES or UNITY-3 producing data).",
+  "Any physical (not simulated) measurement of tritium breeding in a blanket mock-up under fusion neutrons.",
+  "A full set of HTS magnets operating together in a running machine (SPARC), or HTS magnets made at materially lower cost.",
+  "A fusion device converting heat or charged particles into electricity, at any scale, in a public, verifiable test.",
+  "The annual FIA cumulative figure crossing the next band, or capital with legal effect: a plant financial close, a binding PPA, or an enacted public appropriation.",
+  "A final federal-level fusion rule (e.g. NRC) or a national-level licence under a fusion-specific framework in a major market.",
+  "Serial production of a fusion-specific component for several customers, not one-off prototypes.",
+  "Published data showing dedicated fusion training programmes producing graduates at scale.",
+];
+
+// India regulatory note revised and held at 2; palette C adopted (Sridhar, 28 Oct 2026).
+// October 2026 issue added; decisions taken by Sridhar 13 Nov 2026 (Supply Chain and Europe investment held).
+// Generic score ladder (approved by Sridhar, 28 Oct 2026).
+const LADDER = [
+  { range: [0, 0], tech: "Not attempted; no credible path.", inst: "Nothing exists." },
+  { range: [1, 2], tech: "Concept stage: theory, simulations and designs only.", inst: "No framework, market or dedicated programme; ideas and early ventures." },
+  { range: [3, 4], tech: "Sub-scale or separate-effects hardware exists, but the key metric has not been shown in hardware anywhere.", inst: "Programmes forming: drafts and guidance, one-off prototype manufacturing, nascent training." },
+  { range: [5, 6], tech: "The key metric has been shown in hardware at least once, but not under plant conditions or not in combination.", inst: "At least one binding framework or functioning market in a major economy; first real transactions or licences." },
+  { range: [7, 8], tech: "Shown in integrated, plant-relevant hardware; what remains is engineering, scale and cost.", inst: "Tested end to end in several major markets." },
+  { range: [9, 10], tech: "Proven at commercial scale and cost (10 = solved for commercial deployment).", inst: "Routine; ready to support a fleet of plants." },
+];
+const INSTITUTIONAL = [6, 7, 8, 9]; // gaps scored on the institutional ladder
+
+// Private Investment bands (approved by Sridhar, 28 Oct 2026).
+// Cumulative figure = FIA annual report (published each July).
+const PI_BANDS = [
+  { s: "0–1", cap: "Under $1B", cond: "No dedicated private sector" },
+  { s: "2–3", cap: "$1–5B", cond: "Venture-funded prototypes; no binding offtake (2020: ~$1.8B per FIA's first report)" },
+  { s: "4–5", cap: "$5–12B", cond: "Or first binding PPAs / offtake contracts" },
+  { s: "6–7", cap: "$12–30B", cond: "And binding PPAs with credible buyers; first non-venture money (sovereign, pension, infrastructure). Now: $14.24B (FIA 2026), five companies with a PPA or similar commitment → 6" },
+  { s: "8–9", cap: "$30–80B", cond: "Or a first plant reaching financial close with project debt" },
+  { s: "10", cap: "—", cond: "Plants financed on commercial terms" },
+];
+
+const GLOSSARY = {
+  "ADVANCE Act": "US law (2024) directing the NRC to modernise licensing, including for fusion machines.",
+  "Agreement State": "A US state that has taken over licensing of certain nuclear materials from the NRC. Helion (Washington) and Type One (Tennessee) were licensed this way.",
+  "ARC": "Commonwealth Fusion Systems' planned first power plant (400 MW, Virginia), to follow SPARC.",
+  "ARPA-E": "Advanced Research Projects Agency–Energy, a US Department of Energy funder of early-stage energy technology.",
+  "ASIPP": "Institute of Plasma Physics, Chinese Academy of Sciences (Hefei). Runs the EAST tokamak.",
+  "BARC": "Bhabha Atomic Research Centre, India's main nuclear research establishment.",
+  "BEST": "Burning plasma Experimental Superconducting Tokamak, under construction in Hefei, China.",
+  "CFETR": "China Fusion Engineering Test Reactor, a planned Chinese machine between ITER and a power plant.",
+  "CFEC": "China Fusion Energy Co., a state-backed fusion company formed in 2025.",
+  "CFS": "Commonwealth Fusion Systems, a US private fusion company (MIT spin-out) building SPARC.",
+  "CNNC": "China National Nuclear Corporation, the state-owned nuclear group.",
+  "D-T": "Deuterium–tritium, the fusion fuel mix most power-plant designs rely on.",
+  "DIII-D": "A US tokamak run by General Atomics for the Department of Energy.",
+  "DOE": "US Department of Energy.",
+  "DOH": "Department of Health. In Washington State it licenses radioactive materials, including Helion's plant.",
+  "EAST": "Experimental Advanced Superconducting Tokamak, Hefei, China.",
+  "ELMs": "Edge-localised modes: bursts at a plasma's edge that can damage the wall.",
+  "ENN": "A Chinese private energy group with its own fusion programme.",
+  "EUROfusion": "The consortium coordinating fusion research across the EU, UK and Switzerland.",
+  "FIA": "Fusion Industry Association, the private fusion industry's trade body. Publishes the annual global industry report each July.",
+  "FLiBe": "A molten salt of lithium fluoride and beryllium fluoride, proposed as a coolant and tritium-breeding medium.",
+  "FULCRA": "A partnership between Oak Ridge National Laboratory and Rutherford Energy Ventures to scope a shared fusion test bed.",
+  "H-mode": "High-confinement mode, a plasma state that holds heat better.",
+  "HTS": "High-temperature superconductor. HTS magnets reach stronger fields in a smaller machine than older superconductors.",
+  "IAEA": "International Atomic Energy Agency.",
+  "IFE": "Inertial fusion energy: power from fuel pellets compressed by lasers or other drivers, as at NIF.",
+  "IFMIF-DONES": "A neutron source being built in Granada, Spain, to test materials under fusion-like neutron bombardment.",
+  "IPR": "Institute for Plasma Research, Gandhinagar, India. Runs ADITYA-U and SST-1.",
+  "ITER": "The international tokamak under construction in France (members include the EU, US, China, India, Japan, Korea, Russia).",
+  "JET": "Joint European Torus, UK. Held the magnetic-confinement gain record (Q=0.67, 1997). Closed in 2023.",
+  "JNCASR": "Jawaharlal Nehru Centre for Advanced Scientific Research, Bengaluru. Hosts Pranos Fusion's lab.",
+  "JT-60SA": "A large superconducting tokamak in Naka, Japan, run jointly by Japan and Europe.",
+  "keV": "Kilo-electronvolt, a unit of plasma temperature. 1 keV ≈ 11.6 million °C.",
+  "KFE": "Korea Institute of Fusion Energy, which runs KSTAR.",
+  "KSTAR": "Korea Superconducting Tokamak Advanced Research, South Korea's main fusion device.",
+  "LLNL": "Lawrence Livermore National Laboratory, US. Home of NIF.",
+  "LTS": "Low-temperature superconductor, the older magnet technology used in ITER.",
+  "METI": "Japan's Ministry of Economy, Trade and Industry.",
+  "MOU": "Memorandum of understanding: a statement of intent, not a binding contract.",
+  "MWe": "Megawatts of electricity (as opposed to heat).",
+  "NIF": "National Ignition Facility, LLNL. A laser facility that achieved fusion target gain above 1 in 2022.",
+  "NIFS": "National Institute for Fusion Science, Japan.",
+  "NRA": "Nuclear Regulation Authority, Japan's nuclear regulator.",
+  "NRC": "US Nuclear Regulatory Commission, the federal nuclear regulator.",
+  "ORNL": "Oak Ridge National Laboratory, Tennessee.",
+  "PPA": "Power purchase agreement: a contract to buy a plant's electricity.",
+  "PPPL": "Princeton Plasma Physics Laboratory, US.",
+  "PRAGYA": "A small tokamak built by Pranos Fusion, Bengaluru: India's first privately built tokamak. A testbed; it cannot produce fusion.",
+  "Q": "Fusion gain: fusion energy out divided by heating energy in. Q>1 is 'scientific breakeven'. It ignores the power the whole facility draws.",
+  "SPARC": "CFS's demonstration tokamak in Devens, Massachusetts, aiming for Q>1 around 2027.",
+  "SST-1": "Steady State Superconducting Tokamak, IPR, India.",
+  "SHANTI Act": "Sustainable Harnessing and Advancement of Nuclear Energy for Transforming India Act, 2025. Opened India's nuclear power sector to Indian private companies; its implementing rules were still in draft as of Oct 2026.",
+  "DAE": "Department of Atomic Energy, India.",
+  "AERB": "Atomic Energy Regulatory Board, India's nuclear safety regulator, given statutory status by the SHANTI Act.",
+  "STEP": "Spherical Tokamak for Energy Production, the UK's planned prototype plant.",
+  "TAE": "TAE Technologies, a US private fusion company.",
+  "TBR": "Tritium breeding ratio: tritium produced per tritium burned. A plant needs TBR>1 to fuel itself.",
+  "TDEC": "Tennessee Department of Environment and Conservation, which licenses fusion machines in Tennessee.",
+  "TF coil": "Toroidal field coil, one of the large magnets that ring a tokamak.",
+  "TMTG": "Trump Media & Technology Group, which agreed in 2025 to merge with TAE.",
+  "TVA": "Tennessee Valley Authority, a US federal power utility.",
+  "UKAEA": "UK Atomic Energy Authority.",
+  "UNITY-3": "A Kyoto Fusioneering facility planned at Oak Ridge to test tritium-breeding blankets under fusion neutrons.",
+  "WEST": "A tokamak in Cadarache, France. Holds the plasma-duration record (1,337 s at ~50M°C).",
+};
+
+// ---------------- Countries ----------------
+const COUNTRIES_JULY = {
+  Global: {
+    scores: [6, 7, 5, 4, 8, 4, 8, 7, 6, 5],
+    notes: [
+      "Frontier = US (6): NIF's target gain >1 is the only net-gain result anywhere; tokamak record is still JET's Q=0.67",
+      "Frontier = China (7): EAST's 1,066s duration record; KSTAR (6) holds the temperature-qualified 48s at ≥100M°C",
+      "Frontier = Europe/China/Japan (5): IFMIF-DONES under construction, national steel programs; no neutron test facility runs anywhere yet",
+      "Frontier = Japan (4): Kyoto Fusioneering's UNITY fuel-cycle testbeds; TBR>1 still simulation-only everywhere",
+      "Frontier = US (8): CFS 20T magnets validated and installing; China's Energy Singularity holds the 21.7T field record",
+      "Frontier = Japan (4): Kyoto Fusioneering's thermal-cycle testbed; no fusion device has ever put a watt on a grid",
+      "Frontier = US (8): ~$8B of the world's private fusion capital ($14.24B cumulative per FIA 2026)",
+      "Frontier = US (7): NRC framework + ADVANCE Act + proposed rule; UK holds the only fusion law in force",
+      "Frontier = Europe/China/Japan (6): ITER's 70+ supplier network, China's heavy-industry consortium, Japan's industrial base",
+      "Frontier = US/Europe/China (5): largest workforces, but all orders of magnitude below deployment needs",
+    ],
+  },
+  US: {
+    scores: [6, 5, 4, 3, 8, 3, 8, 7, 5, 5],
+    notes: [
+      "Only country to achieve target gain >1 (NIF, Q≈4 target gain); SPARC targets tokamak Q>1 in 2027",
+      "DIII-D research + AI disruption-prediction work; no duration records",
+      "Lab-scale programs; no operating fusion-neutron test facility (global gap)",
+      "CFS FLiBe blanket simulation (TBR 1.08); nothing physically demonstrated (global gap)",
+      "CFS 20-tesla HTS magnets built, tested, installing into SPARC — world-leading",
+      "Conceptual/design stage only (ARC plant designs)",
+      "~$8B raised, world's deepest private fusion capital pool (CFS, Helion, TAE)",
+      "NRC byproduct framework + ADVANCE Act 2024 + Feb 2026 proposed rule; TN state framework",
+      "FIA supply-chain reports; growing but suppliers lack demand visibility",
+      "Largest private-sector fusion workforce; national lab pipeline (PPPL, LLNL)",
+    ],
+  },
+  Europe: {
+    scores: [4, 6, 5, 3, 6, 3, 4, 6, 6, 5],
+    notes: [
+      "JET's Q=0.67 tokamak record (1997, still unbeaten); hosts ITER; no ignition",
+      "WEST holds overall duration record (1,337s at ~50M°C); EPFL/DeepMind AI stability work",
+      "IFMIF-DONES neutron test facility under construction in Spain — furthest along globally",
+      "ITER Test Blanket Module program; nothing physically demonstrated (global gap)",
+      "ITER magnet manufacturing base; Proxima's HTS stellarator designs",
+      "Conceptual stage (EU DEMO studies)",
+      "~$1-2B across Tokamak Energy (UK), Proxima, Marvel, Renaissance — far behind US/China",
+      "UK Energy Act 2023: world's first fusion-specific law; EU framework less settled",
+      "ITER's 70+ supplier network is the deepest fusion supply chain in existence",
+      "EUROfusion consortium + decades of JET/ITER staffing",
+    ],
+  },
+  China: {
+    scores: [4, 7, 5, 3, 7, 3, 6, 3, 6, 5],
+    notes: [
+      "EAST >1,000s plasma records; BEST burning-plasma device under construction; no net gain yet",
+      "EAST's 1,066s record; HL-3 >100M°C; strongest duration portfolio",
+      "New reactor-core steel (2025, ~2x ITER field tolerance claimed); CLAM steel program",
+      "Simulation and design stage like everyone else (global gap)",
+      "Energy Singularity's 21.7-tesla HTS magnet (Mar 2025) broke the US record",
+      "Conceptual stage; CFETR design includes power conversion",
+      "~$5B across CFEC ($2.1B), NeoFusion ($2B+), Startorus, Energy Singularity",
+      "State-directed model; no transparent commercial licensing framework",
+      "CFEC consortium ties in Shanghai Electric & heavy industry; strong industrial base",
+      "ASIPP/SWIP institutes + growing commercial sector; numbers opaque",
+    ],
+  },
+  Japan: {
+    scores: [3, 5, 5, 4, 6, 4, 3, 4, 6, 4],
+    notes: [
+      "JT-60SA (world's largest operating tokamak) restarting late 2026; no D-T capability yet",
+      "JT-60SA record 160 m³ plasma volume; new campaign targets long-pulse scenarios",
+      "F82H steel development; IFMIF/EVEDA accelerator work at Rokkasho",
+      "Kyoto Fusioneering's UNITY testbeds — the most advanced private fuel-cycle work anywhere",
+      "Supplied ITER toroidal field coils; JT-60SA fully superconducting",
+      "Kyoto Fusioneering thermal-cycle testbed (UNITY-1) — ahead of most on this specific gap",
+      "Kyoto Fusioneering, EX-Fusion, Helical Fusion — hundreds of millions, not billions",
+      "National strategy revised June 2025 (2030s power demo goal); NRA dialogue begun, no framework yet",
+      "Deep industrial base; supplied ITER + JT-60SA; US-Japan magnet supply-chain deal (Oct 2025)",
+      "NIFS-led inter-university education system being built per national strategy",
+    ],
+  },
+  "South Korea": {
+    scores: [3, 6, 4, 3, 5, 2, 2, 3, 4, 3],
+    notes: [
+      "KSTAR is a research device without D-T capability; no net-gain pathway of its own",
+      "KSTAR holds the temperature-qualified record: 48s at ≥100M°C (2024); targeting 300s by end-2026",
+      "Participates via ITER; limited standalone materials program",
+      "Simulation/design stage (global gap)",
+      "KSTAR fully superconducting since 2008; supplied major ITER components",
+      "Minimal dedicated work",
+      "Very small private fusion sector; government-centered model",
+      "No fusion-specific commercial framework identified",
+      "Hyundai Heavy et al. supplied ITER vacuum vessel; proven but narrow",
+      "KFE institute base; small commercial pipeline",
+    ],
+  },
+  India: {
+    scores: [2, 3, 3, 3, 3, 2, 2, 2, 4, 3],
+    notes: [
+      "SST-1 sustains plasma ~650 milliseconds; no D-T; SST-Bharat demo targeted ~2060",
+      "ADITYA-U and SST-1 are small experimental devices, far from records",
+      "ITER participation; limited domestic fusion-materials program",
+      "India is an ITER Test Blanket Module partner — design-stage like everyone (global gap)",
+      "SST-1 uses older low-temperature superconductors; no HTS program at scale",
+      "SST-Bharat concept (fusion-fission hybrid, 130 MW target) is paper-stage",
+      "2 (corrected Oct 2026; published as 1). One venture-funded private fusion company: Pranos Fusion (Bengaluru, founded 2024) raised $6.8M in March 2026 (co-led by pi Ventures and Ankur Capital), a little over $7M in total. The original note said India had essentially no private fusion companies; that was wrong when published.",
+      "2 (note corrected Oct 2026). The SHANTI Act (Dec 2025) opens nuclear power to Indian private companies under licence; implementing rules not yet issued. No fusion-specific framework. [Original note said nuclear regulation was restrictive to private entry, which was out of date when published.]",
+      "Proven ITER supplier: L&T built the 3,850-tonne cryostat; Godrej, TCE supplied components",
+      "IPR/BARC/IIT training base exists but no commercial pipeline",
+    ],
+  },
+};
+
+const COUNTRIES_AUG = JSON.parse(JSON.stringify(COUNTRIES_JULY));
+COUNTRIES_AUG.US.notes[7] = "Held at 7 (7→8 proposal declined): Helion received Radioactive Materials + Air Emissions licences from Washington State DOH (June 16, 2026) — first licences issued for a fusion power plant anywhere; Tennessee state framework in force (June 9); NRC final rule still pending";
+COUNTRIES_AUG.US.notes[6] = "CFS now $4B raised (July 30 $1B round, ~30% of global fusion capital per CFS); Helion $1.5B; TAE >$1B — world's deepest capital pool";
+COUNTRIES_AUG.Global.notes[7] = "Frontier = US (7), held: first fusion-plant licences issued (Helion, WA, June 2026) under Agreement State rules; UK still holds the only fusion-specific primary law";
+COUNTRIES_AUG.Global.notes[6] = "Frontier = US (8): CFS alone at ~$4B; global cumulative $14.24B per FIA's 2026 report (corrected Oct 2026; this note previously gave an inferred ~$13B)";
+COUNTRIES_AUG.China.notes[4] = "Energy Singularity's 21.7T HTS magnet (Mar 2025); ASIPP passed full-parameter tests on a 582-ton TF coil (largest fusion magnet ever built, LTS, CFETR-prototype spec) — July/Aug 2026";
+COUNTRIES_AUG.China.notes[8] = "CFEC consortium + heavy industry; 582-ton coil produced entirely from domestic wire and steel per ASIPP/Global Times";
+COUNTRIES_AUG["South Korea"].notes[7] = "Aug 12, 2026: fusion named one of seven strategic technologies ('7 SEED'), target domestic machine by 2035 — policy signal, not a licensing framework";
+COUNTRIES_AUG.Europe.notes[9] = "EUROfusion consortium + JET/ITER staffing; Dennis Whyte (MIT, CFS co-founder) appointed UKAEA CEO Aug 2026";
+
+const INDIA_REG_RULES = "Held at 2 (note revised Oct 2026). The SHANTI Act (Dec 2025) opens nuclear power to Indian private companies. The draft rules (Aug 2026) license D-T fusion reactors under the same composite licence as fission, with bench-scale research exempt. The rules are not final, and there is no fusion-specific framework. Held because the rules are draft and have no legal effect yet; this treats fusion like fission, the opposite of the US, UK and German approach";
+COUNTRIES_AUG.India.notes[7] = INDIA_REG_RULES;
+
+const COUNTRIES_SEP = JSON.parse(JSON.stringify(COUNTRIES_AUG));
+COUNTRIES_SEP.US.notes[7] = "Held at 7 (7→8 considered and held, Oct 2026): Tennessee (TDEC) issued Type One Energy a fusion-specific byproduct material licence for its Bull Run site (announced Aug 31) — the first licence issued under a state fusion-specific framework. Joins Helion's WA licences (June). Held under the August rule: state licences don't move the score; revisit on an NRC final rule or a federal-level licence. NRC final rule not issued as far as we could find; FIA published guidance for Agreement States (Sept 9)";
+COUNTRIES_SEP.US.notes[0] = "Only country to achieve target gain >1 (NIF, Q≈4 target gain); SPARC targets tokamak Q>1 in 2027. Helion has softened its 2028 Orion target from 'producing electricity' to 'initial operations' (Axios, Sept 2026)";
+COUNTRIES_SEP.US.notes[6] = "CFS ~$4B, Helion $1.5B, TAE >$1B — world's deepest capital pool. Sept: House bill (American Leadership in Fusion Act) proposes $10B public funding — introduced, not enacted";
+COUNTRIES_SEP.Global.notes[7] = "Frontier = US (7), held: two state fusion-plant licences now issued (Helion, WA, June; Type One, TN, Aug 31); NRC final rule pending; UK holds the only fusion-specific primary law";
+COUNTRIES_SEP.Japan.notes[6] = "Held at 3 (3→4 considered and held, Oct 2026): METI conditionally selected four company-led projects (incl. EX-Fusion, Helical Fusion, Starlight Engine with Kyoto Fusioneering) for a ~¥60B (~$370-400M) power-generation demonstration subsidy programme through FY2028. Held because it is public money, conditional, and not yet disbursed; individual amounts not set";
+COUNTRIES_SEP.Japan.notes[7] = "National strategy (2030s power demo goal); METI demonstration programme ties subsidies to milestones; NRA dialogue begun, but no fusion licensing framework yet";
+COUNTRIES_SEP.Europe.notes[4] = "ITER magnet manufacturing base; Proxima signed an MOU with Lower Saxony (Sept 14) to lay foundations for industrial-scale HTS tape production — a plan, not a factory";
+COUNTRIES_SEP.Europe.notes[8] = "ITER's supplier network is the deepest in existence; UK STEP announced manufacturing and project partnerships during UK Fusion Week (Sept 15-17), incl. Kyoto Fusioneering";
+COUNTRIES_SEP.China.notes[0] = "BEST burning-plasma device in final assembly (completion targeted 2027); no net gain yet. ENN's next device, Helong-2, is targeted for completion around end-2027. [Corrected Nov 2026: this note previously said ENN had started Helong-2, taken from a newsletter headline.] CNNC restated at the IAEA General Conference: commercial fusion by ~2050, demonstration ~2045";
+COUNTRIES_SEP.China.notes[6] = "~$5B+ across CFEC ($2.1B), NeoFusion ($2B+), Startorus, Energy Singularity, ENN; Sept 1: Nova Fusion closed a RMB 1.2B (~$165-170M, our conversion) pre-Series A to pursue Q>1 verification";
+COUNTRIES_SEP["South Korea"].notes[1] = "KSTAR holds the temperature-qualified record: 48s at ≥100M°C (2024); 300s target by end-2026 — no result reported as of early Oct. Recurring 2026 '102s at 100M°C' headlines conflate two separate 2024 metrics and are excluded";
+COUNTRIES_SEP.India.notes[1] = "ADITYA-U and SST-1 are small experimental devices, far from records. Sept: Pranos Fusion's PRAGYA, India's first privately built tokamak, showed plasma to investors (ThePrint ground report, Sept 3). It is a testbed; the company says it cannot produce fusion. No score change";
+COUNTRIES_SEP.India.notes[6] = "2 (corrected Oct 2026; published as 1). Pranos Fusion: ~$7M raised in total, including a $6.8M round in March 2026. Its next machine, 'Praniq', is described by the company as a $100–200M project targeted for 2030 — a company aim, not funded capital";
+
+// ---------------- Issues ----------------
+// October: deep-copy September countries, then apply the month's edits. All scores held.
+const COUNTRIES_OCT = JSON.parse(JSON.stringify(COUNTRIES_SEP));
+COUNTRIES_OCT.Global.notes[7] = "Frontier = US (7), held: two state fusion-plant licences (Helion, WA; Type One, TN); NRC final rule still not found as of early November. UK holds the only fusion-specific primary law; Italy passed a framework law (Sept 23) whose rules come by decree";
+COUNTRIES_OCT.Global.notes[8] = "Frontier = Europe/China/Japan (6): ITER now has all nine vacuum vessel sectors on site (Oct); Japan's Fujikura signed the largest HTS tape order yet (CFS, >10,000 km). Still no fusion-specific component in serial production for several customers";
+COUNTRIES_OCT.US.notes[6] = "CFS ~$4B, Helion $1.5B, TAE >$1B — world's deepest capital pool. Oct: Commerce CHIPS letters of intent for up to $175M (Helion) and up to $85M (CFS), preliminary until definitive agreements are signed; DOE picked CFS to lead a SPARC digital-twin project (Genesis Mission Phase II, amount undisclosed)";
+COUNTRIES_OCT.US.notes[7] = "Held at 7: two state fusion-plant licences (Helion, WA, June; Type One, TN, Aug 31). NRC final rule still not found as of early November; the NRC's status page was last updated Sept 14. California SB 925 (signed Sept 30) requires a state fusion strategic plan — planning, not licensing";
+COUNTRIES_OCT.US.notes[8] = "Held at 5: CFS signed a long-term agreement to buy >10,000 km of HTS tape from Fujikura for its ARC plants (announced Sept 30) — a volume order, but from a Japanese supplier and for one customer. Helion's CHIPS letter of intent targets domestic power semiconductors. Still no US serial production of fusion-specific components";
+COUNTRIES_OCT.Europe.notes[6] = "Held at 4: ~$1-2B private across Tokamak Energy (UK), Proxima, Marvel, Renaissance. Oct 14: Germany's SPRIND launched a milestone-based fusion programme with €500M to 2029 (projected €2.5B later). Held because it is public money released against milestones — the same reasoning as Japan's METI programme";
+COUNTRIES_OCT.Europe.notes[7] = "UK Energy Act 2023 remains the only fusion-specific primary law. Italy's parliament gave final approval (Sept 23) to a framework law for fission and fusion; rules and a national programme follow by government decree within 12 months. EU-level framework less settled";
+COUNTRIES_OCT.Europe.notes[8] = "ITER's ninth and final vacuum vessel sector reached Cadarache in early October (WNN, Oct 5), completing delivery of the major core components after a 16-year manufacturing effort. Proxima and Fujikura signed an MoU to assess an HTS tape factory in Germany (reported Oct 30)";
+COUNTRIES_OCT.China.notes[0] = "BEST more than half assembled; construction to finish in 2027, with a stated aim to demonstrate D-T fusion power generation around 2030 (CGTN, Oct 1). No net gain yet. CNNC's stated path: demonstration ~2045, commercial ~2050";
+COUNTRIES_OCT.China.notes[1] = "EAST's 1,066s record; HL-3 >100M°C; strongest duration portfolio. ENN reported hydrogen-boron fusion reactions above 10^8 per second on EXL-50U (late Sept; company-reported). Aneutronic fuel and no energy-gain claim, so no score change";
+COUNTRIES_OCT.China.notes[4] = "Energy Singularity's 21.7T HTS magnet (Mar 2025); ASIPP's 582-ton TF coil tests (Jul/Aug 2026). Oct: Startorus reported a central-solenoid model coil ramping at 63 T/s with a 10 T peak at 20 K, which it calls a record for fusion superconducting magnets (company-reported, via NEI)";
+COUNTRIES_OCT.Japan.notes[0] = "JT-60SA (world's largest operating tokamak): systems restart began in May; new experimental campaign expected from end-2026. No D-T capability. Helical Fusion plans power-on tests of its Helix HARUKA device in 2027 (Reuters, Sept 29)";
+COUNTRIES_OCT.Japan.notes[8] = "Deep industrial base; supplied ITER + JT-60SA. Fujikura signed the largest HTS tape order yet (>10,000 km for CFS, Sept 30) and is expanding capacity; also an MoU with Proxima on a German tape factory. Japan's supplier role is growing, but for foreign projects";
+COUNTRIES_OCT["South Korea"].notes[1] = "KSTAR holds the temperature-qualified record: 48s at ≥100M°C (2024); 300s target by end-2026 — no result reported as of early November. Recurring '102s at 100M°C' headlines conflate two separate 2024 metrics and are excluded";
+
+const ISSUES = [
+  {
+    id: "2026-10", month: "October 2026", label: "October 2026 · Issue 4",
+    verdict: "No score change. Two candidates were considered and held: the Fujikura order does not yet amount to serial production, and Germany's programme is public money. October moved money and hardware, not physics: CFS committed to the largest superconducting-tape order yet, ITER's last vacuum vessel sector arrived, and Germany and the US put public money behind fusion on milestone or letter-of-intent terms. SPARC's magnet milestone, now about two months overdue, is still unconfirmed.",
+    scores: [6, 6, 4, 3, 8, 3, 6, 6, 4, 4],
+    scoreNotes: [
+      "Unchanged (6). No new gain result anywhere. SPARC: we found no public confirmation that all 18 magnets are installed (CFS's target was end of summer 2026), so the milestone is about two months overdue unless confirmed; first plasma is still targeted for 2027. China's BEST is more than half assembled, to finish in 2027 (CGTN, Oct 1). General Fusion reported electron temperatures above 1 keV on LM26 (Oct 9, company-reported, measured with UKAEA) — a first for its approach, but a threshold tokamaks passed in 1968, and far from gain.",
+      "Unchanged (6). No new duration or temperature record. KSTAR's 300s-at-100M°C target (end-2026): no result as of early November. ENN reported hydrogen-boron fusion reactions above 10^8 per second on EXL-50U (late Sept, company-reported) — aneutronic fuel, no energy gain claimed. DIII-D's negative-triangularity team won the APS Dawson Award for weeks of plasmas without edge-localised modes, and Kyoto Fusioneering will supply a new divertor for that work (ANS, Oct 15) — recognition of earlier results and a hardware plan.",
+      "Unchanged (4). No fusion-relevant neutron test facility operates anywhere, and October produced no materials result under neutron flux. Kyoto Fusioneering and Focused Energy signed an MoU covering, among other things, materials for extreme conditions — an MoU, not a test.",
+      "Unchanged (3). No physical TBR>1 demonstration. Proxima and Kyoto Fusioneering signed an MoU on gyrotrons and fuel-cycle technology — a plan, not a result.",
+      "Unchanged (8). Startorus (China) reported a central-solenoid model coil ramping at 63 T/s with a 10 T peak at 20 K, which it calls a record for fusion superconducting magnets (company-reported, via NEI). CFS's order for more than 10,000 km of Fujikura HTS tape, and Fujikura's capacity expansion, address the cost and manufacturing leg of this gap. A full SPARC magnet set operating together remains the outstanding test.",
+      "Unchanged (3). No physical progress. Helion's CHIPS letter of intent funds high-voltage semiconductors for its pulsed-power systems — enabling electronics, not a demonstration of converting fusion energy to electricity.",
+      "Unchanged (6). Neither trigger of the Private Investment rule occurred: no new FIA total and no capital with legal effect. Private: Blue Laser Fusion closed $34M; Cambridge Heavy Industries raised a $6.2M seed. Public: Germany's SPRIND launched a milestone-based programme with €500M to 2029 (Oct 14); US Commerce signed CHIPS letters of intent for up to $175M (Helion) and up to $85M (CFS), preliminary until definitive agreements; DOE selected CFS to lead a SPARC digital-twin project (Genesis Mission Phase II). Israel published a draft national fusion strategy for comment.",
+      "Unchanged (6). NRC final rule: not found as of early November; the NRC's rulemaking page was last updated Sept 14. Italy's parliament gave final approval to a framework law for fission and fusion (Sept 23, late-logged); its rules and national programme follow by government decree within 12 months. California's SB 925 (signed Sept 30) requires a state fusion strategic plan. Held: none is a final federal-level rule or a national fusion-specific licence.",
+      "Held at 4 (4→5 considered and held, Nov 2026). CFS signed a long-term agreement to buy more than 10,000 km of HTS tape from Fujikura for its ARC plants (signed Sept 28, announced Sept 30; late-logged), the largest such order, and Fujikura is expanding capacity. ITER's ninth and final vacuum vessel sector reached the site in early October, completing delivery of its major core components. Proxima and Fujikura will assess a German HTS tape factory. The ladder's test for 5 is serial production of a fusion-specific component for several customers; this is a volume order from one customer, for capacity not yet built, so the score holds.",
+      "Unchanged (4). No new workforce or training-capacity data published in October. Helion says its CHIPS-funded work would create more than 100 jobs in Everett — a company estimate tied to a preliminary award.",
+    ],
+    achievements: [
+      { title: "CFS places the largest superconducting-tape order yet (late-logged)", signal: "positive",
+        detail: "Signed Sept 28 and announced Sept 30: CFS agreed to buy more than 10,000 km of high-temperature superconducting tape from Japan's Fujikura for its ARC power plants, starting with the Fall Line plant in Chesterfield County, Virginia. Fujikura says it is investing to expand capacity. It is tied to a power plant rather than a prototype; volume orders like this are how magnet costs are expected to fall. In October Proxima and Fujikura also agreed to study an HTS tape factory in Germany. Falls on the boundary of September; logged here.",
+        links: [
+          ["Fujikura press release", "https://www.fujikura.co.jp/en/news/pressrelease/20260930cfsarc1km.html"],
+          ["CFS announcement (PR Newswire)", "https://www.prnewswire.com/news-releases/commonwealth-fusion-systems-places-largest-single-purchase-order-of-hts-tape-with-fujikura-to-accelerate-development-of-arc-power-plants-302893652.html"],
+        ] },
+      { title: "ITER's last vacuum vessel sector arrives", signal: "positive",
+        detail: "Europe's fifth and last vacuum vessel sector reached ITER in early October, ending a 16-year manufacturing effort; all nine sectors and the major core components are now on site. Assembly continues under the 2025 baseline, which targets deuterium-deuterium operation in 2035. A logistics milestone for the world's largest fusion supply chain, not a change to ITER's schedule.",
+        links: [
+          ["World Nuclear News", "https://www.world-nuclear-news.org/articles/europe-delivers-final-iter-vacuum-vessel-sector"],
+          ["ANS Nuclear Newswire", "https://www.ans.org/news/2026-10-07/article-8469/iter-welcomes-last-major-component-needed-for-core-machine-assembly/"],
+        ] },
+      { title: "Governments fund fusion on milestone terms", signal: "mixed",
+        detail: "Germany's SPRIND launched a programme with €500M to 2029 that releases money only as independent experts verify milestones; companies that miss one are dropped (Oct 14). In the US, Commerce signed CHIPS letters of intent for up to $175M to Helion and up to $85M to CFS for fusion-related semiconductors, and DOE chose CFS to lead a SPARC digital-twin project. Real public money, but conditional or preliminary, and public rather than private, so it does not move Private Investment.",
+        links: [
+          ["NEI Magazine (Germany)", "https://www.neimagazine.com/news/germany-launches-fusion-milestone-programme/"],
+          ["Helion announcement", "https://www.helionenergy.com/newsroom/helion-signs-letter-of-intent-for-175-million-chips-award-to-advance-semiconductor-fusion-energy"],
+          ["ANS Nuclear Newswire (Genesis Mission)", "https://www.ans.org/news/2026-10-21/article-8506/second-round-of-genesis-mission-selections-includes-12-phase-ii-awards/"],
+        ] },
+    ],
+    tracker: {
+      fiaConfidence: { value: "71%", prior: "71%", note: "% of FIA-surveyed companies expecting grid electricity by the 2030s — no new survey since July" },
+      metaculusSparc: { value: "Jun 2029", prior: "Jun 2029", note: "Crowd-forecast date for SPARC net power — NOT re-verified this month; last confirmed via a June 2026 secondary source" },
+      minGapScore: { value: "3/10", prior: "3/10", note: "Weakest links: Tritium Breeding & Heat/Power Conversion — still no physical demonstration anywhere" },
+    },
+    prediction: {
+      band: "Late 2030s – mid 2040s",
+      detail: "Band unchanged. October's progress was logistical and financial: a plant-scale tape order, ITER's last core component on site, and conditional public money in Germany and the US. None of it touched the three never-demonstrated gaps (materials under neutron flux, tritium breeding, heat-to-electricity conversion). The nearest test of the optimistic case is still SPARC, whose magnet milestone is unconfirmed about two months after its target; first plasma remains set for 2027. China says BEST will finish in 2027 and aims to demonstrate D-T power generation around 2030 — a stated goal, not yet a schedule we can check.",
+    },
+    watchlist: [
+      "SPARC: all 18 magnets installed — about two months past CFS's end-of-summer target; no public confirmation found as of early November",
+      "KSTAR 300-second attempt at ≥100M°C (KFE target: end of 2026) — no result as of early November",
+      "NRC final fusion rule (proposed Feb 2026; not found as of early November)",
+      "JT-60SA new experimental campaign (expected from end-2026, about six months)",
+      "Helion: what 'initial operations' in 2028 means; CHIPS definitive agreement",
+      "Japan METI programme: formal grant decisions and per-project amounts (none found as of early November)",
+      "Germany SPRIND programme: first companies selected",
+      "Italy: implementing decrees under the new nuclear law (within 12 months)",
+      "TAE–TMTG merger: SEC registration effective Nov 5; TMTG shareholder meeting Dec 14; close targeted by end-2026",
+      "American Leadership in Fusion Act ($10B) — no committee action found",
+    ],
+    corrections: [
+      "Decisions (Nov 2026): world Supply Chain held at 4; Europe private investment held at 4.",
+      "September's Supply Chain note said ITER's final vacuum vessel sector was delivered on Oct 7; World Nuclear News reported it on site on Oct 5. Corrected in September.",
+      "September's China note said ENN had started its Helong-2 device; ENN targets completion around end-2027. The earlier claim came from a newsletter headline. Corrected in September.",
+      "Late-logged here: Italy's framework law (final approval Sept 23) and the CFS–Fujikura tape agreement (Sept 28–30), both missed in the September issue.",
+    ],
+    sources: [
+      {"author": "Fujikura Ltd.", "title": "Fujikura signs long-term supply contract for high-temperature superconducting wires with CFS", "pub": "Fujikura", "date": "September 30, 2026", "url": "https://www.fujikura.co.jp/en/news/pressrelease/20260930cfsarc1km.html"},
+      {"author": "World Nuclear News", "title": "Europe delivers final ITER vacuum vessel sector", "pub": "World Nuclear News", "date": "October 5, 2026", "url": "https://www.world-nuclear-news.org/articles/europe-delivers-final-iter-vacuum-vessel-sector"},
+      {"author": "American Nuclear Society", "title": "ITER welcomes last major component needed for core machine assembly", "pub": "Nuclear Newswire", "date": "October 7, 2026", "url": "https://www.ans.org/news/2026-10-07/article-8469/iter-welcomes-last-major-component-needed-for-core-machine-assembly/"},
+      {"author": "Nuclear Engineering International", "title": "Germany launches fusion milestone programme", "pub": "NEI Magazine", "date": "October 14, 2026", "url": "https://www.neimagazine.com/news/germany-launches-fusion-milestone-programme/"},
+      {"author": "Helion Energy", "title": "Helion Signs Letter of Intent For $175 Million CHIPS Award to Advance U.S. High Voltage Semiconductor R&D To Support Fusion Energy", "pub": "Helion", "date": "October 22, 2026", "url": "https://www.helionenergy.com/newsroom/helion-signs-letter-of-intent-for-175-million-chips-award-to-advance-semiconductor-fusion-energy"},
+      {"author": "American Nuclear Society", "title": "Second round of Genesis Mission selections includes 12 Phase II awards", "pub": "Nuclear Newswire", "date": "October 21, 2026", "url": "https://www.ans.org/news/2026-10-21/article-8506/second-round-of-genesis-mission-selections-includes-12-phase-ii-awards/"},
+      {"author": "World Nuclear News", "title": "Italy's Senate approves a return to nuclear power", "pub": "World Nuclear News", "date": "September 24, 2026", "url": "https://world-nuclear-news.org/articles/italys-senate-approves-a-return-to-nuclear-power"},
+      {"author": "CGTN", "title": "China's 'artificial sun' project enters key construction phase", "pub": "CGTN", "date": "October 1, 2026", "url": "https://news.cgtn.com/news/2026-10-01/China-s-artificial-sun-project-enters-key-construction-phase-1QSYBsXj0d2/p.html"},
+      {"author": "TAE Technologies", "title": "Trump Media & Technology Group and TAE Technologies Announce Effectiveness of Form S-4 Registration Statement for Proposed Merger", "pub": "TAE", "date": "November 5, 2026", "url": "https://tae.com/trump-media-technology-group-and-tae-technologies-announce-effectiveness-of-form-s-4-registration-statement-for-proposed-merger/"},
+      {"author": "U.S. Nuclear Regulatory Commission", "title": "Fusion Machine Rulemaking Status", "pub": "NRC", "date": "last updated September 14, 2026", "url": "https://www.nrc.gov/materials/fusion/rulemaking-status"},
+    ],
+    sourceNote: "Also used, unlinked: The Fusion Report weekly digests (Oct 2, 16, 23, 30) for Blue Laser Fusion, Cambridge Heavy Industries, the Proxima–Fujikura and Proxima–Kyoto Fusioneering MoUs, Kyoto Fusioneering–Focused Energy, and Israel's draft strategy; ANS Nuclear Newswire (General Fusion 1 keV, Oct 9; DIII-D divertor, Oct 15); NEI Magazine (Startorus magnet); Pandaily (ENN EXL-50U, company-reported); Reuters (Helical Fusion HARUKA, Sept 29); NucNet (JT-60SA restart, May 13). The Proxima–Fujikura MoU and the smaller funding rounds rest on the newsletter and company releases, not independent reporting. SPARC magnet status, the NRC final rule, KSTAR and METI grant decisions rest on absence of evidence in English-language search, as does the absence of new Indian developments.",
+    countries: COUNTRIES_OCT,
+  },
+  {
+    id: "2026-09", month: "September 2026", label: "September 2026 · Issue 3",
+    verdict: "No score change. Three candidate changes were considered and held (Oct 2026): state licences still don't move Regulatory Clarity, and Japan's METI subsidy is public, conditional and undisbursed. The month's most consequential signal ran the other way: Helion, the optimistic tail of every timeline, softened its 2028 commitment.",
+    scores: [6, 6, 4, 3, 8, 3, 6, 6, 4, 4],
+    scoreNotes: [
+      "Unchanged (6). No new gain result anywhere. SPARC: CFS said in January all 18 magnets would be installed by end of summer 2026; we found no public confirmation that this happened as of early October. NIF record remains 8.6 MJ (Apr 2025). Helion now describes Orion's 2028 milestone as 'initial operations' rather than producing electricity, and two 2026 academic papers question whether its approach can overcome energy losses (Axios, Sept 8 and 28).",
+      "Unchanged (6). No new duration or temperature records reported. KSTAR's 300s-at-100M°C target (end-2026): no result yet. 2026 headlines claiming 'KSTAR 102s at 100M°C' recur; they conflate two separate 2024 metrics (48s at 100M°C; 102s H-mode) and are excluded. India's private PRAGYA tokamak produced plasma (Sept 3) — a small testbed, not a record.",
+      "Unchanged (4). No fusion-relevant neutron test facility operates anywhere. September produced no materials demonstration under neutron flux.",
+      "Unchanged (3). No physical TBR>1 demonstration. Starlight Engine's METI-selected project (with Kyoto Fusioneering) includes blanket and liquid-lithium subsystems — funding a plan, not a result.",
+      "Unchanged (8). Proxima signed an MOU with Lower Saxony (Sept 14) toward industrial-scale HTS tape production — relevant to the cost leg of this gap, but an MOU, not a factory. SPARC's full magnet set operating together remains the outstanding test.",
+      "Unchanged (3). No physical progress. Thea Energy published 16 peer-reviewed papers on its 400 MW Helios stellarator design (Sept 9) — design publication, which by rule does not move scores.",
+      "Unchanged (6). Under the Private Investment rule (see 'How to read the scores'), only the annual FIA total or capital with legal effect can move this axis; neither occurred. Private: Nova Fusion (China) RMB 1.2B pre-Series A (Sept 1); smaller rounds (e.g. Fusionality €3.2M). Public: Japan's ~¥60B METI programme (four projects conditionally selected — not yet awarded); US House bill proposing $10B (introduced, not enacted); US-UK fusion and AI cooperation deal (Sept 14-15).",
+      "Held at 6 (6→7 considered and held, Oct 2026). Tennessee's TDEC issued Type One Energy a fusion-specific byproduct material licence for Project Infinity at TVA's Bull Run site (announced Aug 31; Infinity Two full startup targeted 2034). It is the first licence issued under a state fusion-specific framework. Late-logged: it falls on the last day of August, after our August issue. Applying the August rule (state licences too narrow; revisit on an NRC final rule or a federal-level licence), the score holds. NRC final rule: not found as of early October. Also: FIA white paper guiding Agreement States (Sept 9); California signed fusion-related legislation (Sept 30).",
+      "Unchanged (4). Program and partnership formation only: STEP manufacturing partnerships (Sept 15-17), Proxima HTS tape MOU, Realta–Madison utility partnership (Sept 2). Nothing in serial production. October note: ITER's ninth and final vacuum vessel sector reached the site in early October (World Nuclear News, Oct 5) — logged in the October issue. [Corrected Nov 2026: this note previously said Oct 7, which was the date of a later report.]",
+      "Unchanged (4). No new workforce data published in September. Trade-press commentary on recruitment difficulty continues; no training-capacity numbers.",
+    ],
+    achievements: [
+      { title: "Tennessee licenses Type One Energy (late-logged)", signal: "positive",
+        detail: "Announced Aug 31: TDEC issued Type One Energy a fusion-specific byproduct material licence to begin Project Infinity at TVA's Bull Run site near Oak Ridge — Infinity One prototype first, then the 400 MW Infinity Two pilot, full startup targeted 2034. The second US state fusion-plant licence after Helion's (WA, June), and the first issued under a state framework written specifically for fusion. Falls on the boundary of August; logged here.",
+        links: [
+          ["Tennessee government (TDEC) announcement", "https://www.tn.gov/environment/news/2026/8/31/first-license-commercial-fusion.html"],
+          ["ANS Nuclear Newswire", "https://www.ans.org/news/2026-09-02/article-8360/tennessee-issues-commercial-fusion-license-to-type-one-energy-for-bull-run-site"],
+          ["World Nuclear News", "https://world-nuclear-news.org/articles/tennessee-issues-licence-for-fusion-plant"],
+        ] },
+      { title: "Helion softens its 2028 commitment", signal: "negative",
+        detail: "Helion removed the claim that Orion will produce electricity by 2028; its site now says the plant will 'begin initial operations in 2028', undefined. A Helion spokesperson said 50 MW will not reach full operation in 2028; the Microsoft contract requires grid connection and beginning operations by end-2028. Two 2026 academic papers question core assumptions of Helion's approach. Helion was the optimistic tail of our timeline.",
+        links: [
+          ["Axios Seattle, Sept 28", "https://www.axios.com/local/seattle/2026/09/28/helion-energy-orion-fusion-microsoft-commercial-power-altman"],
+          ["Axios Pro, Sept 8 (subscription)", "https://www.axios.com/pro/climate-deals/2026/09/08/helion-energy-fusion-net-electricity-date-year"],
+          ["Helion's Orion page", "https://www.helionenergy.com/orion"],
+        ] },
+      { title: "Japan picks four fusion power-demonstration projects", signal: "mixed",
+        detail: "METI conditionally selected four company-led projects — including EX-Fusion (laser), Helical Fusion (helical stellarator) and Starlight Engine with Kyoto Fusioneering (HTS tokamak) — for a ~¥60B subsidy programme through FY2028, aimed at power-generation demonstration in the 2030s. Conditional selection only; individual awards not yet set. Subsidies are tied to technical milestones.",
+        links: [
+          ["World Nuclear News", "https://www.world-nuclear-news.org/articles/helical-selected-for-japanese-fusion-demonstration-project"],
+          ["Nuclear Engineering International", "https://www.neimagazine.com/?p=107236"],
+        ] },
+    ],
+    tracker: {
+      fiaConfidence: { value: "71%", prior: "71%", note: "% of FIA-surveyed companies expecting grid electricity by the 2030s — no new survey since July" },
+      metaculusSparc: { value: "Jun 2029", prior: "Jun 2029", note: "Crowd-forecast date for SPARC net power — NOT re-verified this month; last confirmed via a June 2026 secondary source" },
+      minGapScore: { value: "3/10", prior: "3/10", note: "Weakest links: Tritium Breeding & Heat/Power Conversion — still no physical demonstration anywhere" },
+    },
+    prediction: {
+      band: "Late 2030s – mid 2040s",
+      detail: "Band unchanged; the optimistic tail weakened. Helion's walk-back from '2028 electricity' to undefined '2028 initial operations' removes the most aggressive dated claim in the field. CNNC restated a ~2045 demonstration / ~2050 commercial path at the IAEA General Conference; Type One targets full startup of Infinity Two by 2034. The three never-demonstrated gaps (materials under neutron flux, tritium breeding, heat-to-electricity conversion) saw no physical progress. Watch SPARC: the end-of-summer magnet milestone is unconfirmed, and first plasma has already slipped once (from 2025).",
+    },
+    watchlist: [
+      "SPARC: all 18 magnets installed — CFS target was end of summer 2026; no public confirmation found (now overdue unless confirmed)",
+      "KSTAR 300-second attempt at ≥100M°C (KFE target: end of 2026) — still no result",
+      "NRC final fusion rule (proposed Feb 2026; final rule not found as of early Oct)",
+      "JT-60SA restart with upgraded campaign (late 2026)",
+      "Helion: what 'initial operations' in 2028 means; Polaris first electricity (no public date)",
+      "Japan METI programme: formal grant decisions and per-project amounts",
+      "American Leadership in Fusion Act ($10B) — committee action",
+      "TAE–TMTG merger close (slipped to Q4 per August issue; not re-checked this month)",
+    ],
+    corrections: [
+      "Decisions (Oct 2026): Regulatory Clarity held at 6, US regulatory held at 7, Japan private investment held at 3. The issue was previously marked draft.",
+      "India private investment: 2, corrected from 1 (see July).",
+      "Oct 2026: India regulatory note revised for the SHANTI Act and draft rules; score held at 2.",
+      "Nov 2026: Supply Chain note corrected. ITER's final vacuum vessel sector was reported on site on Oct 5, not delivered on Oct 7.",
+      "Nov 2026: China note corrected. ENN has not started Helong-2; the company targets completion around end-2027. The earlier claim came from a newsletter headline.",
+    ],
+    sources: [
+      {"author": "Business Standard", "title": "India shifts nuclear fusion debate from research towards power deployment", "pub": "Business Standard", "date": "September 1, 2026", "url": "https://www.business-standard.com/india-news/india-shifts-nuclear-fusion-debate-from-research-towards-power-deployment-126090101606_1.html"},
+      {"author": "Tennessee Department of Environment and Conservation", "title": "Governor Bill Lee, TDEC Announce First License for Commercial Fusion", "pub": "TN.gov", "date": "August 31, 2026", "url": "https://www.tn.gov/environment/news/2026/8/31/first-license-commercial-fusion.html"},
+      {"author": "American Nuclear Society", "title": "Tennessee issues commercial fusion license to Type One Energy for Bull Run site", "pub": "Nuclear Newswire", "date": "September 2, 2026", "url": "https://www.ans.org/news/2026-09-02/article-8360/tennessee-issues-commercial-fusion-license-to-type-one-energy-for-bull-run-site"},
+      {"author": "Axios", "title": "Seattle-area Helion quietly moves goalpost on fusion", "pub": "Axios Seattle", "date": "September 28, 2026", "url": "https://www.axios.com/local/seattle/2026/09/28/helion-energy-orion-fusion-microsoft-commercial-power-altman"},
+      {"author": "World Nuclear News", "title": "Helical selected for Japanese fusion demonstration project", "pub": "World Nuclear News", "date": "September 2026", "url": "https://www.world-nuclear-news.org/articles/helical-selected-for-japanese-fusion-demonstration-project"},
+      {"author": "Soumya Pillai", "title": "Bengaluru startup builds India’s 1st private nuclear fusion tokamak. Next step is a reactor", "pub": "ThePrint", "date": "September 3, 2026", "url": "https://theprint.in/ground-reports/pranos-pragya-tokamak-nuclear-fusion-reactor/3032248/"},
+    ],
+    sourceNote: "Also used, unlinked: ANS Nuclear Newswire (FIA Agreement States white paper, Sept 9; Proxima HTS MOU, Sept 14; STEP and US-UK partnerships, Sept 16-17; House fusion bill, Sept 30; California bills, Oct 2); NEI Magazine (China at IAEA General Conference); 36Kr (Nova Fusion round); The Fusion Report weekly digests (headlines only for ENN Helong-2, not independently verified). The RMB-to-USD conversion for Nova Fusion is ours. NRC final-rule status and SPARC magnet completion rest on absence of evidence in English-language search.",
+    countries: COUNTRIES_SEP,
+  },
+  {
+    id: "2026-08", month: "August 2026", label: "August 2026 · Issue 2",
+    verdict: "No score change. A Regulatory Clarity 6→7 move was proposed on Helion's June licences and declined as too narrow. A capital-and-programs month: record funding, new test-bed programs, no new physics records.",
+    scores: [6, 6, 4, 3, 8, 3, 6, 6, 4, 4],
+    scoreNotes: [
+      "Unchanged (6). No new gain result. SPARC ~80% assembled per CFS (July 30); all 18 HTS magnets expected installed by end of summer 2026; first plasma and Q>1 targeted 2027. NIF record remains 8.6 MJ (Apr 2025). Inertia/LLNL cut D-T fuel-layer formation from days to hours — a manufacturing step for IFE, not a gain result.",
+      "Unchanged (6). MAST Upgrade (UK) set a machine record for plasma pressure without ELMs — not a world record (Alcator C-Mod's 2.05 atm, 2016, still stands). KSTAR's 300s-at-100M°C target: no result reported yet. General Fusion LM26 reached ~0.72 keV (~8.4M°C) — far from fusion-relevant.",
+      "Unchanged (4). ORNL–REV 'FULCRA' partnership (18 months) to scope a shared test bed at Oak Ridge including a fusion-relevant neutron source — a plan, not a facility. IFMIF-DONES still under construction. No neutron-tested plant-grade material exists.",
+      "Unchanged (3). Kyoto Fusioneering moving US HQ to Oak Ridge to build UNITY-3, a DOE-funded liquid-lithium breeding blanket test facility (Realta, Thea, Type One, Xcimer to use its data). Meaningful program formation; still zero physical TBR>1 demonstrations anywhere.",
+      "Unchanged (8). ASIPP passed full-parameter testing on a 582-ton D-shaped TF coil — largest fusion magnet ever built (1.3× ITER's volume, 3× stored energy), domestically sourced. Note: Forbes attributed it to BEST; the Global Times source does not, and specs match the CFETR prototype coil. Confirms manufacturing scale, doesn't move an already near-solved gap.",
+      "Unchanged (3). No physical progress reported. MIT (Lo & Whyte, J. Fusion Energy) published an 'Economic Q' framework — analytical, not hardware.",
+      "Unchanged (6). Funding rounds alone don't move this axis. CFS raised $1B (July 30; total $4B, which CFS says is ~30% of all fusion capital). FIA's July 2026 report puts cumulative industry funding at $14.24B since 2021 — inside the 6–7 band of the Private Investment rule. Thea extended Series B; General Fusion now public with ~$150M cash. [Corrected Oct 2026: this note previously called FIA's $9.77B (2025) figure the latest official number and inferred ~$13B from CFS's claim; FIA had already published $14.24B in July 2026.]",
+      "Held at 6 (6→7 proposal declined). Helion received Radioactive Materials + Radioactive Air Emissions licences from Washington State DOH on June 16, 2026 — the first licences issued to a fusion power plant anywhere, under the Agreement State pathway. This event predates our July issue and was missed; the July note 'no license has run end-to-end anywhere' is corrected there. Decision (Sept 2026): hold at 6 — these are state materials licences, not a federal reactor-style review, and the NRC final rule is still pending. Will revisit if the NRC rule is finalised or a federal-level licence issues.",
+      "Unchanged (4). ITER installed its 6th of 9 sector modules ~6 months ahead of schedule; Pacific Fusion broke ground on a $1B campus in Albuquerque; Thea won $20M ARPA-E SCALEUP for domestic HTS magnet production lines. All construction/program starts — nothing in serial production yet.",
+      "Unchanged (4). Notable moves in people, not pipelines: Dennis Whyte named UKAEA CEO; Korea's '7 SEED' initiative names fusion a strategic technology. No new training-capacity data.",
+    ],
+    achievements: [
+      { title: "CFS raises $1B; SPARC ~80% assembled", signal: "positive",
+        detail: "Announced July 30: $1B from sovereign wealth, pension and infrastructure funds — the largest fusion round since CFS's own $1.8B round in 2021 — bringing CFS to $4B total, which the company says is ~30% of all private fusion capital. SPARC is ~80% assembled; all 18 magnets due by end of summer; first plasma and scientific breakeven targeted 2027 (originally 2025).",
+        links: [
+          ["CFS press release", "https://cfs.energy/news-and-media/commonwealth-fusion-systems-raises-another-1-billion-bringing-total-capital-raised-to-4-billion/"],
+          ["Boston Globe", "https://www.bostonglobe.com/2026/07/30/business/fusion-commonwealth-systems-billion-funding/"],
+        ] },
+      { title: "Helion licensed to operate a fusion plant (late-logged)", signal: "positive",
+        detail: "June 16, 2026: Washington State Department of Health issued Radioactive Materials and Radioactive Air Emissions licences for Orion (Malaga, WA) — the first fusion-plant licences issued anywhere. Assembly and office buildings complete; generator building under construction; 2028 Microsoft PPA target unchanged at the time. Missed in our July issue.",
+        links: [
+          ["ANS Nuclear Newswire", "https://www.ans.org/news/2026-06-23/article-8140/helion-secures-new-licenses-from-washington/"],
+          ["Helion announcement", "https://www.helionenergy.com/newsroom/helion-clears-key-regulatory-milestone-on-the-path-to-building-and-operating-the-worlds-first-fusion-power-plant"],
+        ] },
+      { title: "Breeding-blanket programs finally get hardware plans", signal: "mixed",
+        detail: "Kyoto Fusioneering relocating US HQ to Oak Ridge to build UNITY-3 (DOE-funded liquid-lithium blanket test facility with ORNL); ORNL and Rutherford Energy Ventures launched FULCRA to scope a shared test bed including a fusion-relevant neutron source. Program formation only — no TBR>1 has been physically demonstrated.",
+        links: [
+          ["Nuclear Engineering International", "https://www.neimagazine.com/news/kyoto-ornl-advance-unity-3-fusion/"],
+          ["Kyoto Fusioneering announcement", "https://kyotofusioneering.com/en/?p=4308"],
+        ] },
+    ],
+    tracker: {
+      fiaConfidence: { value: "71%", prior: "71%", note: "% of FIA-surveyed companies expecting grid electricity by the 2030s — no new survey since July's 2026 report" },
+      metaculusSparc: { value: "Jun 2029", prior: "Jun 2029", note: "Crowd-forecast date for SPARC first demonstrating net power — steady (last confirmed via secondary source, June 2026)" },
+      minGapScore: { value: "3/10", prior: "3/10", note: "Weakest links: Tritium Breeding & Heat/Power Conversion — still no physical demonstration anywhere" },
+    },
+    prediction: {
+      band: "Late 2030s – mid 2040s",
+      detail: "Unchanged. August strengthened the capital and regulatory legs (CFS $4B; first plant licences issued) without touching the three never-demonstrated gaps: materials under real neutron flux, tritium breeding, heat-to-electricity conversion. New test-bed programs (UNITY-3, FULCRA) are the right kind of step but are years from data. Optimistic tail still Helion 2028 / CFS ARC early-2030s; base case unchanged. Watch for SPARC first plasma slipping past 2027 — CFS has already moved it once (from 2025).",
+    },
+    watchlist: [
+      "SPARC: all 18 magnets installed (CFS target: end of summer 2026) — a verifiable checkpoint",
+      "KSTAR 300-second attempt at ≥100M°C (KFE target: end of 2026) — still no result",
+      "NRC final fusion rule (proposed Feb 2026; comments closed May 27; final rule pending)",
+      "JT-60SA restart with upgraded campaign (late 2026)",
+      "Helion Polaris: first electricity from fusion (company milestone, no public date)",
+      "TAE–TMTG merger close (slipped from mid-2026 to Q4) and Da Vinci site selection",
+    ],
+    corrections: [
+      "Oct 2026: Private Investment note corrected to FIA's published $14.24B cumulative (July 2026 report). The earlier inferred ~$13B figure is withdrawn.",
+      "Oct 2026: India private investment 2, corrected from 1 (see July).",
+      "Oct 2026: India regulatory note revised for the SHANTI Act and the August draft rules (which include D-T fusion reactors in reactor licensing); score held at 2.",
+    ],
+    sources: [
+      {"author": "Business Standard", "title": "India shifts nuclear fusion debate from research towards power deployment", "pub": "Business Standard", "date": "September 1, 2026", "url": "https://www.business-standard.com/india-news/india-shifts-nuclear-fusion-debate-from-research-towards-power-deployment-126090101606_1.html"},
+      {"author": "Commonwealth Fusion Systems", "title": "Commonwealth Fusion Systems Raises Another $1 Billion, Bringing Total Capital Raised to $4 Billion", "pub": "CFS", "date": "July 30, 2026", "url": "https://cfs.energy/news-and-media/commonwealth-fusion-systems-raises-another-1-billion-bringing-total-capital-raised-to-4-billion/"},
+      {"author": "American Nuclear Society", "title": "Helion secures new licenses from Washington", "pub": "Nuclear Newswire", "date": "June 23, 2026", "url": "https://www.ans.org/news/2026-06-23/article-8140/helion-secures-new-licenses-from-washington/"},
+      {"author": "Nuclear Engineering International", "title": "Kyoto, ORNL advance Unity-3 fusion", "pub": "NEI Magazine", "date": "August 2026", "url": "https://www.neimagazine.com/news/kyoto-ornl-advance-unity-3-fusion/"},
+      {"author": "World Nuclear News", "title": "Fusion industry raised USD4.5 billion in past year, report says", "pub": "World Nuclear News", "date": "July 2026", "url": "https://world-nuclear-news.org/articles/fusion-industry-raised-usd45-billion-over-past-year-report-says"},
+    ],
+    sourceNote: "Also used, unlinked: Fusion Energy Base 'Confinement Time: August 2026'; The Fusion Report weekly digests (Aug 7, 21, 28); ORNL, ASIPP/Global Times, UKAEA/gov.uk and TAE releases; Reuters (TAE helium-3); Federal Register (NRC proposed rule). Metaculus date confirmed only via a June 2026 secondary source (AEI), not the site itself.",
+    countries: COUNTRIES_AUG,
+  },
+  {
+    id: "2026-07", month: "July 2026", label: "July 2026 · Inaugural issue",
+    verdict: "No material score change. Baseline issue — three notable developments logged.",
+    scores: [6, 6, 4, 3, 8, 3, 6, 6, 4, 4],
+    scoreNotes: [
+      "NIF (US) has achieved target gain >1 repeatedly (up to Q≈4 target gain, ~8.6 MJ reported record), but only in single laser shots that ignore ~300 MJ facility draw. Tokamak record remains JET's Q=0.67 from 1997. SPARC (75% built) targets tokamak Q>1 in 2027.",
+      "Two records that don't yet overlap: duration at moderate temperature (WEST 1,337s at ~50M°C; EAST 1,066s) and duration at fusion-relevant temperature (KSTAR 48s at ≥100M°C). No device has held both simultaneously — which is what a plant needs. AI disruption-prediction (DeepMind/EPFL, DIII-D) is real progress on control.",
+      "No fusion-relevant neutron test facility operates anywhere; IFMIF-DONES (Spain) is under construction. Candidate materials (tungsten walls, low-activation steels) exist but are unproven against decades of 14 MeV neutron bombardment. Independent materials scientists call plant-grade materials nonexistent today.",
+      "TBR>1 exists only in simulation (Proxima/Max Planck IPP: 1.07 lithium-lead; CFS/MIT: 1.08 FLiBe — both computational neutronics, not experiments). No full-scale breeding blanket has ever operated. Kyoto Fusioneering's UNITY testbeds are the most advanced physical fuel-cycle work.",
+      "The one near-solved gap: CFS 20-tesla HTS magnets built, tested, installing into SPARC; Energy Singularity (China) holds the 21.7T field record. Remaining: a full magnet set operating together in a running machine, and cost reduction from bespoke to manufacturable.",
+      "No fusion device has ever delivered a watt to a grid. Heat exchangers/turbines for fusion-specific conditions remain design-stage; Kyoto Fusioneering's UNITY-1 thermal-cycle testbed is the furthest physical work anywhere.",
+      "FIA official: $14.24B cumulative since 2021 (Global Fusion Industry in 2026 report, July 2026), including a record $4.48B raised in the last year; five companies hold a PPA or similar commercial commitment. Against that, 67% of companies call funding the biggest short-term challenge. Score reflects capital formation still far short of deployment needs. [Corrected Oct 2026: this note previously cited FIA's 2025 figure of $9.77B as the latest official number.] The ~$77B 'still needed' figure in the original note is carried over and not re-verified, so it has been removed.",
+      "US: NRC byproduct framework + ADVANCE Act 2024 + proposed rule (Feb 2026, comments closed May 2026, final rule pending) + Tennessee state framework (June 2026). UK: only fusion-specific law in force (Energy Act 2023). Most countries have no framework. [Correction logged Aug 2026: the original note said no licence had run end-to-end anywhere; Helion's WA licences were issued June 16, 2026.]",
+      "ITER's 70+ supplier network is the deepest in existence; FIA supply-chain spend growing (~$538M in 2025). But 69% of suppliers still lack long-term demand visibility, and nothing is in serial production — everything remains one-off prototype manufacturing.",
+      "~4,600 direct private-sector employees + ~9,300 supply-chain jobs (FIA 2025), 16,000+ total per FIA 2026 — up sharply but orders of magnitude below deployment needs. Dedicated training pipelines are nascent; competes with fission for the same skilled trades.",
+    ],
+    achievements: [
+      { title: "FIA Global Fusion Industry 2026 report published", signal: "mixed",
+        detail: "Record $4.48B raised in the past year (~70% up year-on-year), bringing the cumulative total since 2021 to $14.24B; 16,000+ people employed across 56 surveyed companies. 71% expect grid electricity by the 2030s; FIA's 2025 report put the comparable figure at 84% (and 89% in 2024). FIA itself describes the timeline as unchanged, and the question wording may differ between years, so treat the decline with caution.",
+        links: [
+          ["World Nuclear News: 2026 report", "https://world-nuclear-news.org/articles/fusion-industry-raised-usd45-billion-over-past-year-report-says"],
+          ["World Nuclear News: 2025 report (84%)", "https://wnn.world-nuclear.org/articles/access-to-funding-remains-a-major-issue-for-fusion-says-fia"],
+        ] },
+      { title: "Tennessee enacts first US state fusion framework", signal: "positive",
+        detail: "On June 9, 2026, Tennessee became the first US state to implement its own fusion-specific regulatory framework, complementing the federal NRC proposed rule (public comments closed May 2026, final rule still pending).",
+        links: [
+          ["Tennessee government (TDEC) announcement", "https://www.tn.gov/environment/news/2026/6/1/tn-powers-up-first-in-the-nation-fusion-regulations-june-9.html"],
+          ["ANS Nuclear Newswire", "https://www.ans.org/news/2026-06-11/article-8115/tennessee-fusion-regulations-take-effect/"],
+        ] },
+      { title: "SPARC construction ~75% complete", signal: "positive",
+        detail: "CFS reports SPARC roughly three-quarters built, targeting first plasma in 2027 with Q>1 'as fast as possible' thereafter — the nearest real checkpoint for magnetic-confinement net energy. Metaculus forecasters aggregate to ~June 2029 for demonstrated net power.",
+        links: [
+          ["CFS blog", "https://blog.cfs.energy/cfs-begins-preparing-a-home-for-our-100-million-degree-fusion-plasma/"],
+        ] },
+    ],
+    tracker: {
+      fiaConfidence: { value: "71%", prior: "84%", note: "% of FIA-surveyed companies expecting grid electricity by the 2030s. Question wording may differ year to year" },
+      metaculusSparc: { value: "Jun 2029", prior: "Jun 2029", note: "Crowd-forecast date for SPARC first demonstrating net power — steady" },
+      minGapScore: { value: "3/10", prior: "3/10", note: "Weakest links: Tritium Breeding & Heat/Power Conversion — no physical demonstration exists anywhere" },
+    },
+    prediction: {
+      band: "Late 2030s – mid 2040s",
+      detail: "First grid-connected fusion plant (likely subsidized/early-adopter-funded). Optimistic tail: Helion 2028 (Microsoft PPA), CFS ARC early-2030s (Virginia, 400MW). The structural constraint remains the three never-demonstrated gaps: materials under real neutron flux, tritium breeding, and heat-to-electricity conversion. Cost-competitive commercial viability more plausibly 2040s-2050s.",
+    },
+    watchlist: [
+      "SPARC first plasma (CFS target: 2027; watch for schedule updates)",
+      "KSTAR 300-second attempt at ≥100M°C (KFE target: end of 2026)",
+      "NRC final fusion rule (proposed Feb 2026; comments closed May 2026)",
+      "JT-60SA restart with upgraded campaign (late 2026)",
+    ],
+    corrections: [
+      "Aug 2026: Regulatory note corrected for Helion's Washington licences (June 16).",
+      "Oct 2026: India private investment 2, published as 1. Pranos Fusion had raised $6.8M in March 2026, so 'essentially no private fusion companies' was wrong when published.",
+      "Oct 2026: India regulatory note corrected. It said nuclear regulation was restrictive to private entry; the SHANTI Act (Dec 2025) had already opened nuclear power to Indian private companies. Score held at 2.",
+      "Oct 2026: Private Investment note corrected to FIA's 2026 cumulative figure ($14.24B); the FIA confidence comparison now carries a wording caveat, and the claim that the drop was the first in the survey's history is withdrawn (the figure was 89% in 2024).",
+    ],
+    sources: [
+      {"author": "Niranjan Chandrashekhar Oak and Bhawna Budhwar", "title": "SHANTI Act and India’s Nuclear Energy Governance Framework", "pub": "Issue Brief, MP-IDSA", "date": "February 17, 2026", "url": "https://idsa.in/publisher/issuebrief/shanti-act-and-indias-nuclear-energy-governance-framework"},
+      {"author": "World Nuclear News", "title": "Fusion industry raised USD4.5 billion in past year, report says", "pub": "World Nuclear News", "date": "July 2026", "url": "https://world-nuclear-news.org/articles/fusion-industry-raised-usd45-billion-over-past-year-report-says"},
+      {"author": "World Nuclear News", "title": "Access to funding remains a major issue for fusion, says industry report", "pub": "World Nuclear News", "date": "July 2025", "url": "https://wnn.world-nuclear.org/articles/access-to-funding-remains-a-major-issue-for-fusion-says-fia"},
+      {"author": "American Nuclear Society", "title": "Tennessee fusion regulations take effect", "pub": "Nuclear Newswire", "date": "June 11, 2026", "url": "https://www.ans.org/news/2026-06-11/article-8115/tennessee-fusion-regulations-take-effect/"},
+      {"author": "Commonwealth Fusion Systems", "title": "CFS begins preparing a home for our 100 million degree fusion plasma", "pub": "CFS blog", "date": "2026", "url": "https://blog.cfs.energy/cfs-begins-preparing-a-home-for-our-100-million-degree-fusion-plasma/"},
+      {"author": "Soumya Pillai", "title": "Bengaluru startup builds India’s 1st private nuclear fusion tokamak. Next step is a reactor", "pub": "ThePrint", "date": "September 3, 2026", "url": "https://theprint.in/ground-reports/pranos-pragya-tokamak-nuclear-fusion-reactor/3032248/"},
+    ],
+    sourceNote: "Also used, unlinked: F4E Fusion Observatory, Metaculus, primary lab and regulator announcements.",
+    countries: COUNTRIES_JULY,
+  },
+];
+
+const LATEST_ID = "2026-10";
+</script>
+<script>
+(function () {
+  const issues = ISSUES.slice(ISSUES.findIndex(i => i.id === LATEST_ID));
+  const COUNTRY_VAR = { Global: "--c-global", US: "--c-us", Europe: "--c-europe", China: "--c-china", Japan: "--c-japan", "South Korea": "--c-korea", India: "--c-india" };
+  const DEFAULT_SEL = ["Global", "US", "China"];
+  // A distinct marker per country, so lines can be told apart without colour.
+  const SHAPE = { Global: "circle", US: "rect", Europe: "triangle", China: "rectRot", Japan: "crossRot", "South Korea": "star", India: "cross" };
+  const st = { i: 0, gap: 0, cgap: 0, sel: DEFAULT_SEL.slice(), wv: "chart", cv: "chart" };
+  const $ = id => document.getElementById(id);
+  const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+  const narrow = () => window.innerWidth < 560;
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const pad = n => String(n).padStart(2, "0");
+
+  // ---------- glossary wrapping ----------
+  const KEYS = Object.keys(GLOSSARY).sort((a, b) => b.length - a.length);
+  const RX = new RegExp("(?<![A-Za-z0-9-])(" + KEYS.map(k => k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|") + ")(?![A-Za-z0-9])", "g");
+  function gloss(root) {
+    const seen = new Set();
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode: n => n.parentElement.closest("a,button,select,.g,h1,h2,th,summary,dt,.meta,.eyebrow,.code,.badge") ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT });
+    const nodes = []; while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(n => {
+      const t = n.nodeValue; RX.lastIndex = 0; let m, last = 0, frag = null;
+      while ((m = RX.exec(t))) {
+        const k = m[1]; if (seen.has(k)) continue; seen.add(k);
+        frag = frag || document.createDocumentFragment();
+        frag.append(t.slice(last, m.index));
+        const b = document.createElement("button"); b.type = "button"; b.className = "g"; b.dataset.k = k; b.textContent = k;
+        b.setAttribute("aria-expanded", "false"); frag.append(b); last = m.index + k.length;
+      }
+      if (frag) { frag.append(t.slice(last)); n.replaceWith(frag); }
+    });
+  }
+  const tip = $("tip"); let tipFor = null;
+  function showTip(b) {
+    tipFor && tipFor.setAttribute("aria-expanded", "false");
+    tipFor = b; b.setAttribute("aria-expanded", "true");
+    tip.innerHTML = "<b>" + esc(b.dataset.k) + "</b>" + esc(GLOSSARY[b.dataset.k]); tip.hidden = false;
+    const r = b.getBoundingClientRect(), w = tip.offsetWidth, h = tip.offsetHeight;
+    let x = Math.min(Math.max(16, r.left), window.innerWidth - w - 16);
+    let y = r.bottom + 6; if (y + h > window.innerHeight - 8) y = r.top - h - 6;
+    tip.style.left = x + "px"; tip.style.top = y + "px";
+  }
+  function hideTip() { if (tipFor) tipFor.setAttribute("aria-expanded", "false"); tipFor = null; tip.hidden = true; }
+  const fine = window.matchMedia("(hover: hover)").matches;
+  document.addEventListener("mouseover", e => { if (!fine) return; const b = e.target.closest(".g[data-k]"); if (b) showTip(b); });
+  document.addEventListener("mouseout", e => { if (!fine) return; if (e.target.closest(".g[data-k]")) hideTip(); });
+  document.addEventListener("click", e => { const b = e.target.closest(".g[data-k]"); if (b) { tipFor === b && !fine ? hideTip() : showTip(b); } else hideTip(); });
+  document.addEventListener("focusin", e => { const b = e.target.closest(".g[data-k]"); if (b) showTip(b); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") hideTip(); });
+  window.addEventListener("scroll", hideTip, { passive: true });
+
+  // ---------- charts ----------
+  let wChart, cChart;
+  const MONO = "'Roboto Mono', ui-monospace, Menlo, monospace";
+  function radarOpts() {
+    return {
+      responsive: true, maintainAspectRatio: false, animation: false,
+      layout: { padding: narrow() ? 2 : 8 },
+      scales: { r: { min: 0, max: 10,
+        ticks: { stepSize: 2, color: css("--muted"), backdropColor: "transparent", font: { size: 10, family: MONO } },
+        grid: { color: css("--grid") }, angleLines: { color: css("--grid") },
+        pointLabels: { color: css("--muted"), font: { size: narrow() ? 10 : 11, family: MONO } } } },
+      plugins: { legend: { display: false },
+        tooltip: { backgroundColor: "#171413", cornerRadius: 0, caretSize: 5, padding: 10,
+          titleFont: { family: "Inter, sans-serif", weight: "500" }, bodyFont: { family: MONO, size: 11 },
+          callbacks: { title: it => GAPS[it[0].dataIndex] } } },
+    };
+  }
+  const labels = () => narrow() ? GAPS_SHORT : GAPS.map(g => g.replace("Tritium Supply/Breeding", "Tritium breeding").replace("Heat/Power Conversion", "Heat→power"));
+  function ds(label, data, color, o = {}) {
+    return Object.assign({ label, data, borderColor: color, backgroundColor: color + "26", pointBackgroundColor: color, pointRadius: 2.5, borderWidth: 2 }, o);
+  }
+  // Series key in mono, with the line style drawn: radar series can't be labelled at a line end.
+  function marker(shape, c) {
+    const x = 13, y = 6;
+    switch (shape) {
+      case "rect": return `<rect x="${x-3.5}" y="${y-3.5}" width="7" height="7" fill="${c}"/>`;
+      case "triangle": return `<path d="M${x} ${y-4.5}L${x+4.5} ${y+3.5}H${x-4.5}Z" fill="${c}"/>`;
+      case "rectRot": return `<path d="M${x} ${y-5}L${x+5} ${y}L${x} ${y+5}L${x-5} ${y}Z" fill="${c}"/>`;
+      case "crossRot": return `<path d="M${x-4} ${y-4}L${x+4} ${y+4}M${x+4} ${y-4}L${x-4} ${y+4}" stroke="${c}" stroke-width="2"/>`;
+      case "cross": return `<path d="M${x} ${y-5}V${y+5}M${x-5} ${y}H${x+5}" stroke="${c}" stroke-width="2"/>`;
+      case "star": return `<path d="M${x} ${y-5}L${x+1.5} ${y-1.5}L${x+5} ${y-1.5}L${x+2.2} ${y+1}L${x+3.2} ${y+5}L${x} ${y+2.6}L${x-3.2} ${y+5}L${x-2.2} ${y+1}L${x-5} ${y-1.5}L${x-1.5} ${y-1.5}Z" fill="${c}"/>`;
+      default: return `<circle cx="${x}" cy="${y}" r="3.5" fill="${c}"/>`;
+    }
+  }
+  function key(el, items) {
+    el.innerHTML = items.map(([label, color, dash, w, shape]) =>
+      `<span><svg width="26" height="12" aria-hidden="true"><line x1="1" y1="6" x2="25" y2="6" stroke="${color}" stroke-width="${w || 2}" ${dash ? `stroke-dasharray="${dash}"` : ""}/>${shape ? marker(shape, color) : ""}</svg>${esc(label)}</span>`).join("");
+  }
+  function drawWorld() {
+    const is = issues[st.i], pr = issues[st.i + 1];
+    const sets = [ds("2020 baseline", BASELINE_2020, css("--s-base"), { borderDash: [4, 4], backgroundColor: "transparent", borderWidth: 1.5, order: 3 })];
+    const k = [["This month", css("--s-current"), "", 2.5]];
+    if (pr) { sets.push(ds("Prior month", pr.scores, css("--s-prior"), { backgroundColor: "transparent", borderDash: [2, 3], order: 2 })); k.push(["Prior month", css("--s-prior"), "2 3"]); }
+    sets.push(ds("This month", is.scores, css("--s-current"), { borderWidth: 2.5, order: 1 }));
+    k.push(["2020 baseline", css("--s-base"), "4 4", 1.5]);
+    key($("worldKey"), k);
+    wChart && wChart.destroy();
+    wChart = new Chart($("worldChart"), { type: "radar", data: { labels: labels(), datasets: sets }, options: radarOpts() });
+  }
+  function drawCountry() {
+    const C = issues[st.i].countries;
+    const many = st.sel.length > 3;
+    const sets = st.sel.map(c => ds(c, C[c].scores, css(COUNTRY_VAR[c]), Object.assign(
+      { pointStyle: SHAPE[c], pointRadius: many ? 4.5 : 3.5, pointBorderColor: css(COUNTRY_VAR[c]), pointBorderWidth: 1.5 },
+      (c === "Global" || many) ? { backgroundColor: "transparent" } : {},
+      c === "Global" ? { borderDash: [6, 4] } : {})));
+    key($("countryKey"), st.sel.map(c => [c, css(COUNTRY_VAR[c]), c === "Global" ? "6 4" : "", 2, SHAPE[c]]));
+    cChart && cChart.destroy();
+    cChart = new Chart($("countryChart"), { type: "radar", data: { labels: labels(), datasets: sets }, options: radarOpts() });
+  }
+
+  // ---------- render ----------
+  function chips(el, active, onPick) {
+    el.innerHTML = "";
+    GAPS.forEach((g, i) => { const b = document.createElement("button"); b.type = "button"; b.className = "chip"; b.textContent = g;
+      b.setAttribute("aria-pressed", String(i === active)); b.onclick = () => onPick(i); el.append(b); });
+  }
+  function renderWorldDetail() {
+    const is = issues[st.i], g = st.gap;
+    chips($("gapChips"), g, i => { st.gap = i; renderWorldDetail(); });
+    $("gapDetail").innerHTML = `<div class="bigfig"><span class="fig">${is.scores[g]}</span><span class="meta">of 10</span></div>
+      <div><h3>${esc(GAPS[g])}</h3><p class="small">${esc(is.scoreNotes[g])}</p>
+      <p class="next"><span class="meta">What would move it up a point</span>${esc(NEXT_POINT[g])}</p></div>`;
+    gloss($("gapDetail"));
+  }
+  function renderWorldTable() {
+    const is = issues[st.i], pr = issues[st.i + 1];
+    let h = `<table><thead><tr><th>Gap</th><th class="num">2020</th>${pr ? '<th class="num">Prior month</th>' : ""}<th class="num">This month</th></tr></thead><tbody>`;
+    GAPS.forEach((g, i) => { const up = pr && is.scores[i] > pr.scores[i];
+      h += `<tr><td>${esc(g)}</td><td class="num">${BASELINE_2020[i]}</td>${pr ? `<td class="num">${pr.scores[i]}</td>` : ""}<td class="num ${up ? "up" : ""}">${is.scores[i]}</td></tr>`; });
+    $("worldTable").innerHTML = h + "</tbody></table>";
+  }
+  function renderCountryPick() {
+    const C = issues[st.i].countries, el = $("countryChips"); el.innerHTML = "";
+    Object.keys(C).forEach(name => { const on = st.sel.includes(name);
+      const b = document.createElement("button"); b.type = "button"; b.className = "chip country"; b.setAttribute("aria-pressed", String(on));
+      b.style.borderColor = on ? css(COUNTRY_VAR[name]) : "";
+      b.innerHTML = `<span class="sw" style="background:${css(COUNTRY_VAR[name])}"></span>${esc(name)}`;
+      b.onclick = () => {
+        if (on) { if (st.sel.length > 1) st.sel = st.sel.filter(c => c !== name); else return msg("Keep at least one selected."); }
+        else st.sel = Object.keys(C).filter(n => n === name || st.sel.includes(n));
+        renderCountries();
+      };
+      el.append(b); });
+    const n = st.sel.length, total = Object.keys(C).length;
+    msg(n > 3 ? `${n} of ${total} selected. With more than three, fills are switched off and each country has its own marker; the All Countries table is easier to compare.` : `${n} of ${total} selected.`, n > 3);
+  }
+  function msg(t, full) { const m = $("pickMsg"); m.textContent = t; m.classList.toggle("full", !!full); }
+  function renderCountryDetail() {
+    const C = issues[st.i].countries;
+    chips($("cGapChips"), st.cgap, i => { st.cgap = i; renderCountryDetail(); });
+    $("cDetail").innerHTML = st.sel.map(c => `<div class="card scorecard"><div class="bigfig"><span class="fig">${C[c].scores[st.cgap]}</span><span class="meta">of 10</span></div>
+      <div><h3 class="ctitle"><i style="background:${css(COUNTRY_VAR[c])}"></i>${esc(c)}</h3><p class="small">${esc(C[c].notes[st.cgap])}</p></div></div>`).join("");
+    gloss($("cDetail"));
+  }
+  function renderCountryTable() {
+    const C = issues[st.i].countries, names = Object.keys(C);
+    let h = `<table><thead><tr><th>Gap</th>${names.map(n => `<th class="num">${esc(n)}</th>`).join("")}</tr></thead><tbody>`;
+    GAPS.forEach((g, i) => { h += `<tr><td>${esc(g)}</td>${names.map(n => `<td class="num">${C[n].scores[i]}</td>`).join("")}</tr>`; });
+    $("countryTable").innerHTML = h + "</tbody></table>";
+  }
+  function renderCountries() { renderCountryPick(); if (st.cv === "chart") drawCountry(); renderCountryTable(); renderCountryDetail(); }
+
+  function renderLadder() {
+    const is = issues[st.i];
+    let h = `<thead><tr><th>Score</th><th>Technical gaps</th><th>Institutional gaps</th><th>Gaps here now</th></tr></thead><tbody>`;
+    LADDER.forEach(r => { const here = GAPS.filter((g, i) => is.scores[i] >= r.range[0] && is.scores[i] <= r.range[1]);
+      h += `<tr><td class="num" style="text-align:left;padding-left:0">${r.range[0] === r.range[1] ? r.range[0] : r.range[0] + "–" + r.range[1]}</td><td>${esc(r.tech)}</td><td>${esc(r.inst)}</td><td class="muted">${here.map(esc).join(", ") || "—"}</td></tr>`; });
+    $("ladder").innerHTML = h + "</tbody>";
+    $("piBands").innerHTML = `<thead><tr><th>Score</th><th>FIA cumulative</th><th>Condition</th></tr></thead><tbody>` +
+      PI_BANDS.map(b => `<tr><td class="score-col">${b.s}</td><td style="white-space:nowrap">${b.cap}</td><td style="min-width:220px">${esc(b.cond)}</td></tr>`).join("") + "</tbody>";
+    gloss($("scale"));
+  }
+  // Chicago style, commas as separators (Takshashila convention)
+  const cite = s => `${esc(s.author)}, “<a href="${s.url}" target="_blank" rel="noopener">${esc(s.title)}</a>,” ${esc(s.pub)}, ${esc(s.date)}.`;
+
+  function render() {
+    const is = issues[st.i];
+    $("issueName").textContent = is.label;
+    $("verdict").textContent = is.verdict;
+    $("changes").innerHTML = "No gap moved a point this month. A score changes only on a new <em>physical</em> demonstration or an institutional decision taking legal effect.";
+    $("devs").innerHTML = is.achievements.map((a, n) => `<article class="card dev"><div class="top"><span class="code">${pad(n + 1)}</span><span class="badge ${a.signal}">${{ positive: "▲ Positive", mixed: "◆ Mixed", negative: "▼ Negative" }[a.signal]}</span></div>
+      <h3>${esc(a.title)}</h3><p class="small">${esc(a.detail)}</p><div class="links"><span class="meta">Read more</span>${a.links.map(l => `<a href="${l[1]}" target="_blank" rel="noopener">${esc(l[0])}</a>`).join("")}</div></article>`).join("");
+    $("stats").innerHTML = Object.values(is.tracker).map(t => `<div class="stat"><span class="fig">${t.value}</span><span class="meta ${t.value !== t.prior ? "moved" : ""}">${t.value !== t.prior ? "Changed from " + t.prior : "Unchanged"}</span><p class="small muted">${esc(t.note)}</p></div>`).join("");
+    $("bandV").textContent = is.prediction.band; $("bandD").textContent = is.prediction.detail;
+    $("watch").innerHTML = is.watchlist.map((w, n) => `<li><span class="code">W.${pad(n + 1)}</span><span>${esc(w)}</span></li>`).join("");
+    $("corr").innerHTML = is.corrections.map((c, n) => `<li><span class="code">C.${pad(n + 1)}</span><span>${esc(c)}</span></li>`).join("");
+    $("src").innerHTML = is.sources.map(s => `<li>${cite(s)}</li>`).join("");
+    $("srcNote").textContent = is.sourceNote;
+    const cap = `Source: author's scoring, ${is.month}. Evidence for each score is given under “Why these scores” and in the sources for this issue.`;
+    $("worldCap").textContent = cap;
+    $("countryCap").textContent = `Source: author's scoring, ${is.month}. “Global” is the highest score any of the six countries holds on each gap.`;
+    ["verdict", "devs", "stats", "bandD", "watch", "corr", "srcNote"].forEach(id => gloss($(id)));
+    if (st.wv === "chart") drawWorld(); renderWorldTable(); renderWorldDetail(); renderCountries(); renderLadder();
+  }
+
+  // ---------- controls ----------
+  issues.forEach((is, n) => { const o = document.createElement("option"); o.value = n; o.textContent = is.label; $("issueSel").append(o); });
+  $("issueSel").onchange = e => { st.i = +e.target.value; render(); };
+  document.querySelectorAll(".seg").forEach(seg => seg.addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    seg.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+    const isWorld = seg.closest("#world");
+    const v = b.dataset.v;
+    if (isWorld) { st.wv = v; $("worldChartBox").hidden = $("worldKey").hidden = v !== "chart"; $("worldTable").hidden = v !== "table"; if (v === "chart") drawWorld(); }
+    else { st.cv = v; $("countryChartBox").hidden = $("countryKey").hidden = v !== "chart"; $("countryTable").hidden = v !== "table"; if (v === "chart") drawCountry(); }
+  }));
+  $("selAll").onclick = () => { st.sel = Object.keys(issues[st.i].countries); renderCountries(); };
+  $("selReset").onclick = () => { st.sel = DEFAULT_SEL.slice(); renderCountries(); };
+  $("gloss").innerHTML = Object.keys(GLOSSARY).sort((a, b) => a.localeCompare(b)).map(k => `<dt>${esc(k)}</dt><dd>${esc(GLOSSARY[k])}</dd>`).join("");
+  let wasNarrow = narrow();
+  window.addEventListener("resize", () => { if (narrow() !== wasNarrow) { wasNarrow = narrow(); if (st.wv === "chart") drawWorld(); if (st.cv === "chart") drawCountry(); } });
+  // Redraw once the web fonts arrive so chart labels use Roboto Mono.
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { if (st.wv === "chart") drawWorld(); if (st.cv === "chart") drawCountry(); });
+  render();
+})();
+</script>
+
+</body>
+</html>

@@ -2,7 +2,7 @@
 
 A monthly tracker of how far nuclear fusion is from the electricity grid.
 
-Ten gaps stand in the way: net energy gain, plasma stability, materials science, tritium
+We have identified ten major gaps that prevent commercialisation of nuclear fusion today: net energy gain, plasma stability, materials science, tritium
 breeding, magnet technology, heat-to-power conversion, private investment, regulatory
 clarity, supply chain and workforce. Each issue scores every gap from 0 to 10 against a
 2020 baseline, compares the US, Europe, China, Japan, South Korea and India, and updates an
@@ -14,6 +14,7 @@ estimate of when the first fusion plant connects to the grid.
 
 | Issue | Page |
 |---|---|
+| October 2026 · Issue 4 | `oct2026.html` |
 | September 2026 · Issue 3 | `sep2026.html` |
 | August 2026 · Issue 2 | `aug2026.html` |
 | July 2026 · Inaugural issue | `jul2026.html` |
